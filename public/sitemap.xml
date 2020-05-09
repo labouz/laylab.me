@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/about/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/</loc>
     <lastmod>2019-03-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -10,11 +20,6 @@
   
   <url>
     <loc>/series/hugo/</loc>
-    <lastmod>2019-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2019-03-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -161,10 +166,6 @@
   <url>
     <loc>/posts/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/about/</loc>
   </url>
   
   <url>

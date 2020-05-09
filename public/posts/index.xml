@@ -135,11 +135,8 @@ if you like.&lt;/p&gt;
 
 console.log(foo(&lt;span style=&#34;color:#ff0;font-weight:bold&#34;&gt;5&lt;/span&gt;));
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;hugo-shortcode-for-figure&#34;&gt;Hugo shortcode for figure&lt;/h2&gt;
-&lt;figure&gt;
-    &lt;img src=&#34;/images/N90.jpg&#34;
-         alt=&#34;N90 nebula, &amp;amp;ldquo;New stars shed light on the past&amp;amp;rdquo; by ESA/Hubble&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;N90 nebula, &amp;ldquo;New stars shed light on the past&amp;rdquo; by ESA/Hubble&lt;/p&gt;
-        &lt;/figcaption&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/N90.jpg&#34; height=&#34;300px&#34;/&gt; 
 &lt;/figure&gt;
 
 </description>

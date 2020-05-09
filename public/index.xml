@@ -6,10 +6,100 @@
     <description>Recent content on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title></title>
+      <link>/about/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>&lt;h3 id=&#34;this-is-me-&#34;&gt;This is me 👋&lt;/h3&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/pic01.png&#34; height=&#34;300px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;The not so boring stuff:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Freshly transplanted Miamian, originally from Atlanta, GA&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/pic02.jpg&#34; width=&#34;200px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Daughter of two wonderful Moroccans 🇲🇦, &lt;a href=&#34;https://www.linkedin.com/in/alain-bouzouba-51894950/&#34;&gt;Al&lt;/a&gt; and Mounira&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Raised in the &lt;a href=&#34;http://www.sevengablesrestaurant.com/&#34;&gt;restaurant&lt;/a&gt; biz&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/pic04.jpg&#34; width=&#34;300px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I have a low-key plant addiction&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Self-proclaimed wine connoisseur and food critic&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Aspire to one day build an oasis by the sea, which will house an overabundance of animals, fancy wines, and horticulture, and where I will frequently host dinner parties and woo my guests with my exceptional piano playing and culinary skills!&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/pic05.jpg&#34; width=&#34;300px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;I like hats 🎩&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I am a statistical programmer for the University of Miami &lt;a href=&#34;https://twitter.com/SylvesterCancer&#34;&gt;Sylvester Comprehensive Cancer Center&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I organize the Miami chapter of &lt;a href=&#34;https://www.meetup.com/rladies-miami/&#34; title=&#34;R-Ladies Meetup&#34;&gt;R-Ladies&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I am a &lt;a href=&#34;https://www.womentechmakers.com/ambassadors/layla-bouzoubaa&#34;&gt;Women Techmakers Ambassador&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I facilitate &lt;a href=&#34;https://iamremarkable.withgoogle.com/&#34;&gt;#IamRemarkable&lt;/a&gt; workshops&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I am an organizer of &lt;a href=&#34;https://www.meetup.com/GDG-Miami/&#34;&gt;GDG Miami&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I am a leader of the &lt;a href=&#34;https://tenoriofoundation.org&#34;&gt;Tenorio Foundation&lt;/a&gt; Miami Team&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/rl.png&#34; width=&#34;80px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/wtm.png&#34; width=&#34;112px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/iar.png&#34; width=&#34;150px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/gdg-miami.png&#34; width=&#34;180px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/stackedDiagonal.png&#34; width=&#34;200px&#34;/&gt; 
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+</description>
+    </item>
     
     <item>
       <title>Render LaTeX using KaTeX</title>
@@ -135,11 +225,8 @@ if you like.&lt;/p&gt;
 
 console.log(foo(&lt;span style=&#34;color:#ff0;font-weight:bold&#34;&gt;5&lt;/span&gt;));
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;hugo-shortcode-for-figure&#34;&gt;Hugo shortcode for figure&lt;/h2&gt;
-&lt;figure&gt;
-    &lt;img src=&#34;/images/N90.jpg&#34;
-         alt=&#34;N90 nebula, &amp;amp;ldquo;New stars shed light on the past&amp;amp;rdquo; by ESA/Hubble&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;N90 nebula, &amp;ldquo;New stars shed light on the past&amp;rdquo; by ESA/Hubble&lt;/p&gt;
-        &lt;/figcaption&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/N90.jpg&#34; height=&#34;300px&#34;/&gt; 
 &lt;/figure&gt;
 
 </description>
@@ -1475,34 +1562,6 @@ Liquid::Template.register_tag(&#39;image&#39;, Jekyll::ImageTag)
 &lt;p&gt;You&amp;rsquo;ll want to remove the Jekyll configuration at this point. If you have anything else that isn&amp;rsquo;t used, delete it.&lt;/p&gt;
 &lt;h2 id=&#34;a-practical-example-in-a-diff&#34;&gt;A practical example in a diff&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;http://heyitsalex.net/&#34;&gt;Hey, it&amp;rsquo;s Alex&lt;/a&gt; was migrated in less than a &lt;em&gt;father-with-kids day&lt;/em&gt; from Jekyll to Hugo. You can see all the changes (and screw-ups) by looking at this &lt;a href=&#34;https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610&#34;&gt;diff&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About Hugo</title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>&lt;p&gt;Hugo is a static site engine written in Go.&lt;/p&gt;
-&lt;p&gt;It makes use of a variety of open source projects including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cobra&#34;&gt;Cobra&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/viper&#34;&gt;Viper&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/jWalterWeatherman&#34;&gt;J Walter Weatherman&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cast&#34;&gt;Cast&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/spf13&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
-&lt;p&gt;Some fun facts about &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Built in &lt;a href=&#34;http://golang.org/&#34;&gt;Go&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Loosely inspired by &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Primarily developed by &lt;a href=&#34;http://spf13.com/&#34;&gt;spf13&lt;/a&gt; on the train while commuting to and from Manhattan.&lt;/li&gt;
-&lt;li&gt;Coded in &lt;a href=&#34;http://vim.org&#34;&gt;Vim&lt;/a&gt; using &lt;a href=&#34;http://vim.spf13.com/&#34;&gt;spf13-vim&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Have questions or suggestions? Feel free to &lt;a href=&#34;https://github.com/spf13/hugo/issues/new&#34;&gt;open an issue on GitHub&lt;/a&gt; or &lt;a href=&#34;https://twitter.com/spf13&#34;&gt;ask me on Twitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Thanks for reading!&lt;/p&gt;
 </description>
     </item>
     

@@ -1,29 +1,56 @@
 ---
-slug: about
-title: About Hugo
+author: LB
+date: "2019-08-25"
 ---
 
-Hugo is a static site engine written in Go.
+### This is me 👋
+
+{{< figure src="/images/pic01.png" class="center" height="300px" >}}
 
 
-It makes use of a variety of open source projects including:
+**The not so boring stuff:**  
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
+* Freshly transplanted Miamian, originally from Atlanta, GA
 
-Learn more and contribute on [GitHub](https://github.com/spf13).
+     {{< figure src="/images/pic02.jpg" class="center" width="200px" >}}
 
-## Setup
+* Daughter of two wonderful Moroccans 🇲🇦, [Al](https://www.linkedin.com/in/alain-bouzouba-51894950/) and Mounira
 
-Some fun facts about [Hugo](http://gohugo.io/):
+* Raised in the [restaurant](http://www.sevengablesrestaurant.com/) biz   
 
-* Built in [Go](http://golang.org/)
-* Loosely inspired by [Jekyll](http://jekyllrb.com/)
-* Primarily developed by [spf13](http://spf13.com/) on the train while commuting to and from Manhattan.
-* Coded in [Vim](http://vim.org) using [spf13-vim](http://vim.spf13.com/)
+  {{< figure src="/images/pic04.jpg" class="center" width="300px" >}}
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/spf13/hugo/issues/new) or [ask me on Twitter](https://twitter.com/spf13).
+* I have a low-key plant addiction
+    
+* Self-proclaimed wine connoisseur and food critic
 
-Thanks for reading!
+* Aspire to one day build an oasis by the sea, which will house an overabundance of animals, fancy wines, and horticulture, and where I will frequently host dinner parties and woo my guests with my exceptional piano playing and culinary skills!  
+
+    {{< figure src="/images/pic05.jpg" class="center" width="300px" >}}
+
+
+**I like hats 🎩** 
+ 
+* I am a statistical programmer for the University of Miami [Sylvester Comprehensive Cancer Center](https://twitter.com/SylvesterCancer).   
+
+* I organize the Miami chapter of [R-Ladies](https://www.meetup.com/rladies-miami/ "R-Ladies Meetup")  
+* I am a [Women Techmakers Ambassador](https://www.womentechmakers.com/ambassadors/layla-bouzoubaa)  
+
+* I facilitate [#IamRemarkable](https://iamremarkable.withgoogle.com/) workshops 
+
+* I am an organizer of [GDG Miami](https://www.meetup.com/GDG-Miami/)
+
+* I am a leader of the [Tenorio Foundation](https://tenoriofoundation.org) Miami Team
+
+<br>
+
+{{< figure src="/images/rl.png" class="center-inline" width="80px" >}}
+{{< figure src="/images/wtm.png" class="center-inline" width="112px" >}}
+{{< figure src="/images/iar.png" class="center-inline" width="150px" >}}
+{{< figure src="/images/gdg-miami.png" class="center-inline" width="180px" >}}
+{{< figure src="/images/stackedDiagonal.png" class="center-inline" width="200px" >}}
+
+
+<br>
+
+

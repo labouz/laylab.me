@@ -1,4 +1,4 @@
-baseurl = "http://www.laylab.me"
+baseurl = "/"
 title = "LB"
 
 theme = "hugo-coder"

@@ -5,3 +5,7 @@
 
 .DS_Store
 *.Rproj
+
+#data files
+public/posts/*.rda
+public/posts/*.rds

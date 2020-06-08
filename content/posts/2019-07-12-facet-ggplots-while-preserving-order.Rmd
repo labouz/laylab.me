@@ -1,0 +1,485 @@
+---
+title: Facet ggplots While Preserving Unique Order
+author: Layla Bouzoubaa
+date: '2019-07-12'
+slug: facet-ggplots-while-preserving-order
+categories: []
+tags:
+  - ggplot
+  - dataviz
+  - ggpubr
+description: 'Facet ggplots while preserving unque order of factor variables with purrr::map(), ggpubr::ggarange() and ggpubr::annotate_figure()'
+externalLink: ''
+series: []
+---
+<!-- <style type="text/css"> -->
+<!-- .main-container { -->
+<!--   max-width: 1500px; -->
+<!--   margin-left: auto; -->
+<!--   margin-right: auto; -->
+<!-- } -->
+<!-- pre { -->
+<!-- border: 0; -->
+<!-- } -->
+<!-- </style> -->
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Data
+
+This document goes through the step by step of how ggplots, faceted by race, were able to preserve the order of a specific measure, uniqely.
+
+For reference here is what I'm talking about: <http://10.64.183.96:3939/LB_explore_prmcScore/>.
+
+Let's continue... 
+
+First, we need some data. For these graphs, I used the *theRatesByCounty_df*. This dataframe includes the age-adjusted incidence rates, counts, and percent late stage at diagnosis for every combination of geography, race/ethnicity (NHW, NHB, Hispanic, all), and lifestage (youth, adult, senior, all).
+
+```{r data, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+load("theRatesByCounty_df.rda")
+
+kable(theRatesByCounty_df[1:10,], caption = "theRatesByCounty_df", format = "html") %>%
+  kable_styling(position = "center") %>%
+  column_spec(5:6, width = "1cm")
+
+```
+
+Cool. 😎
+
+```{r prev, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# I only want to look at Sylvester catchment area
+sylRates <- theRatesByCounty_df %>% 
+   filter(place_num == 888)
+
+# I don't care about a particular lifestage nor do I care about all cancers as a
+# whole or other cancers aside from the 19 we've marked as important
+prevalence <- sylRates %>% 
+  filter(lifeStage == "All", !site %in% c("All","Other")) %>%
+  #also, for the sake of the graphics, I want the percentage to be pretty
+  mutate(pLateStage = round(pLateStage*100,1)) 
+```
+
+### It Started With a Plot...
+
+I wanted to start off by showing the counts for the 19 different cancers for *all races*
+
+```{r ggplot, echo=TRUE}
+
+f <- prevalence %>%  
+  filter(sex == "P", race == "All_Races") %>% #sex == "people"
+  ggplot(aes(x = site, y = count))
+
+f + geom_bar(position = "dodge", stat = "identity", fill = "#2ECC71") +
+  coord_flip() +
+  geom_text(aes(label = count), hjust = -0.4, color = "black",
+            position = position_dodge(width = 1), size = 2) +
+  labs(x = "Site",
+       y = "Count") +
+  ggtitle("Count of 19 Cancers by Site") +
+  theme_light() 
+
+```
+
+That's cool but, I want to order this by most frequent to less frequent so that means I need to make site a factor and because there are 4 different race/ethnicity categories, I also need to make sure each race has it's own order. Therefore, I need to `group_by()` race and `arrange()` by race and count.
+
+```{r ggplot_fact, echo=TRUE}
+
+all_sexes <- prevalence %>% 
+  filter(sex == "P") %>%   # sex == "people"
+  group_by(race) %>% 
+  arrange(race, count) %>% 
+  mutate(site = factor(site, levels = unique(site)))
+
+#let's try making a plot for just "All_Races"
+f <- filter(all_sexes, race == "All_Races") %>% 
+  ggplot(aes(x = site, y = count))
+
+f + geom_bar(position = "dodge", stat = "identity", fill = "#2ECC71") +
+  coord_flip() +
+  geom_text(aes(label = count), hjust = -0.4, color = "black",
+            position = position_dodge(width = 1), size = 2) +
+  labs(x = "Site",
+       y = "Count") +
+  ggtitle("Count of 19 Cancers by Site") +
+  theme_light() 
+
+```
+
+**Yippee!!**
+
+Now, I need to replicate this plot for not only all 19 cancers, but the top 5 cancers, the top 5 cancers by each race group, the cancers that are caused by viruses, and the cancers caused by viruses for each race group. Not only do I want to look at the counts, but I also want these plots for the percent late stage at diagnosis and for the age-adjusted incidence rates...oh, $#!@.
+
+That's 15 different plots and if you know me, there's no way in hell I am copying and pasting this crap 15 times...
+
+Red rover, red rover, please send a function right over :)
+
+This didn't seem *terribly* intimidating at first, the only arguments I needed was which measure I wanted to plot: count, adjusted rate, or percent late stage and if I wanted to filter the data on just the cancers that were caused by viruses.
+
+The reason why I say terribly is because I had an inkling there would probably be some NSE involved here because I would need to pipe my data to `arrange()` on the *measure* argument, follwed by a ggplot. All tidyverse functions that take unquoted arguments. So, I thought "ok, first I need turn my argument to a quosure, and then unquote when I call it in either my dplyr verbs or ggplot geoms". Here's what that looked like:
+
+
+
+```{r func1, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+library(lettercase)
+
+makeGraphs <- function(measure, virus = FALSE) {
+  
+  measureText <- str_cap_words(measure)
+  quo_measure <- enquo(measure)
+  
+  all_sexes <- prevalence %>% 
+    filter(sex == "P") %>% 
+    group_by(race) %>% 
+    arrange(race, !!quo_measure) %>%
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f <- filter(all_sexes, race == "All_Races") %>% 
+      ggplot(aes(x = site, y = !!quo_measure))
+    
+    allcancers <- f + geom_bar(position = "dodge", stat = "identity", fill = "#2ECC71") +
+      coord_flip() +
+      geom_text(aes(label = !!quo_measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of 19 Cancers by Site ")) +
+      theme_light() 
+    
+  }
+}
+```
+
+**This did *NOT* work.**
+
+Sigh...after a couple hours of falling down the rabbit hole of Stack Overflow and the *tidyeval* vignette, I gave up on this option. Fortunately, those hours were not spent in vain. I did stumble accross a potential solution where I use a bit of tidy (thanks to `rlang` version >= 0.4) and base, as such:
+
+```{r func2, echo=TRUE, message=FALSE, warning=FALSE}
+library(lettercase)
+
+makeGraphs <- function(measure, virus = FALSE) {
+  
+  measureText <- str_cap_words(measure)
+  
+  all_sexes <- prevalence %>% 
+    filter(sex == "P") %>% 
+    group_by(race) %>% 
+    arrange(race, .data[[measure]]) %>%  # .data is now recognized as a way to refer to the parent data frame, so reference by string works - like in base
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f <- filter(all_sexes, race == "All_Races") %>% 
+      ggplot(aes_string(x = "site", y = measure)) 
+    
+    f + geom_bar(position = "dodge", stat = "identity", fill = "#2ECC71") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of 19 Cancers by Site ")) +
+      theme_light() 
+    
+  }
+}
+
+makeGraphs("count")
+```
+
+**WOOP!**...progress. Now to turn this into a full function that will produce and save all 15 graphics!
+
+```{r func3, echo=TRUE, message=FALSE, warning=FALSE, results='hide', fig.keep='all'}
+library(lettercase)
+
+makeGraphs <- function(measure, virus = FALSE) {
+  
+  measureText <- str_cap_words(measure)
+  
+  all_sexes <- prevalence %>% 
+    filter(sex == "P") %>% 
+    group_by(race) %>% 
+    arrange(race, .data[[measure]]) %>%  
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f <- filter(all_sexes, race == "All_Races") %>% 
+      ggplot(aes_string(x = "site", y = measure)) 
+    
+    allcancers <- f + geom_bar(position = "dodge", stat = "identity", fill = "#2ECC71") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of 19 Cancers by Site ")) +
+      theme_light() 
+    
+    # ggsave(paste0("./images/", measureText, "_allcancers.png"))
+    
+    # just breast, colorectal, lung, prostate, cervical
+    
+    all_sexes_five_cancer <- filter(all_sexes, site %in% c("Prostate", "Colorectal", "Breast", "Cervix", 
+                                "Lung & Bronchus"))
+    
+    
+    g <- filter(all_sexes_five_cancer, race == "All_Races") %>%
+      ggplot(aes_string(x = "site", y = measure))
+    
+    topCancer <- g + geom_bar(position = "dodge", stat = "identity", fill = "#F39C12") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of Most Prevalent Cancers by Site ")) +
+      theme_light()
+    
+    # ggsave(paste0("./images/", measureText,"_topCancer.png"))
+    
+    # facet by race
+    h <-  ggplot(all_sexes_five_cancer, aes_string(x = "site", y = measure))
+    
+    topCancerRace <- h + geom_bar(position = "dodge", stat = "identity", fill = "#9B59B6") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.1, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of Most Prevalent Cancers by Site & Race")) +
+      theme_light() +
+      facet_wrap("race", scales = "free")
+    
+    # ggsave(paste0("./images/", measureText,"_topCancerRace.png"))
+    
+    list(allcancers, topCancer, topCancerRace)
+    
+  }else{
+    # just cancers caused by viruses
+    
+    virus <- filter(all_sexes, site %in% c("Anal", "Non-Hodgkin Lymphoma", "Liver", 
+                                   "Oral & Oropharynx", "Cervix", 
+                                   "Stomach"))
+    
+    #just all_races
+    
+    i <- filter(virus, race == "All_Races") %>%
+      ggplot(aes_string(x = "site", y = measure))
+    
+    virusCancer <- i + geom_bar(position = "dodge", stat = "identity", fill = "#F0B27A") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of Cancers Caused by Viruses")) +
+      theme_light()
+    
+    # ggsave(paste0("./images/", measureText,"_virusCancer.png"))
+    
+    # facet by race
+    
+    i <-  ggplot(virus, aes_string(x = "site", y = measure))
+    
+    virusCancerRace <- i + geom_bar(position = "dodge", stat = "identity", fill = "#9B59B6") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.1, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of Cancers Caused by Viruses by Race")) +
+      theme_light() +
+      facet_wrap("race", scales = "free")
+    
+    # ggsave(paste0("./images/", measureText,"_virusCancerRace.png"))
+    
+    list(virusCancer, virusCancerRace)
+  }
+}
+
+makeGraphs("count")
+```
+
+Now, this made me excited at first *until* I noticed that when I facted by race, the order of the levels for site remained fixed, regardless of race. The order for the "All_Races" group was getting recycled. *This* is where the headache, more cursing, and thoughts of running away and never coming back started to creep in.
+
+How can I facet on race yet still preserve the order of site per each race group???
+
+\*\ *In the Spongebob narrator voice* \*\ A few hours later.... I gave up and went home.
+
+Then in the middle of the night I awoke with an idea...as most annoying problems tend to do. Faceting fixes the y axis so I can't use this. I will need to create 4 individual plots and join them into 1 for easier comparison. 
+
+I was advised to try `par()` or `layout()` but then learned that these functions are not compatible with ggpolot - only plot functions. 
+
+Again, there's no way I'm going to copy and paste each ggplot code 4 times - one that filters for each race group...I feel another function coming on. 
+
+Better yet, `map()` to the rescue! 
+
+What if I listed the race categories and passed that to a map which contained a function that filtered the data by the race and drew the plot? So let's try this one mo'gain (don't judge, I'm a Georgia girl, born and bred). 
+
+```{r workingFunc, echo=TRUE, message=FALSE, warning=FALSE, results='hide', fig.keep='all'}
+library(ggpubr) # for arranging the individual race plots to one
+
+makeGraphs <- function(measure, virus = FALSE) {
+  
+  measureText <- str_cap_words(measure)
+  
+  all_sexes <- prevalence %>% 
+    filter(sex == "P") %>% 
+    group_by(race) %>% 
+    arrange(race, .data[[measure]]) %>%  
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f <-  filter(all_sexes, race == "All_Races") %>% 
+      ggplot(aes_string(x = "site", y = measure))
+    
+    allcancers <- f + geom_bar(position = "dodge", stat = "identity", fill = "#2ECC71") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of 19 Cancers by Site ")) +
+      theme_light() 
+    
+    # ggsave(paste0("./images/", measureText, "_allcancers.png"))
+    
+    # just breast, colorectal, lung, prostate, cervical
+    
+    all_sexes_five_cancer <- filter(all_sexes, site %in% c("Prostate", "Colorectal", "Breast", "Cervix", 
+                                "Lung & Bronchus"))
+    
+    
+    g <-  filter(all_sexes_five_cancer, race == "All_Races") %>% 
+      ggplot(aes_string(x = "site", y = measure))
+    
+    topCancer <- g + geom_bar(position = "dodge", stat = "identity", fill = "#F39C12") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of Most Prevalent Cancers by Site ")) +
+      theme_light()
+    
+    # ggsave(paste0("./images/", measureText,"_topCancer.png"))
+    
+    # facet by race
+    races <- list("All_Races", "NHW", "NHB", "Hispanic")
+    
+    raceGraphs <- map(races, function(x){
+      h <-  all_sexes_five_cancer %>% 
+        filter(race == x) %>% 
+        arrange(race, .data[[measure]]) %>%  
+        mutate(site= factor(site, levels = unique(site), ordered = TRUE)) %>% 
+        ggplot(aes_string(x = "site", y = measure))
+      
+      h + geom_bar(position = "dodge", stat = "identity", fill = "#9B59B6") +
+        coord_flip() +
+        geom_text(aes_string(label = measure), hjust = -0.1, color = "black",
+                  position = position_dodge(width = 1), size = 2) +
+        labs(x = "Site",
+             y = measureText) +
+        ggtitle(x) +
+        theme_light()+
+        theme(plot.title = element_text(size = 10, color = "#B03A2E", hjust = 1),
+              plot.margin = margin(0,0,0,0))
+      
+    })
+    
+    h <- ggarrange(
+      raceGraphs[[1]] + rremove("x.title"),
+      raceGraphs[[2]] + rremove("y.title") + rremove("x.title"),
+      raceGraphs[[3]],
+      raceGraphs[[4]] + rremove("y.title"),
+      ncol = 2, nrow = 2
+    )
+    
+    topCancerRace <- annotate_figure(h, fig.lab = paste0(measureText," of Most Prevalent Cancers"),
+                                     fig.lab.face = "bold")
+    
+    # ggsave(paste0("./images/", measureText,"_topCancerRace.png"))
+    
+    list(allcancers, topCancer, topCancerRace)
+  }else{
+    # just cancers caused by viruses
+    
+    virus <- filter(all_sexes, site %in% c("Anal", "Non-Hodgkin Lymphoma", "Liver", 
+                                   "Oral & Oropharynx", "Cervix", 
+                                   "Stomach"))
+    
+    
+    i <-  filter(virus, race == "All_Races") %>% 
+      ggplot(aes_string(x = "site", y = measure))
+    
+    virusCancer <- i + geom_bar(position = "dodge", stat = "identity", fill = "#F0B27A") +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = "black",
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = "Site",
+           y = measureText) +
+      ggtitle(paste0(measureText," of Cancers Caused by Viruses by Site")) +
+      theme_light()
+    
+    # ggsave(paste0("./images/", measureText,"_virusCancer.png"))
+    
+    # facet by race
+    races <- list("All_Races", "NHW", "NHB", "Hispanic")
+    
+    raceGraphs <- map(races, function(x){
+      j <-  virus %>% 
+        filter(race == x) %>% 
+        arrange(race, .data[[measure]]) %>%  
+        mutate(site= factor(site, levels = unique(site), ordered = TRUE)) %>% 
+        ggplot(aes_string(x = "site", y = measure))
+      
+      j + geom_bar(position = "dodge", stat = "identity", fill = "#BB8FCE") +
+        coord_flip() +
+        geom_text(aes_string(label = measure), hjust = -0.1, color = "black",
+                  position = position_dodge(width = 1), size = 2) +
+        labs(x = "Site",
+             y = measureText) +
+        ggtitle(x) +
+        theme_light()+
+        theme(plot.title = element_text(size = 10, color = "#E74C3C", hjust = 1),
+              plot.margin = margin(0,0,0,0))
+    })
+    
+    j <- ggarrange(
+      raceGraphs[[1]] + rremove("x.title"),
+      raceGraphs[[2]] + rremove("y.title") + rremove("x.title"),
+      raceGraphs[[3]],
+      raceGraphs[[4]] + rremove("y.title"),
+      ncol = 2, nrow = 2
+    )
+    
+    virusCancerRace <- annotate_figure(j, fig.lab = paste0(measureText," of Cancers Caused by Viruses by Site"),
+                                       fig.lab.face = "bold")
+    
+    # ggsave(paste0("./images/", measureText,"_virusCancerRace.png"))
+    
+    list(virusCancer, virusCancerRace)
+  }
+  
+  
+}
+
+makeGraphs("count")
+makeGraphs("adjRate", virus = TRUE)
+```
+
+**YAASSSS!!!**...purrring in contentment ;) 
+
+*Note: I've commented out the ggsaves for the sake of making sure I don't screw up what I already have
+
+I hope what went through my head effectively made it through my fingers, onto the keyboard, and on the screen into this document in an intelligible way. 

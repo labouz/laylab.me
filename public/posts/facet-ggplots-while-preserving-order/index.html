@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Layla Bouzoubaa">
+    <meta name="description" content="Facet ggplots while preserving unque order of factor variables with purrr::map(), ggpubr::ggarange() and ggpubr::annotate_figure()">
+    <meta name="keywords" content="blog,data science,personal,R, public health">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Facet ggplots While Preserving Unique Order"/>
+<meta name="twitter:description" content="Facet ggplots while preserving unque order of factor variables with purrr::map(), ggpubr::ggarange() and ggpubr::annotate_figure()"/>
+
+    <meta property="og:title" content="Facet ggplots While Preserving Unique Order" />
+<meta property="og:description" content="Facet ggplots while preserving unque order of factor variables with purrr::map(), ggpubr::ggarange() and ggpubr::annotate_figure()" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/facet-ggplots-while-preserving-order/" />
+<meta property="article:published_time" content="2019-07-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-07-12T00:00:00+00:00" />
+
+
+    
+      <base href="/posts/facet-ggplots-while-preserving-order/">
+    
+    <title>
+  Facet ggplots While Preserving Unique Order · LB
+</title>
+
+    
+      <link rel="canonical" href="/posts/facet-ggplots-while-preserving-order/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.e5aeb0c7ebdb0c248e6c3849c2b185c5ac91a8e09001c27f5cab574b0de80433.css" integrity="sha256-5a6wx&#43;vbDCSObDhJwrGFxayRqOCQAcJ/XKtXSw3oBDM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.69.2" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      LB
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Posts</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Passion Projects/Talks</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/files/lb_20secs.pdf">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Facet ggplots While Preserving Unique Order</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2019-07-12T00:00:00Z'>
+                July 12, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              12-minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/ggplot/">ggplot</a>
+      <span class="separator">•</span>
+    <a href="/tags/dataviz/">dataviz</a>
+      <span class="separator">•</span>
+    <a href="/tags/ggpubr/">ggpubr</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<!-- <style type="text/css"> -->
+<!-- .main-container { -->
+<!--   max-width: 1500px; -->
+<!--   margin-left: auto; -->
+<!--   margin-right: auto; -->
+<!-- } -->
+<!-- pre { -->
+<!-- border: 0; -->
+<!-- } -->
+<!-- </style> -->
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>This document goes through the step by step of how ggplots, faceted by race, were able to preserve the order of a specific measure, uniqely.</p>
+<p>For reference here is what I’m talking about: <a href="http://10.64.183.96:3939/LB_explore_prmcScore/" class="uri">http://10.64.183.96:3939/LB_explore_prmcScore/</a>.</p>
+<p>Let’s continue…</p>
+<p>First, we need some data. For these graphs, I used the <em>theRatesByCounty_df</em>. This dataframe includes the age-adjusted incidence rates, counts, and percent late stage at diagnosis for every combination of geography, race/ethnicity (NHW, NHB, Hispanic, all), and lifestage (youth, adult, senior, all).</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:data">Table 1: </span>theRatesByCounty_df
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+crudeRate
+</th>
+<th style="text-align:right;">
+adjRate
+</th>
+<th style="text-align:right;">
+lci
+</th>
+<th style="text-align:right;">
+uci
+</th>
+<th style="text-align:left;">
+site
+</th>
+<th style="text-align:left;">
+siteNum
+</th>
+<th style="text-align:right;">
+place_num
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:left;">
+race
+</th>
+<th style="text-align:right;">
+count
+</th>
+<th style="text-align:right;">
+ratePop
+</th>
+<th style="text-align:right;">
+pop
+</th>
+<th style="text-align:left;">
+lifeStage
+</th>
+<th style="text-align:right;">
+pLateStage
+</th>
+<th style="text-align:left;">
+place
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2124.22
+</td>
+<td style="text-align:right;">
+2130.03
+</td>
+<td style="text-align:right;">
+2055.19
+</td>
+<td style="text-align:right;">
+2207.01
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+All_Races
+</td>
+<td style="text-align:right;">
+3104
+</td>
+<td style="text-align:right;">
+29225
+</td>
+<td style="text-align:right;">
+31895
+</td>
+<td style="text-align:left;">
+Senior
+</td>
+<td style="text-align:right;">
+0.4391108
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+336.99
+</td>
+<td style="text-align:right;">
+357.99
+</td>
+<td style="text-align:right;">
+344.19
+</td>
+<td style="text-align:right;">
+372.27
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+All_Races
+</td>
+<td style="text-align:right;">
+2733
+</td>
+<td style="text-align:right;">
+162199
+</td>
+<td style="text-align:right;">
+161909
+</td>
+<td style="text-align:left;">
+Adult
+</td>
+<td style="text-align:right;">
+0.4548116
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19.13
+</td>
+<td style="text-align:right;">
+18.45
+</td>
+<td style="text-align:right;">
+13.87
+</td>
+<td style="text-align:right;">
+24.20
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+All_Races
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+60652
+</td>
+<td style="text-align:right;">
+62777
+</td>
+<td style="text-align:left;">
+Youth
+</td>
+<td style="text-align:right;">
+0.5689655
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+467.72
+</td>
+<td style="text-align:right;">
+484.55
+</td>
+<td style="text-align:right;">
+471.98
+</td>
+<td style="text-align:right;">
+497.40
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+All_Races
+</td>
+<td style="text-align:right;">
+5895
+</td>
+<td style="text-align:right;">
+252076
+</td>
+<td style="text-align:right;">
+256581
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+0.4476675
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1226.04
+</td>
+<td style="text-align:right;">
+1252.24
+</td>
+<td style="text-align:right;">
+974.98
+</td>
+<td style="text-align:right;">
+1592.43
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+Hispanic
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+1158
+</td>
+<td style="text-align:right;">
+1326
+</td>
+<td style="text-align:left;">
+Senior
+</td>
+<td style="text-align:right;">
+0.4788732
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+125.21
+</td>
+<td style="text-align:right;">
+207.45
+</td>
+<td style="text-align:right;">
+165.72
+</td>
+<td style="text-align:right;">
+256.65
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+Hispanic
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+14376
+</td>
+<td style="text-align:right;">
+14416
+</td>
+<td style="text-align:left;">
+Adult
+</td>
+<td style="text-align:right;">
+0.4777778
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+Hispanic
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+6486
+</td>
+<td style="text-align:right;">
+7337
+</td>
+<td style="text-align:left;">
+Youth
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+152.58
+</td>
+<td style="text-align:right;">
+285.88
+</td>
+<td style="text-align:right;">
+242.11
+</td>
+<td style="text-align:right;">
+336.78
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+Hispanic
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+22021
+</td>
+<td style="text-align:right;">
+23079
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+0.4761905
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2035.59
+</td>
+<td style="text-align:right;">
+2067.90
+</td>
+<td style="text-align:right;">
+1872.33
+</td>
+<td style="text-align:right;">
+2279.43
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+NHB
+</td>
+<td style="text-align:right;">
+421
+</td>
+<td style="text-align:right;">
+4136
+</td>
+<td style="text-align:right;">
+4529
+</td>
+<td style="text-align:left;">
+Senior
+</td>
+<td style="text-align:right;">
+0.4608076
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+349.59
+</td>
+<td style="text-align:right;">
+367.12
+</td>
+<td style="text-align:right;">
+335.99
+</td>
+<td style="text-align:right;">
+400.73
+</td>
+<td style="text-align:left;width: 1cm; ">
+All
+</td>
+<td style="text-align:left;width: 1cm; ">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:left;">
+NHB
+</td>
+<td style="text-align:right;">
+531
+</td>
+<td style="text-align:right;">
+30379
+</td>
+<td style="text-align:right;">
+30667
+</td>
+<td style="text-align:left;">
+Adult
+</td>
+<td style="text-align:right;">
+0.5216573
+</td>
+<td style="text-align:left;">
+Alachua County
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cool. 😎</p>
+<pre class="r"><code>library(tidyverse)
+
+# I only want to look at Sylvester catchment area
+sylRates &lt;- theRatesByCounty_df %&gt;% 
+   filter(place_num == 888)
+
+# I don&#39;t care about a particular lifestage nor do I care about all cancers as a
+# whole or other cancers aside from the 19 we&#39;ve marked as important
+prevalence &lt;- sylRates %&gt;% 
+  filter(lifeStage == &quot;All&quot;, !site %in% c(&quot;All&quot;,&quot;Other&quot;)) %&gt;%
+  #also, for the sake of the graphics, I want the percentage to be pretty
+  mutate(pLateStage = round(pLateStage*100,1)) </code></pre>
+</div>
+<div id="it-started-with-a-plot" class="section level3">
+<h3>It Started With a Plot…</h3>
+<p>I wanted to start off by showing the counts for the 19 different cancers for <em>all races</em></p>
+<pre class="r"><code>f &lt;- prevalence %&gt;%  
+  filter(sex == &quot;P&quot;, race == &quot;All_Races&quot;) %&gt;% #sex == &quot;people&quot;
+  ggplot(aes(x = site, y = count))
+
+f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#2ECC71&quot;) +
+  coord_flip() +
+  geom_text(aes(label = count), hjust = -0.4, color = &quot;black&quot;,
+            position = position_dodge(width = 1), size = 2) +
+  labs(x = &quot;Site&quot;,
+       y = &quot;Count&quot;) +
+  ggtitle(&quot;Count of 19 Cancers by Site&quot;) +
+  theme_light() </code></pre>
+<p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot-1.png" width="672" /></p>
+<p>That’s cool but, I want to order this by most frequent to less frequent so that means I need to make site a factor and because there are 4 different race/ethnicity categories, I also need to make sure each race has it’s own order. Therefore, I need to <code>group_by()</code> race and <code>arrange()</code> by race and count.</p>
+<pre class="r"><code>all_sexes &lt;- prevalence %&gt;% 
+  filter(sex == &quot;P&quot;) %&gt;%   # sex == &quot;people&quot;
+  group_by(race) %&gt;% 
+  arrange(race, count) %&gt;% 
+  mutate(site = factor(site, levels = unique(site)))
+
+#let&#39;s try making a plot for just &quot;All_Races&quot;
+f &lt;- filter(all_sexes, race == &quot;All_Races&quot;) %&gt;% 
+  ggplot(aes(x = site, y = count))
+
+f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#2ECC71&quot;) +
+  coord_flip() +
+  geom_text(aes(label = count), hjust = -0.4, color = &quot;black&quot;,
+            position = position_dodge(width = 1), size = 2) +
+  labs(x = &quot;Site&quot;,
+       y = &quot;Count&quot;) +
+  ggtitle(&quot;Count of 19 Cancers by Site&quot;) +
+  theme_light() </code></pre>
+<p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot_fact-1.png" width="672" /></p>
+<p><strong>Yippee!!</strong></p>
+<p>Now, I need to replicate this plot for not only all 19 cancers, but the top 5 cancers, the top 5 cancers by each race group, the cancers that are caused by viruses, and the cancers caused by viruses for each race group. Not only do I want to look at the counts, but I also want these plots for the percent late stage at diagnosis and for the age-adjusted incidence rates…oh, $#!@.</p>
+<p>That’s 15 different plots and if you know me, there’s no way in hell I am copying and pasting this crap 15 times…</p>
+<p>Red rover, red rover, please send a function right over :)</p>
+<p>This didn’t seem <em>terribly</em> intimidating at first, the only arguments I needed was which measure I wanted to plot: count, adjusted rate, or percent late stage and if I wanted to filter the data on just the cancers that were caused by viruses.</p>
+<p>The reason why I say terribly is because I had an inkling there would probably be some NSE involved here because I would need to pipe my data to <code>arrange()</code> on the <em>measure</em> argument, follwed by a ggplot. All tidyverse functions that take unquoted arguments. So, I thought “ok, first I need turn my argument to a quosure, and then unquote when I call it in either my dplyr verbs or ggplot geoms”. Here’s what that looked like:</p>
+<pre class="r"><code>library(lettercase)
+
+makeGraphs &lt;- function(measure, virus = FALSE) {
+  
+  measureText &lt;- str_cap_words(measure)
+  quo_measure &lt;- enquo(measure)
+  
+  all_sexes &lt;- prevalence %&gt;% 
+    filter(sex == &quot;P&quot;) %&gt;% 
+    group_by(race) %&gt;% 
+    arrange(race, !!quo_measure) %&gt;%
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f &lt;- filter(all_sexes, race == &quot;All_Races&quot;) %&gt;% 
+      ggplot(aes(x = site, y = !!quo_measure))
+    
+    allcancers &lt;- f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#2ECC71&quot;) +
+      coord_flip() +
+      geom_text(aes(label = !!quo_measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of 19 Cancers by Site &quot;)) +
+      theme_light() 
+    
+  }
+}</code></pre>
+<p><strong>This did <em>NOT</em> work.</strong></p>
+<p>Sigh…after a couple hours of falling down the rabbit hole of Stack Overflow and the <em>tidyeval</em> vignette, I gave up on this option. Fortunately, those hours were not spent in vain. I did stumble accross a potential solution where I use a bit of tidy (thanks to <code>rlang</code> version &gt;= 0.4) and base, as such:</p>
+<pre class="r"><code>library(lettercase)
+
+makeGraphs &lt;- function(measure, virus = FALSE) {
+  
+  measureText &lt;- str_cap_words(measure)
+  
+  all_sexes &lt;- prevalence %&gt;% 
+    filter(sex == &quot;P&quot;) %&gt;% 
+    group_by(race) %&gt;% 
+    arrange(race, .data[[measure]]) %&gt;%  # .data is now recognized as a way to refer to the parent data frame, so reference by string works - like in base
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f &lt;- filter(all_sexes, race == &quot;All_Races&quot;) %&gt;% 
+      ggplot(aes_string(x = &quot;site&quot;, y = measure)) 
+    
+    f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#2ECC71&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of 19 Cancers by Site &quot;)) +
+      theme_light() 
+    
+  }
+}
+
+makeGraphs(&quot;count&quot;)</code></pre>
+<p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png" width="672" /></p>
+<p><strong>WOOP!</strong>…progress. Now to turn this into a full function that will produce and save all 15 graphics!</p>
+<pre class="r"><code>library(lettercase)
+
+makeGraphs &lt;- function(measure, virus = FALSE) {
+  
+  measureText &lt;- str_cap_words(measure)
+  
+  all_sexes &lt;- prevalence %&gt;% 
+    filter(sex == &quot;P&quot;) %&gt;% 
+    group_by(race) %&gt;% 
+    arrange(race, .data[[measure]]) %&gt;%  
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f &lt;- filter(all_sexes, race == &quot;All_Races&quot;) %&gt;% 
+      ggplot(aes_string(x = &quot;site&quot;, y = measure)) 
+    
+    allcancers &lt;- f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#2ECC71&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of 19 Cancers by Site &quot;)) +
+      theme_light() 
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText, &quot;_allcancers.png&quot;))
+    
+    # just breast, colorectal, lung, prostate, cervical
+    
+    all_sexes_five_cancer &lt;- filter(all_sexes, site %in% c(&quot;Prostate&quot;, &quot;Colorectal&quot;, &quot;Breast&quot;, &quot;Cervix&quot;, 
+                                &quot;Lung &amp; Bronchus&quot;))
+    
+    
+    g &lt;- filter(all_sexes_five_cancer, race == &quot;All_Races&quot;) %&gt;%
+      ggplot(aes_string(x = &quot;site&quot;, y = measure))
+    
+    topCancer &lt;- g + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#F39C12&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of Most Prevalent Cancers by Site &quot;)) +
+      theme_light()
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_topCancer.png&quot;))
+    
+    # facet by race
+    h &lt;-  ggplot(all_sexes_five_cancer, aes_string(x = &quot;site&quot;, y = measure))
+    
+    topCancerRace &lt;- h + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#9B59B6&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.1, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of Most Prevalent Cancers by Site &amp; Race&quot;)) +
+      theme_light() +
+      facet_wrap(&quot;race&quot;, scales = &quot;free&quot;)
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_topCancerRace.png&quot;))
+    
+    list(allcancers, topCancer, topCancerRace)
+    
+  }else{
+    # just cancers caused by viruses
+    
+    virus &lt;- filter(all_sexes, site %in% c(&quot;Anal&quot;, &quot;Non-Hodgkin Lymphoma&quot;, &quot;Liver&quot;, 
+                                   &quot;Oral &amp; Oropharynx&quot;, &quot;Cervix&quot;, 
+                                   &quot;Stomach&quot;))
+    
+    #just all_races
+    
+    i &lt;- filter(virus, race == &quot;All_Races&quot;) %&gt;%
+      ggplot(aes_string(x = &quot;site&quot;, y = measure))
+    
+    virusCancer &lt;- i + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#F0B27A&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of Cancers Caused by Viruses&quot;)) +
+      theme_light()
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_virusCancer.png&quot;))
+    
+    # facet by race
+    
+    i &lt;-  ggplot(virus, aes_string(x = &quot;site&quot;, y = measure))
+    
+    virusCancerRace &lt;- i + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#9B59B6&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.1, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of Cancers Caused by Viruses by Race&quot;)) +
+      theme_light() +
+      facet_wrap(&quot;race&quot;, scales = &quot;free&quot;)
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_virusCancerRace.png&quot;))
+    
+    list(virusCancer, virusCancerRace)
+  }
+}
+
+makeGraphs(&quot;count&quot;)</code></pre>
+<p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-1.png" width="672" /><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-2.png" width="672" /><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-3.png" width="672" /></p>
+<p>Now, this made me excited at first <em>until</em> I noticed that when I facted by race, the order of the levels for site remained fixed, regardless of race. The order for the “All_Races” group was getting recycled. <em>This</em> is where the headache, more cursing, and thoughts of running away and never coming back started to creep in.</p>
+<p>How can I facet on race yet still preserve the order of site per each race group???</p>
+<p>* <em>In the Spongebob narrator voice</em> * A few hours later…. I gave up and went home.</p>
+<p>Then in the middle of the night I awoke with an idea…as most annoying problems tend to do. Faceting fixes the y axis so I can’t use this. I will need to create 4 individual plots and join them into 1 for easier comparison.</p>
+<p>I was advised to try <code>par()</code> or <code>layout()</code> but then learned that these functions are not compatible with ggpolot - only plot functions.</p>
+<p>Again, there’s no way I’m going to copy and paste each ggplot code 4 times - one that filters for each race group…I feel another function coming on.</p>
+<p>Better yet, <code>map()</code> to the rescue!</p>
+<p>What if I listed the race categories and passed that to a map which contained a function that filtered the data by the race and drew the plot? So let’s try this one mo’gain (don’t judge, I’m a Georgia girl, born and bred).</p>
+<pre class="r"><code>library(ggpubr) # for arranging the individual race plots to one
+
+makeGraphs &lt;- function(measure, virus = FALSE) {
+  
+  measureText &lt;- str_cap_words(measure)
+  
+  all_sexes &lt;- prevalence %&gt;% 
+    filter(sex == &quot;P&quot;) %&gt;% 
+    group_by(race) %&gt;% 
+    arrange(race, .data[[measure]]) %&gt;%  
+    mutate(site= factor(site, levels = unique(site), ordered = TRUE))
+  
+  
+  if(virus == FALSE){
+    f &lt;-  filter(all_sexes, race == &quot;All_Races&quot;) %&gt;% 
+      ggplot(aes_string(x = &quot;site&quot;, y = measure))
+    
+    allcancers &lt;- f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#2ECC71&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of 19 Cancers by Site &quot;)) +
+      theme_light() 
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText, &quot;_allcancers.png&quot;))
+    
+    # just breast, colorectal, lung, prostate, cervical
+    
+    all_sexes_five_cancer &lt;- filter(all_sexes, site %in% c(&quot;Prostate&quot;, &quot;Colorectal&quot;, &quot;Breast&quot;, &quot;Cervix&quot;, 
+                                &quot;Lung &amp; Bronchus&quot;))
+    
+    
+    g &lt;-  filter(all_sexes_five_cancer, race == &quot;All_Races&quot;) %&gt;% 
+      ggplot(aes_string(x = &quot;site&quot;, y = measure))
+    
+    topCancer &lt;- g + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#F39C12&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of Most Prevalent Cancers by Site &quot;)) +
+      theme_light()
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_topCancer.png&quot;))
+    
+    # facet by race
+    races &lt;- list(&quot;All_Races&quot;, &quot;NHW&quot;, &quot;NHB&quot;, &quot;Hispanic&quot;)
+    
+    raceGraphs &lt;- map(races, function(x){
+      h &lt;-  all_sexes_five_cancer %&gt;% 
+        filter(race == x) %&gt;% 
+        arrange(race, .data[[measure]]) %&gt;%  
+        mutate(site= factor(site, levels = unique(site), ordered = TRUE)) %&gt;% 
+        ggplot(aes_string(x = &quot;site&quot;, y = measure))
+      
+      h + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#9B59B6&quot;) +
+        coord_flip() +
+        geom_text(aes_string(label = measure), hjust = -0.1, color = &quot;black&quot;,
+                  position = position_dodge(width = 1), size = 2) +
+        labs(x = &quot;Site&quot;,
+             y = measureText) +
+        ggtitle(x) +
+        theme_light()+
+        theme(plot.title = element_text(size = 10, color = &quot;#B03A2E&quot;, hjust = 1),
+              plot.margin = margin(0,0,0,0))
+      
+    })
+    
+    h &lt;- ggarrange(
+      raceGraphs[[1]] + rremove(&quot;x.title&quot;),
+      raceGraphs[[2]] + rremove(&quot;y.title&quot;) + rremove(&quot;x.title&quot;),
+      raceGraphs[[3]],
+      raceGraphs[[4]] + rremove(&quot;y.title&quot;),
+      ncol = 2, nrow = 2
+    )
+    
+    topCancerRace &lt;- annotate_figure(h, fig.lab = paste0(measureText,&quot; of Most Prevalent Cancers&quot;),
+                                     fig.lab.face = &quot;bold&quot;)
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_topCancerRace.png&quot;))
+    
+    list(allcancers, topCancer, topCancerRace)
+  }else{
+    # just cancers caused by viruses
+    
+    virus &lt;- filter(all_sexes, site %in% c(&quot;Anal&quot;, &quot;Non-Hodgkin Lymphoma&quot;, &quot;Liver&quot;, 
+                                   &quot;Oral &amp; Oropharynx&quot;, &quot;Cervix&quot;, 
+                                   &quot;Stomach&quot;))
+    
+    
+    i &lt;-  filter(virus, race == &quot;All_Races&quot;) %&gt;% 
+      ggplot(aes_string(x = &quot;site&quot;, y = measure))
+    
+    virusCancer &lt;- i + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#F0B27A&quot;) +
+      coord_flip() +
+      geom_text(aes_string(label = measure), hjust = -0.4, color = &quot;black&quot;,
+                position = position_dodge(width = 1), size = 2) +
+      labs(x = &quot;Site&quot;,
+           y = measureText) +
+      ggtitle(paste0(measureText,&quot; of Cancers Caused by Viruses by Site&quot;)) +
+      theme_light()
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_virusCancer.png&quot;))
+    
+    # facet by race
+    races &lt;- list(&quot;All_Races&quot;, &quot;NHW&quot;, &quot;NHB&quot;, &quot;Hispanic&quot;)
+    
+    raceGraphs &lt;- map(races, function(x){
+      j &lt;-  virus %&gt;% 
+        filter(race == x) %&gt;% 
+        arrange(race, .data[[measure]]) %&gt;%  
+        mutate(site= factor(site, levels = unique(site), ordered = TRUE)) %&gt;% 
+        ggplot(aes_string(x = &quot;site&quot;, y = measure))
+      
+      j + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &quot;#BB8FCE&quot;) +
+        coord_flip() +
+        geom_text(aes_string(label = measure), hjust = -0.1, color = &quot;black&quot;,
+                  position = position_dodge(width = 1), size = 2) +
+        labs(x = &quot;Site&quot;,
+             y = measureText) +
+        ggtitle(x) +
+        theme_light()+
+        theme(plot.title = element_text(size = 10, color = &quot;#E74C3C&quot;, hjust = 1),
+              plot.margin = margin(0,0,0,0))
+    })
+    
+    j &lt;- ggarrange(
+      raceGraphs[[1]] + rremove(&quot;x.title&quot;),
+      raceGraphs[[2]] + rremove(&quot;y.title&quot;) + rremove(&quot;x.title&quot;),
+      raceGraphs[[3]],
+      raceGraphs[[4]] + rremove(&quot;y.title&quot;),
+      ncol = 2, nrow = 2
+    )
+    
+    virusCancerRace &lt;- annotate_figure(j, fig.lab = paste0(measureText,&quot; of Cancers Caused by Viruses by Site&quot;),
+                                       fig.lab.face = &quot;bold&quot;)
+    
+    # ggsave(paste0(&quot;./images/&quot;, measureText,&quot;_virusCancerRace.png&quot;))
+    
+    list(virusCancer, virusCancerRace)
+  }
+  
+  
+}
+
+makeGraphs(&quot;count&quot;)</code></pre>
+<p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-1.png" width="672" /><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-2.png" width="672" /><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-3.png" width="672" /></p>
+<pre class="r"><code>makeGraphs(&quot;adjRate&quot;, virus = TRUE)</code></pre>
+<p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-4.png" width="672" /><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-5.png" width="672" /></p>
+<p><strong>YAASSSS!!!</strong>…purrring in contentment ;)</p>
+<p>*Note: I’ve commented out the ggsaves for the sake of making sure I don’t screw up what I already have</p>
+<p>I hope what went through my head effectively made it through my fingers, onto the keyboard, and on the screen into this document in an intelligible way.</p>
+</div>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Dynamite with a laser beam</p>
+      
+      
+        ©
+        
+        2020
+         Layla Bouzoubaa 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+        
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

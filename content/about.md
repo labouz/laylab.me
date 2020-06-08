@@ -3,7 +3,7 @@ author: LB
 date: "2019-08-25"
 ---
 
-### This is me 👋
+### This is me, Layla B 👋
 
 {{< figure src="/images/pic01.png" class="center" height="300px" >}}
 
@@ -24,10 +24,9 @@ date: "2019-08-25"
     
 * Self-proclaimed wine connoisseur and food critic
 
+{{< figure src="/images/pic05.jpg" class="center" width="300px" >}}
+
 * Aspire to one day build an oasis by the sea, which will house an overabundance of animals, fancy wines, and horticulture, and where I will frequently host dinner parties and woo my guests with my exceptional piano playing and culinary skills!  
-
-    {{< figure src="/images/pic05.jpg" class="center" width="300px" >}}
-
 
 **I like hats 🎩** 
  

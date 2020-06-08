@@ -2,7 +2,7 @@ baseurl = "/"
 title = "LB"
 
 theme = "hugo-coder"
-
+googleAnalytics = "UA-168802684-1"
 languagecode = "en"
 defaultcontentlanguage = "en"
 

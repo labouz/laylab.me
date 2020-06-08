@@ -9,3 +9,6 @@
 #data files
 public/posts/*.rda
 public/posts/*.rds
+
+content/posts/*.rda
+content/posts/*.rds

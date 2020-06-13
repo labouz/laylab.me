@@ -13,7 +13,7 @@ title: Passion Projects & Talks
     - [Felicia Knaul, Ph.D](https://people.miami.edu/profile/fknaul@miami.edu) – University of Miami
     - [Hector Arreola](http://tomateloapecho.org.mx/Cvs/Hector_Arreola.php) - Anahuac University, MX
     - [Michael Touchton, Ph.D](https://people.miami.edu/profile/mxt725@miami.edu) - University of Miami
-    - [Alberto Cairo, Ph.D](http://albertocairo.com/)
+    - [Alberto Cairo, Ph.D](http://albertocairo.com/) - University of Miami
     - [Raymond Balise, Ph.D](https://people.miami.edu/profile/rrb28@miami.edu) – University of Miami
   - Press: https://www.publichealth.med.miami.edu/news/news-releases/2020/observatory/index.html
   - Web platform to visualize the adoption of public policy towards COVID-19 in Mexico and further, across Latin America
@@ -54,7 +54,7 @@ title: Passion Projects & Talks
     - Work was done as part of a Sylvester CCC Global Oncology Grant
 
 - An emergent, high-fatality lung disease in systemic juvenile arthritis – 2017-2019
-  - DOI: [10.1101/19002923](https://www.medrxiv.org/content/10.1101/19002923v1)
+  - DOI: [10.1136/annrheumdis-2019-216040](https://www.medrxiv.org/content/10.1101/19002923v1)
   - Key Collaborators:
     - [Vivian Saper, M.D](https://profiles.stanford.edu/vivian-saper) – Stanford University
   - To investigate characteristics and risk factors of a novel parenchymal lung disease, increasingly detected in systemic juvenile idiopathic arthritis (sJIA)

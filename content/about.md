@@ -16,20 +16,20 @@ date: "2019-08-25"
 
 * Daughter of two wonderful Moroccans 🇲🇦, [Al](https://www.linkedin.com/in/alain-bouzouba-51894950/) and Mounira
 
-* Raised in the [restaurant](http://www.sevengablesrestaurant.com/) biz   
+* Raised in the [restaurant](http://www.sevengablesrestaurant.com/) biz
 
   {{< figure src="/images/pic04.jpg" class="center" width="300px" >}}
 
 * I have a low-key plant addiction
-    
+
 * Self-proclaimed wine connoisseur and food critic
 
 {{< figure src="/images/pic05.jpg" class="center" width="300px" >}}
 
 * Aspire to one day build an oasis by the sea, which will house an overabundance of animals, fancy wines, and horticulture, and where I will frequently host dinner parties and woo my guests with my exceptional piano playing and culinary skills!  
 
-**I like hats 🎩** 
- 
+**I like hats 🎩**
+
 * I am a statistical programmer for the University of Miami [Sylvester Comprehensive Cancer Center](https://twitter.com/SylvesterCancer).   
 
 * I organize the Miami chapter of [R-Ladies](https://www.meetup.com/rladies-miami/ "R-Ladies Meetup")  
@@ -51,5 +51,3 @@ date: "2019-08-25"
 
 
 <br>
-
-

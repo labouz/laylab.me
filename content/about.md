@@ -5,7 +5,7 @@ date: "2019-08-25"
 
 ### This is me, Layla B 👋
 
-{{< figure src="/images/pic01.png" class="center" height="300px" >}}
+{{< figure src="/images/pic01.jpeg" class="center" height="325px" >}}
 
 
 **The not so boring stuff:**  

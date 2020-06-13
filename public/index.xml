@@ -19,7 +19,7 @@
       <guid>/about/</guid>
       <description>&lt;h3 id=&#34;this-is-me-layla-b-&#34;&gt;This is me, Layla B 👋&lt;/h3&gt;
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;/images/pic01.png&#34; height=&#34;300px&#34;/&gt; 
+    &lt;img src=&#34;/images/pic01.jpeg&#34; height=&#34;300px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;strong&gt;The not so boring stuff:&lt;/strong&gt;&lt;/p&gt;
@@ -1091,7 +1091,7 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&#34;https://people.miami.edu/profile/fknaul@miami.edu&#34;&gt;Felicia Knaul, Ph.D&lt;/a&gt; – University of Miami&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://tomateloapecho.org.mx/Cvs/Hector_Arreola.php&#34;&gt;Hector Arreola&lt;/a&gt; - Anahuac University, MX&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://people.miami.edu/profile/mxt725@miami.edu&#34;&gt;Michael Touchton, Ph.D&lt;/a&gt; - University of Miami&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://albertocairo.com/&#34;&gt;Alberto Cairo, Ph.D&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://albertocairo.com/&#34;&gt;Alberto Cairo, Ph.D&lt;/a&gt; - University of Miami&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://people.miami.edu/profile/rrb28@miami.edu&#34;&gt;Raymond Balise, Ph.D&lt;/a&gt; – University of Miami&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -1176,7 +1176,7 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;
 &lt;p&gt;An emergent, high-fatality lung disease in systemic juvenile arthritis – 2017-2019&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;DOI: &lt;a href=&#34;https://www.medrxiv.org/content/10.1101/19002923v1&#34;&gt;10.1101/19002923&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DOI: &lt;a href=&#34;https://www.medrxiv.org/content/10.1101/19002923v1&#34;&gt;10.1136/annrheumdis-2019-216040&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Key Collaborators:
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://profiles.stanford.edu/vivian-saper&#34;&gt;Vivian Saper, M.D&lt;/a&gt; – Stanford University&lt;/li&gt;

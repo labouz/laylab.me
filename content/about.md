@@ -14,7 +14,7 @@ date: "2019-08-25"
 
      {{< figure src="/images/pic02.jpg" class="center" width="200px" >}}
 
-* Daughter of two wonderful Moroccans 🇲🇦, [Al](https://www.linkedin.com/in/alain-bouzouba-51894950/) and Mounira
+* Daughter of two wonderful Moroccans 🇲🇦, [Al](https://www.linkedin.com/in/alain-bouzouba-51894950/) and Mounira, and sister of [Zineb](https://www.linkedin.com/in/zinebbouzoubaa/)
 
 * Raised in the [restaurant](http://www.sevengablesrestaurant.com/) biz
 

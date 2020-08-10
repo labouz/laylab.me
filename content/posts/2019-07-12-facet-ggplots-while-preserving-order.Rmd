@@ -127,11 +127,11 @@ The reason why I say terribly is because I had an inkling there would probably b
 
 
 ```{r func1, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-library(lettercase)
+library(stringr)
 
 makeGraphs <- function(measure, virus = FALSE) {
   
-  measureText <- str_cap_words(measure)
+  measureText <- str_to_sentence(measure)
   quo_measure <- enquo(measure)
   
   all_sexes <- prevalence %>% 
@@ -163,16 +163,17 @@ makeGraphs <- function(measure, virus = FALSE) {
 Sigh...after a couple hours of falling down the rabbit hole of Stack Overflow and the *tidyeval* vignette, I gave up on this option. Fortunately, those hours were not spent in vain. I did stumble accross a potential solution where I use a bit of tidy (thanks to `rlang` version >= 0.4) and base, as such:
 
 ```{r func2, echo=TRUE, message=FALSE, warning=FALSE}
-library(lettercase)
+library(stringr)
 
 makeGraphs <- function(measure, virus = FALSE) {
   
-  measureText <- str_cap_words(measure)
+  measureText <- str_to_sentence(measure)
   
   all_sexes <- prevalence %>% 
     filter(sex == "P") %>% 
     group_by(race) %>% 
     arrange(race, .data[[measure]]) %>%  # .data is now recognized as a way to refer to the parent data frame, so reference by string works - like in base
+    ungroup() %>% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -198,16 +199,17 @@ makeGraphs("count")
 **WOOP!**...progress. Now to turn this into a full function that will produce and save all 15 graphics!
 
 ```{r func3, echo=TRUE, message=FALSE, warning=FALSE, results='hide', fig.keep='all'}
-library(lettercase)
+library(stringr)
 
 makeGraphs <- function(measure, virus = FALSE) {
   
-  measureText <- str_cap_words(measure)
+  measureText <- str_to_sentence(measure)
   
   all_sexes <- prevalence %>% 
     filter(sex == "P") %>% 
     group_by(race) %>% 
     arrange(race, .data[[measure]]) %>%  
+    ungroup() %>% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -330,12 +332,13 @@ library(ggpubr) # for arranging the individual race plots to one
 
 makeGraphs <- function(measure, virus = FALSE) {
   
-  measureText <- str_cap_words(measure)
+  measureText <- str_to_sentence(measure)
   
   all_sexes <- prevalence %>% 
     filter(sex == "P") %>% 
     group_by(race) %>% 
     arrange(race, .data[[measure]]) %>%  
+    ungroup() %>% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   

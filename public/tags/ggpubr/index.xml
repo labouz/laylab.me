@@ -619,11 +619,11 @@ f + geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp
 &lt;p&gt;Red rover, red rover, please send a function right over :)&lt;/p&gt;
 &lt;p&gt;This didn’t seem &lt;em&gt;terribly&lt;/em&gt; intimidating at first, the only arguments I needed was which measure I wanted to plot: count, adjusted rate, or percent late stage and if I wanted to filter the data on just the cancers that were caused by viruses.&lt;/p&gt;
 &lt;p&gt;The reason why I say terribly is because I had an inkling there would probably be some NSE involved here because I would need to pipe my data to &lt;code&gt;arrange()&lt;/code&gt; on the &lt;em&gt;measure&lt;/em&gt; argument, follwed by a ggplot. All tidyverse functions that take unquoted arguments. So, I thought “ok, first I need turn my argument to a quosure, and then unquote when I call it in either my dplyr verbs or ggplot geoms”. Here’s what that looked like:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lettercase)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   quo_measure &amp;lt;- enquo(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
@@ -650,16 +650,17 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;This did &lt;em&gt;NOT&lt;/em&gt; work.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Sigh…after a couple hours of falling down the rabbit hole of Stack Overflow and the &lt;em&gt;tidyeval&lt;/em&gt; vignette, I gave up on this option. Fortunately, those hours were not spent in vain. I did stumble accross a potential solution where I use a bit of tidy (thanks to &lt;code&gt;rlang&lt;/code&gt; version &amp;gt;= 0.4) and base, as such:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lettercase)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
     filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;% 
     group_by(race) %&amp;gt;% 
     arrange(race, .data[[measure]]) %&amp;gt;%  # .data is now recognized as a way to refer to the parent data frame, so reference by string works - like in base
+    ungroup() %&amp;gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -682,16 +683,17 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;WOOP!&lt;/strong&gt;…progress. Now to turn this into a full function that will produce and save all 15 graphics!&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lettercase)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
     filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;% 
     group_by(race) %&amp;gt;% 
     arrange(race, .data[[measure]]) %&amp;gt;%  
+    ungroup() %&amp;gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -804,12 +806,13 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
     filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;% 
     group_by(race) %&amp;gt;% 
     arrange(race, .data[[measure]]) %&amp;gt;%  
+    ungroup() %&amp;gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   

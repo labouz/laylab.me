@@ -61,6 +61,7 @@ title: Passion Projects & Talks
 
 # Passion Talks
 
+- [Whose Knowledge Gets To Be Saved](https://www.dikayodata.com/datafemme/algorithmsofoppression) – Data Femme Podcast – Online – 2020
 - Women in Data Science – Panelist - General Assembly Boston – Boston, MA – 2020
 - #IamRemarkable Workshop – UM DPHS Students/Alumni - 2020
 - Tearing Down Barriers to Publication – FIU – Miami, FL - 2020

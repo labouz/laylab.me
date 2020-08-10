@@ -6,10 +6,117 @@
     <description>Recent content on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The API and I - Exposing a Pluber API</title>
+      <link>/posts/the-api-and-i-exposing-a-pluber-api/</link>
+      <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/the-api-and-i-exposing-a-pluber-api/</guid>
+      <description>
+
+
+&lt;p&gt;If you had asked me two years ago to use and API in my scripts, much less develop and deploy them, I probably would have hid under
+my desk. Well, I probably wouldn’t have actually hid, but I would have wanted to. Developing APIs can seem quite daunting at first, but I promise, it’s really not. If &lt;em&gt;I&lt;/em&gt; can do it &lt;em&gt;YOU&lt;/em&gt; definitely can!&lt;/p&gt;
+&lt;p&gt;I am going to show how to build an API, first and then expose it in less than 5 minutes, are you ready?!&lt;/p&gt;
+&lt;p&gt;First a little on APIs to get your head in the right place. 🤓&lt;/p&gt;
+&lt;div id=&#34;what-is-an-api&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;What is an API?&lt;/h3&gt;
+&lt;div id=&#34;application-program-interface&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;A&lt;/strong&gt;pplication &lt;strong&gt;P&lt;/strong&gt;rogram &lt;strong&gt;I&lt;/strong&gt;nterface&lt;/h4&gt;
+&lt;p&gt;In short, it allows a user to programatically pull data from a source given that source provides one&lt;br /&gt;
+&lt;em&gt;ex. The NYT, Twitter, Facebook, Google, US Census&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-does-it-work&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How Does it Work?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Think of it like this, just like a Graphical User Interface (GUI) allows you to interact with your code, an API lets your code interact with other code&lt;/li&gt;
+&lt;li&gt;Set of commands, functions, objects, and protocols
+&lt;ul&gt;
+&lt;li&gt;used to create software or interact with an external system (databases)&lt;/li&gt;
+&lt;li&gt;everywhere!&lt;/li&gt;
+&lt;li&gt;convenient- ready-made code to simplify the life of a programmer&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;not-only-for-getting-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Not Only for Getting Data&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Build APIs for your ML models so others can use them&lt;/li&gt;
+&lt;li&gt;Write (post) to a database
+&lt;ul&gt;
+&lt;li&gt;and update (put) and delete (delete)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Functions
+&lt;ul&gt;
+&lt;li&gt;more control over what is exposed to end user&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Okay, enough of that, let’s build one shall we?? 😉&lt;/p&gt;
+&lt;p&gt;Lucky for us, &lt;code&gt;plumber&lt;/code&gt; makes this step &lt;em&gt;really&lt;/em&gt; easy! I’m not going to go into the weeds of the details. The documentation does a really good job at this, so why be redundant!? We’re here for the part after that!
+FYI:&lt;br /&gt;
+📦: &lt;code&gt;plumber&lt;/code&gt;&lt;br /&gt;
+📖: &lt;a href=&#34;https://www.rplumber.io/&#34; class=&#34;uri&#34;&gt;https://www.rplumber.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here, we want to expose an API that returns a dynamic plot using &lt;code&gt;ggplot2::ggplot()&lt;/code&gt; and &lt;code&gt;plotly::ggplotly()&lt;/code&gt;, specifically we are plotting the distribution of our favorite &lt;code&gt;mtcars$cyl&lt;/code&gt; data.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Wait, a couple steps back. Why are we exposing and not deploying? And what is exposing, anyways?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Good question, when you run a service such as an API or a Shiny app, for example, locally on your computer, you are running it as a server behind the scenes. You can access it through your browser by typing &lt;code&gt;localhost:portNumber&lt;/code&gt;. &lt;em&gt;Exposing&lt;/em&gt; your service is when we make this internal address (localhost) available on the internet. We are exposing whatever service on the particular port by giving it an external(public) URL.&lt;/p&gt;
+&lt;p&gt;Why would we do this? Well, if you are building models or various other objects meant for production, it would be a bit of a pain to constantly build and re-deploy, especially during the beginning stages when you are more prone to bugs. You could really piss off some engineers that way! Exposing your API is a good way to test before you deploy to your production server 😊&lt;/p&gt;
+&lt;p&gt;So, let’s get to it! Let’s start with our API:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(plotly)
+#* Plot a dynamic histogram
+#* @serializer htmlwidget
+#* @get /plotly
+function(){
+  data(mtcars)
+  x &amp;lt;- ggplot(mtcars, aes(x = as.factor(cyl))) +
+    geom_bar(fill= c(&amp;quot;#8245BF&amp;quot;, &amp;quot;#05F29B&amp;quot;, &amp;quot;#F2CB05&amp;quot;)) +
+    theme_minimal() +
+    labs(x = &amp;quot;cylinders&amp;quot;)
+
+  ggplotly(x)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To run your API locally just save the above script somewhere you can find it and run the following two commands in the console:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(plumber)
+r &amp;lt;- plumb(&amp;quot;plumber.R&amp;quot;)
+r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you run this you will get a screen like this from swagger:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/api_swagger.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;FYI, your local address will be localhost:8000/plotly&lt;/p&gt;
+&lt;div id=&#34;now-to-the-fun-part&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Now to the fun part!&lt;/h4&gt;
+&lt;p&gt;For exposing our API, we will use a service called &lt;a href=&#34;https://ngrok.com/download&#34;&gt;ngrok&lt;/a&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;You will have to create an account, this is how you will get your authentication token. The easiest would to authenticate is with your GitHub account, if you have one.&lt;/li&gt;
+&lt;li&gt;Download the installation for your operating system&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_download.png&#34; width=&#34;600&#34; /&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Open your terminal&lt;/li&gt;
+&lt;li&gt;Unzip the ngrok installation files&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd&lt;/code&gt; into that directory and authenticate the application (see picture below)
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;code&gt;./ngrok authtoken YOUR-AUTH-TOKEN&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_auth.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now it’s time to expose your API! 😎&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Hopefully, you still have the localhost served. If not, just run &lt;code&gt;r$run(port=8000)&lt;/code&gt; again and you should be good.&lt;/li&gt;
+&lt;li&gt;Open your terminal again. Make sure you’re in the directory where you unzipped ngrok (Applications, for me) and run &lt;code&gt;./ngrok http 8000&lt;/code&gt; and that’s it! You have now exposed port 8000 on your computer. If all went well, you should get a screen like this:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_expose.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now, all you have to do is share! Copy and paste the “Forwarding” URL and add the path to your API and send it out for testing!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_plotly.png&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Facet ggplots While Preserving Unique Order</title>
@@ -619,11 +726,11 @@ f + geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp
 &lt;p&gt;Red rover, red rover, please send a function right over :)&lt;/p&gt;
 &lt;p&gt;This didn’t seem &lt;em&gt;terribly&lt;/em&gt; intimidating at first, the only arguments I needed was which measure I wanted to plot: count, adjusted rate, or percent late stage and if I wanted to filter the data on just the cancers that were caused by viruses.&lt;/p&gt;
 &lt;p&gt;The reason why I say terribly is because I had an inkling there would probably be some NSE involved here because I would need to pipe my data to &lt;code&gt;arrange()&lt;/code&gt; on the &lt;em&gt;measure&lt;/em&gt; argument, follwed by a ggplot. All tidyverse functions that take unquoted arguments. So, I thought “ok, first I need turn my argument to a quosure, and then unquote when I call it in either my dplyr verbs or ggplot geoms”. Here’s what that looked like:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lettercase)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   quo_measure &amp;lt;- enquo(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
@@ -650,16 +757,17 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;This did &lt;em&gt;NOT&lt;/em&gt; work.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Sigh…after a couple hours of falling down the rabbit hole of Stack Overflow and the &lt;em&gt;tidyeval&lt;/em&gt; vignette, I gave up on this option. Fortunately, those hours were not spent in vain. I did stumble accross a potential solution where I use a bit of tidy (thanks to &lt;code&gt;rlang&lt;/code&gt; version &amp;gt;= 0.4) and base, as such:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lettercase)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
     filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;% 
     group_by(race) %&amp;gt;% 
     arrange(race, .data[[measure]]) %&amp;gt;%  # .data is now recognized as a way to refer to the parent data frame, so reference by string works - like in base
+    ungroup() %&amp;gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -682,16 +790,17 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;WOOP!&lt;/strong&gt;…progress. Now to turn this into a full function that will produce and save all 15 graphics!&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lettercase)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
     filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;% 
     group_by(race) %&amp;gt;% 
     arrange(race, .data[[measure]]) %&amp;gt;%  
+    ungroup() %&amp;gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -804,12 +913,13 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 
 makeGraphs &amp;lt;- function(measure, virus = FALSE) {
   
-  measureText &amp;lt;- str_cap_words(measure)
+  measureText &amp;lt;- str_to_sentence(measure)
   
   all_sexes &amp;lt;- prevalence %&amp;gt;% 
     filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;% 
     group_by(race) %&amp;gt;% 
     arrange(race, .data[[measure]]) %&amp;gt;%  
+    ungroup() %&amp;gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   

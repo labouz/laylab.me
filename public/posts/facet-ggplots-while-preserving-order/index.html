@@ -741,11 +741,11 @@ f + geom_bar(position = &quot;dodge&quot;, stat = &quot;identity&quot;, fill = &
 <p>Red rover, red rover, please send a function right over :)</p>
 <p>This didn’t seem <em>terribly</em> intimidating at first, the only arguments I needed was which measure I wanted to plot: count, adjusted rate, or percent late stage and if I wanted to filter the data on just the cancers that were caused by viruses.</p>
 <p>The reason why I say terribly is because I had an inkling there would probably be some NSE involved here because I would need to pipe my data to <code>arrange()</code> on the <em>measure</em> argument, follwed by a ggplot. All tidyverse functions that take unquoted arguments. So, I thought “ok, first I need turn my argument to a quosure, and then unquote when I call it in either my dplyr verbs or ggplot geoms”. Here’s what that looked like:</p>
-<pre class="r"><code>library(lettercase)
+<pre class="r"><code>library(stringr)
 
 makeGraphs &lt;- function(measure, virus = FALSE) {
   
-  measureText &lt;- str_cap_words(measure)
+  measureText &lt;- str_to_sentence(measure)
   quo_measure &lt;- enquo(measure)
   
   all_sexes &lt;- prevalence %&gt;% 
@@ -772,16 +772,17 @@ makeGraphs &lt;- function(measure, virus = FALSE) {
 }</code></pre>
 <p><strong>This did <em>NOT</em> work.</strong></p>
 <p>Sigh…after a couple hours of falling down the rabbit hole of Stack Overflow and the <em>tidyeval</em> vignette, I gave up on this option. Fortunately, those hours were not spent in vain. I did stumble accross a potential solution where I use a bit of tidy (thanks to <code>rlang</code> version &gt;= 0.4) and base, as such:</p>
-<pre class="r"><code>library(lettercase)
+<pre class="r"><code>library(stringr)
 
 makeGraphs &lt;- function(measure, virus = FALSE) {
   
-  measureText &lt;- str_cap_words(measure)
+  measureText &lt;- str_to_sentence(measure)
   
   all_sexes &lt;- prevalence %&gt;% 
     filter(sex == &quot;P&quot;) %&gt;% 
     group_by(race) %&gt;% 
     arrange(race, .data[[measure]]) %&gt;%  # .data is now recognized as a way to refer to the parent data frame, so reference by string works - like in base
+    ungroup() %&gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -804,16 +805,17 @@ makeGraphs &lt;- function(measure, virus = FALSE) {
 makeGraphs(&quot;count&quot;)</code></pre>
 <p><img src="/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png" width="672" /></p>
 <p><strong>WOOP!</strong>…progress. Now to turn this into a full function that will produce and save all 15 graphics!</p>
-<pre class="r"><code>library(lettercase)
+<pre class="r"><code>library(stringr)
 
 makeGraphs &lt;- function(measure, virus = FALSE) {
   
-  measureText &lt;- str_cap_words(measure)
+  measureText &lt;- str_to_sentence(measure)
   
   all_sexes &lt;- prevalence %&gt;% 
     filter(sex == &quot;P&quot;) %&gt;% 
     group_by(race) %&gt;% 
     arrange(race, .data[[measure]]) %&gt;%  
+    ungroup() %&gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   
@@ -926,12 +928,13 @@ makeGraphs(&quot;count&quot;)</code></pre>
 
 makeGraphs &lt;- function(measure, virus = FALSE) {
   
-  measureText &lt;- str_cap_words(measure)
+  measureText &lt;- str_to_sentence(measure)
   
   all_sexes &lt;- prevalence %&gt;% 
     filter(sex == &quot;P&quot;) %&gt;% 
     group_by(race) %&gt;% 
     arrange(race, .data[[measure]]) %&gt;%  
+    ungroup() %&gt;% 
     mutate(site= factor(site, levels = unique(site), ordered = TRUE))
   
   

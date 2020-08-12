@@ -1,5 +1,5 @@
 ---
-title: The API and I - Exposing a Pluber API
+title: The API and I - Exposing a Plumber API
 author: Layla Bouzoubaa
 date: '2020-07-08'
 slug: the-api-and-i-exposing-a-pluber-api
@@ -26,7 +26,7 @@ First a little on APIs to get your head in the right place. 🤓
 
 ### What is an API?
 
-#### **A**pplication **P**rogram **I**nterface  
+#### **A**pplication **P**rogramming **I**nterface  
 
 In short, it allows a user to programatically pull data from a source given that source provides one  
 *ex. The NYT, Twitter, Facebook, Google, US Census*

@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>The API and I - Exposing a Pluber API</title>
+      <title>The API and I - Exposing a Plumber API</title>
       <link>/posts/the-api-and-i-exposing-a-pluber-api/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
@@ -26,8 +26,8 @@ my desk. Well, I probably wouldn’t have actually hid, but I would have wanted 
 &lt;p&gt;First a little on APIs to get your head in the right place. 🤓&lt;/p&gt;
 &lt;div id=&#34;what-is-an-api&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;What is an API?&lt;/h3&gt;
-&lt;div id=&#34;application-program-interface&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;&lt;strong&gt;A&lt;/strong&gt;pplication &lt;strong&gt;P&lt;/strong&gt;rogram &lt;strong&gt;I&lt;/strong&gt;nterface&lt;/h4&gt;
+&lt;div id=&#34;application-programming-interface&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;A&lt;/strong&gt;pplication &lt;strong&gt;P&lt;/strong&gt;rogramming &lt;strong&gt;I&lt;/strong&gt;nterface&lt;/h4&gt;
 &lt;p&gt;In short, it allows a user to programatically pull data from a source given that source provides one&lt;br /&gt;
 &lt;em&gt;ex. The NYT, Twitter, Facebook, Google, US Census&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -1157,6 +1157,15 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I hope what went through my head effectively made it through my fingers, onto the keyboard, and on the screen into this document in an intelligible way.&lt;/p&gt;
 &lt;/div&gt;
 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/now/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/now/</guid>
+      <description></description>
     </item>
     
     <item>

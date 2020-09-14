@@ -26,7 +26,7 @@ Oh, and because all the cool kids have one....
 
 <style type="text/css" media="screen">
     .gr_grid_container {
-        width: fit-content;
+        width: 500px;
         /* customize grid container div here. eg: width: 500px; */
     }
     

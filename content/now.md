@@ -27,6 +27,7 @@ Oh, and because all the cool kids have one....
 <style type="text/css" media="screen">
         .gr_grid_container {
           /* customize grid container div here. eg: width: 500px; */
+          width: 500px;
         }
 
         .gr_grid_book_container {

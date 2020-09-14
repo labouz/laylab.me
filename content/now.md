@@ -27,13 +27,13 @@ Oh, and because all the cool kids have one....
 <style type="text/css" media="screen">
         .gr_grid_container {
           /* customize grid container div here. eg: width: 500px; */
-          width: 500px;
+          width: 600px;
         }
 
         .gr_grid_book_container {
           /* customize book cover container div here */
           float: left;
-          width: 120px;
+          width: 100px;
           height: 160px;
           padding: 0px 0px;
           overflow: hidden;
@@ -44,7 +44,7 @@ Oh, and because all the cool kids have one....
     <h3 style = "margin-left: 10px;">
       <a style="text-decoration: none;" rel="nofollow" href="https://www.goodreads.com/review/list/121450152-layla?shelf=currently-reading&utm_medium=api&utm_source=grid_widget">Currently on my nightstand:</a>
     </h3>
-<div class="gr_grid_container">
+  <div class="gr_grid_container">
     <div class="gr_grid_book_container"><a title="City of Girls" rel="nofollow" href="https://www.goodreads.com/book/show/51918871-city-of-girls"><img alt="City of Girls" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1583203648l/51918871._SX98_.jpg" /></a>
     </div>
     <div class="gr_grid_book_container"><a title="Calling Bullshit: The Art of Skepticism in a Data-Driven World" rel="nofollow" href="https://www.goodreads.com/book/show/48889983-calling-bullshit"><img alt="Calling Bullshit: The Art of Skepticism in a Data-Driven World" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592246867l/48889983._SX98_.jpg" /></a>
@@ -53,5 +53,5 @@ Oh, and because all the cool kids have one....
     </div>
     <div class="gr_grid_book_container"><a title="How Charts Lie: Getting Smarter about Visual Information" rel="nofollow" href="https://www.goodreads.com/book/show/43726576-how-charts-lie"><img alt="How Charts Lie: Getting Smarter about Visual Information" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1563764604l/43726576._SX98_.jpg" /></a>
     </div>
-    
+  </div> 
 </div>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/now/</loc>
+    <lastmod>2020-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/</loc>
     <lastmod>2020-07-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -61,11 +66,6 @@
   <url>
     <loc>/tags/ggpubr/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/now/</loc>
-    <priority>0</priority>
   </url>
   
   <url>

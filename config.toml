@@ -59,6 +59,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     # Default value is cdn.usefathom.com, overwrite this if you are self-hosting
     #serverURL = "analytics.example.com"
 
+[markup.goldmark.renderer]
+unsafe= true
+
 [taxonomies]
   category = "categories"
   series = "series"
@@ -95,10 +98,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   identifier = "posts"
   url = "/posts/"
 
-  #[[menu.main]]
-  #name = "Now"
-  #weight = 3
-  #url = "now/"
+  [[menu.main]]
+  name = "NOW"
+  weight = 3
+  url = "now/"
   
   [[menu.main]]
   name = "Passion Projects/Talks"

@@ -30,52 +30,44 @@ Back to COVID-19. Was I fool to think that I had escaped the stress back in Apri
 &lt;p&gt;Oh, and because all the cool kids have one&amp;hellip;.&lt;/p&gt;
 &lt;style type=&#34;text/css&#34; media=&#34;screen&#34;&gt;
     .gr_grid_container {
+        width: fit-content;
         /* customize grid container div here. eg: width: 500px; */
-        width: 600px;
     }
-
+    
     .gr_grid_book_container {
         /* customize book cover container div here */
         float: left;
-        width: 100px;
+        width: 98px;
         height: 160px;
         padding: 0px 0px;
         overflow: hidden;
     }
 &lt;/style&gt;
-&lt;div id=&#34;gr_grid_widget_1600116681&#34;&gt;
+&lt;div id=&#34;gr_grid_widget_1600127326&#34;&gt;
     &lt;!-- Show static html as a placeholder in case js is not enabled - javascript include will override this if things work --&gt;
-    &lt;h3 style=&#34;margin-left: 10px&#34;&gt;
-        &lt;a style=&#34;text-decoration: none&#34; rel=&#34;nofollow&#34;
-            href=&#34;https://www.goodreads.com/review/list/121450152-layla?shelf=currently-reading&amp;utm_medium=api&amp;utm_source=grid_widget&#34;&gt;Currently
-            on my nightstand:&lt;/a&gt;
+    &lt;h3&gt;
+        &lt;a style=&#34;text-decoration: none;&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/review/list/121450152-layla?shelf=currently-reading&amp;utm_medium=api&amp;utm_source=grid_widget&#34;&gt;Currently on my nightstand:&lt;/a&gt;
     &lt;/h3&gt;
     &lt;div class=&#34;gr_grid_container&#34;&gt;
         &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;City of Girls&#34; rel=&#34;nofollow&#34;
-                href=&#34;https://www.goodreads.com/book/show/51918871-city-of-girls&#34;&gt;&lt;img alt=&#34;City of Girls&#34; border=&#34;0&#34;
-                    src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1583203648l/51918871._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+            &lt;a title=&#34;City of Girls&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/51918871-city-of-girls&#34;&gt;&lt;img alt=&#34;City of Girls&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1583203648l/51918871._SX98_.jpg&#34; /&gt;&lt;/a&gt;
         &lt;/div&gt;
         &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; rel=&#34;nofollow&#34;
-                href=&#34;https://www.goodreads.com/book/show/48889983-calling-bullshit&#34;&gt;&lt;img
-                    alt=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; border=&#34;0&#34;
-                    src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592246867l/48889983._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+            &lt;a title=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/48889983-calling-bullshit&#34;&gt;&lt;img alt=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592246867l/48889983._SX98_.jpg&#34; /&gt;&lt;/a&gt;
         &lt;/div&gt;
         &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; rel=&#34;nofollow&#34;
-                href=&#34;https://www.goodreads.com/book/show/34762552-algorithms-of-oppression&#34;&gt;&lt;img
-                    alt=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; border=&#34;0&#34;
-                    src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492944248l/34762552._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+            &lt;a title=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/34762552-algorithms-of-oppression&#34;&gt;&lt;img alt=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492944248l/34762552._SX98_.jpg&#34; /&gt;&lt;/a&gt;
         &lt;/div&gt;
         &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; rel=&#34;nofollow&#34;
-                href=&#34;https://www.goodreads.com/book/show/43726576-how-charts-lie&#34;&gt;&lt;img
-                    alt=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; border=&#34;0&#34;
-                    src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1563764604l/43726576._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+            &lt;a title=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/43726576-how-charts-lie&#34;&gt;&lt;img alt=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1563764604l/43726576._SX98_.jpg&#34; /&gt;&lt;/a&gt;
         &lt;/div&gt;
+        &lt;noscript&gt;&lt;br/&gt;Share &lt;a rel=&#34;nofollow&#34; href=&#34;/&#34;&gt;book reviews&lt;/a&gt; and ratings with Layla, and even join a &lt;a rel=&#34;nofollow&#34; href=&#34;/group&#34;&gt;book club&lt;/a&gt; on Goodreads.&lt;/noscript&gt;
     &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;
+&lt;script src=&#34;https://www.goodreads.com/review/grid_widget/121450152.Currently%20on%20my%20nightstand:?cover_size=medium&amp;hide_link=true&amp;hide_title=&amp;num_books=20&amp;order=a&amp;shelf=currently-reading&amp;sort=date_added&amp;widget_id=1600127326&#34; type=&#34;text/javascript&#34;
+    charset=&#34;utf-8&#34;&gt;
+&lt;/script&gt;
+</description>
     </item>
     
     <item>

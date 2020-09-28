@@ -111,7 +111,7 @@ unsafe= true
   [[menu.main]]
   name = "Resume"
   weight = 5
-  url = "/files/LB_20secs.pdf"
+  url = "/files/ds_resume.html"
  
 
 [markup]

@@ -61,8 +61,9 @@ title: Passion Projects & Talks
 
 # Passion Talks
 
+- [Mayshad #BWYWTB Series: Women in Data Science](https://joinmayshad.com/event/women-data-science-9-18-20/) - Live Stream - 2020
 - [Whose Knowledge Gets To Be Saved](https://www.dikayodata.com/datafemme/algorithmsofoppression) – Data Femme Podcast – Online – 2020
-- Women in Data Science – Panelist - General Assembly Boston – Boston, MA – 2020
+- Women in Data Science – Panelist - General Assembly Boston – Boston, MA - Online – 2020
 - #IamRemarkable Workshop – UM DPHS Students/Alumni - 2020
 - Tearing Down Barriers to Publication – FIU – Miami, FL - 2020
 - [Communicating with RMarkdown](https://github.com/labouz/introRmd) – R-Ladies Miami – Miami, FL - 2020

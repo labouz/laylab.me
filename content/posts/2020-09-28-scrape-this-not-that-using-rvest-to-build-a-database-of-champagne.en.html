@@ -1,0 +1,90 @@
+---
+title: 'Scrape this, not that: using rvest to build a database of Champagne'
+author: "Layla Bouzoubaa"
+date: '2020-09-28'
+slug: scrape-this-not-that-using-rvest-to-build-a-database-of-champagne
+categories: []
+tags:
+- rvest
+- scraping
+- html
+description: Web scraping 101 with the `rvest` package!
+externalLink: ''
+series: []
+---
+
+
+
+<p>So you want to scrape some information from a website? if you’re reading this, I assuming you have a basic understanding of what “scraping” is, so I won’t get into the weeds on the theory but more on the application in R using just a few packages: <code>rvest</code>, <code>dplyr</code> and <code>stringr</code>.</p>
+<p>Before I start, let me point you to the <code>rvest</code> <a href="%22https://rvest.tidyverse.org/index.html%22">documentation</a> for installation and release information .</p>
+<p>Although the documentation is quite comprehensive, I want to go over some very basic HTML definitions that will make your experience go a lot smoother.</p>
+<ul>
+<li>Elements: These are your main “tags” such as <code>&lt;h1&gt; Heading 1 &lt;/h1&gt;</code> or <code>&lt;p&gt; Wine is life.&lt;/p&gt;</code>. The basic structure of a page is:</li>
+</ul>
+<pre><code>&lt;html&gt;
+&lt;body&gt;
+  #body of your page
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The <code>rvest::html_nodes()</code> function is what you will use to specify which elements, specifically the CSS selector. For example, calling <code>html_nodes(myhtmldoc, ".CSS-selector span") %&gt;% html_text()</code> will retrieve the text associated with the specified <code>&lt;span&gt;</code> tag. If this doesn’t make sense right away, don’t worry you’ll see an example below.</p>
+<ul>
+<li>Attributes: These provide additional information for the element, such as an image source (<code>src</code>) or a link’s path (<code>href</code>). These are usually displayed as key/value pairs, i.e. <code>width="500"</code>. You will use <code>rvest::html_attr("YOUR ATTRIBUTE")</code> if you need to get specific details from an attribute.</li>
+</ul>
+<p>Finally, it’s a good idea to familiarize yourself with the “Inspect” feature from your browser. This allows your to see the breakdown of any web-page your viewing. This is where you will also find the names for the elements and attributes you want to scrape!</p>
+<p>(pro tip: use the "select element feature to jump directly to the element you’re looking for)</p>
+<p><img src="/posts/2020-09-28-scrape-this-not-that-using-rvest-to-build-a-database-of-champagne.en_files/elements_console.png" height="500" /></p>
+<p><em>Note: <code>rvest</code> cannot handle JS, it only reads the HTML before JS loaded so some objects may not be possible to scrape with this package. However, if you have the inspect console open in your browser, go to the “Network” tab, refresh the page and try looking for a GET request made to an API (api may be in the URL). This is data stored in a JSON file which can be read using <code>jsonlite::fromJSON()</code></em></p>
+<p>Don’t get intimidated. It’s quite simple. Here, let me show you:</p>
+<div id="scrape-the-details-of-a-specific-wine" class="section level3">
+<h3>Scrape the details of a specific wine</h3>
+<p>I want to know the details of this pretty <a href="https://www.totalwine.com/wine/champagne-sparkling-wine/champagne/rose/champagne-lallier-grand-rose/p/171403750?">Champagne Rose from Lallier</a></p>
+<pre class="r"><code>library(dplyr)
+library(rvest)
+
+path &lt;- &quot;https://www.totalwine.com/wine/champagne-sparkling-wine/champagne/rose/champagne-lallier-grand-rose/p/171403750?&quot;
+
+#details table - brand, country/state, region, wine type, varietal, style, taste, body, sku
+details &lt;- read_html(path) %&gt;% 
+  html_nodes(&quot;.detailsTableLabel__kj9FI2Mq, .detailsTableText__1SvcRdYn&quot;) %&gt;% #the two element names of the details table separated by a &quot;,&quot;
+  html_text() #extract the text</code></pre>
+<p>The above code chunk returns a character vector of length 40. Well, that’s not really helpful. It would be nice to clean this up into a nice tidy format. We are going to make a it a wide table in preparation of row-binding more wines in a subsequent step ;)</p>
+<pre class="r"><code>#convert the table to a dataframe and make it wide with clean names  
+details_df &lt;- tibble(label = details[seq(1,18,2)], #the label of the data piece is every other odd string in the vector
+         text = details[seq(2,18,2)]) %&gt;% #the data piece itself is every other even string in the vector
+  tidyr::pivot_wider(names_from = label, values_from = text) %&gt;% #make the labels the colnames
+  rename_with(.cols = everything(), .fn = janitor::make_clean_names) #remove any slashes, dash or other bad characters, make lower, and snake_case</code></pre>
+<p>See, that wasn’t so bad! Now, we don’t want this information for just one wine. What if we wanted to collect this information on all Champagnes offered through Total Wine? Simple, my friend - we’ll wrap it in a function!</p>
+<p>First we need to get the paths for all Champagnes by going to <a href="www.totalwine.com">totalwine.com</a> and extract the particular element that corresponds to sparkling wines - specifically Champagnes.</p>
+<p>This is where a little manual searching is required (read <em>easier</em>). After going to the site, selecting Wine &gt; Champagne &amp; Sparkling Wine we are left with 706 results. But, we are interested in Champagnes so that will require clicking on the “Champagne” filter under “Varietal &amp; Type”. <em>I want you to notice how the path in the URL bar changes - that’s exactly what you want.</em> Pages whose paths do not change when any filtering/action is done are called single page applications (SAP) and are not very easy to scrape. Thankfully, this doesn’t apply to us. Thankfully, it seems like Total Wine has a pretty solid database where each chunk of the path is another table being indexed.</p>
+<p>Filtering, brought us down to 235 results. This is more than one page so our first step will be to extract all the paths for each of the 235 Champagnes.</p>
+<pre class="r"><code>#for simplicity, I&#39;ve expanded the &quot;items per page&quot; option from 24(default) to 120
+#page 1 out of 2 -- path not the same for page 2 
+wine_paths_pg1 &lt;- read_html(&quot;https://www.totalwine.com/wine/champagne-sparkling-wine/c/000005?viewall=true&amp;pageSize=120&amp;varietaltype=Champagne&quot;) %&gt;% 
+  html_nodes(&quot;.productImg__3fOOgAmO a&quot;) %&gt;% #the a is to indicate we want specifically an &lt;a&gt; tag - for hyperlinks
+  html_attr(&quot;href&quot;) %&gt;% 
+  tibble(&quot;path&quot; = .)
+wine_paths_pg2 &lt;- read_html(&quot;https://www.totalwine.com/wine/champagne-sparkling-wine/c/000005?viewall=true&amp;page=2&amp;pageSize=120&amp;varietaltype=Champagne&quot;) %&gt;% 
+  html_nodes(&quot;.productImg__3fOOgAmO a&quot;) %&gt;% #the a is to indicate we want specifically an &lt;a&gt; tag - for hyperlinks
+  html_attr(&quot;href&quot;) %&gt;% 
+  tibble(&quot;path&quot; = .)
+
+#bind the 1st page to 2nd page
+wine_paths &lt;- bind_rows(wine_paths_pg1, wine_paths_pg2) #this returns 197/235 paths...this is really good as some requests may return null</code></pre>
+<p>Now let’s get those details!</p>
+<p>We will take the code chunk up above and wrap it in a function but use the path as the argument</p>
+<pre class="r"><code>#details table - brand, country/state, region, wine type, varietal, style, taste, body, sku
+get_details &lt;- function(path){
+details &lt;- read_html(paste0(&quot;https://www.totalwine.com&quot;,path)) %&gt;% #paste the the first part of the URL to the Champagne specific path
+  html_nodes(&quot;.detailsTableLabel__kj9FI2Mq, .detailsTableText__1SvcRdYn&quot;) %&gt;% 
+  html_text() 
+
+#convert the table to a dataframe and make it wide with clean names  
+details_df &lt;- tibble(label = details[seq(1,18,2)], 
+         text = details[seq(2,18,2)]) %&gt;% 
+  tidyr::pivot_wider(names_from = label, values_from = text) %&gt;% 
+  rename_with(.cols = everything(), .fn = janitor::make_clean_names) 
+}
+
+champagne_df &lt;- purrr::map_dfr(wine_paths$path, get_details)</code></pre>
+<p>Et voila! Une belle base de donnees de Champagne! Sante!</p>
+</div>

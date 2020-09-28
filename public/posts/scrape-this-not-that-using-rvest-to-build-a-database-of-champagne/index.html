@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Layla Bouzoubaa">
+    <meta name="description" content="Web scraping 101 with the `rvest` package!">
+    <meta name="keywords" content="blog,data science,personal,R, public health">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Scrape this, not that: using rvest to build a database of Champagne"/>
+<meta name="twitter:description" content="Web scraping 101 with the `rvest` package!"/>
+
+    <meta property="og:title" content="Scrape this, not that: using rvest to build a database of Champagne" />
+<meta property="og:description" content="Web scraping 101 with the `rvest` package!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/" />
+<meta property="article:published_time" content="2020-09-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-28T00:00:00+00:00" />
+
+
+    
+      <base href="/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/">
+    
+    <title>
+  Scrape this, not that: using rvest to build a database of Champagne · LB
+</title>
+
+    
+      <link rel="canonical" href="/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.e5aeb0c7ebdb0c248e6c3849c2b185c5ac91a8e09001c27f5cab574b0de80433.css" integrity="sha256-5a6wx&#43;vbDCSObDhJwrGFxayRqOCQAcJ/XKtXSw3oBDM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      LB
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Posts</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/now/">NOW</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Passion Projects/Talks</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/files/ds_resume.html">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Scrape this, not that: using rvest to build a database of Champagne</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-09-28T00:00:00Z'>
+                September 28, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              5-minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/rvest/">rvest</a>
+      <span class="separator">•</span>
+    <a href="/tags/scraping/">scraping</a>
+      <span class="separator">•</span>
+    <a href="/tags/html/">html</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        
+
+
+<p>So you want to scrape some information from a website? if you’re reading this, I assuming you have a basic understanding of what “scraping” is, so I won’t get into the weeds on the theory but more on the application in R using just a few packages: <code>rvest</code>, <code>dplyr</code> and <code>stringr</code>.</p>
+<p>Before I start, let me point you to the <code>rvest</code> <a href="%22https://rvest.tidyverse.org/index.html%22">documentation</a> for installation and release information .</p>
+<p>Although the documentation is quite comprehensive, I want to go over some very basic HTML definitions that will make your experience go a lot smoother.</p>
+<ul>
+<li>Elements: These are your main “tags” such as <code>&lt;h1&gt; Heading 1 &lt;/h1&gt;</code> or <code>&lt;p&gt; Wine is life.&lt;/p&gt;</code>. The basic structure of a page is:</li>
+</ul>
+<pre><code>&lt;html&gt;
+&lt;body&gt;
+  #body of your page
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The <code>rvest::html_nodes()</code> function is what you will use to specify which elements, specifically the CSS selector. For example, calling <code>html_nodes(myhtmldoc, ".CSS-selector span") %&gt;% html_text()</code> will retrieve the text associated with the specified <code>&lt;span&gt;</code> tag. If this doesn’t make sense right away, don’t worry you’ll see an example below.</p>
+<ul>
+<li>Attributes: These provide additional information for the element, such as an image source (<code>src</code>) or a link’s path (<code>href</code>). These are usually displayed as key/value pairs, i.e. <code>width="500"</code>. You will use <code>rvest::html_attr("YOUR ATTRIBUTE")</code> if you need to get specific details from an attribute.</li>
+</ul>
+<p>Finally, it’s a good idea to familiarize yourself with the “Inspect” feature from your browser. This allows your to see the breakdown of any web-page your viewing. This is where you will also find the names for the elements and attributes you want to scrape!</p>
+<p>(pro tip: use the "select element feature to jump directly to the element you’re looking for)</p>
+<p><img src="/posts/2020-09-28-scrape-this-not-that-using-rvest-to-build-a-database-of-champagne.en_files/elements_console.png" height="500" /></p>
+<p><em>Note: <code>rvest</code> cannot handle JS, it only reads the HTML before JS loaded so some objects may not be possible to scrape with this package. However, if you have the inspect console open in your browser, go to the “Network” tab, refresh the page and try looking for a GET request made to an API (api may be in the URL). This is data stored in a JSON file which can be read using <code>jsonlite::fromJSON()</code></em></p>
+<p>Don’t get intimidated. It’s quite simple. Here, let me show you:</p>
+<div id="scrape-the-details-of-a-specific-wine" class="section level3">
+<h3>Scrape the details of a specific wine</h3>
+<p>I want to know the details of this pretty <a href="https://www.totalwine.com/wine/champagne-sparkling-wine/champagne/rose/champagne-lallier-grand-rose/p/171403750?">Champagne Rose from Lallier</a></p>
+<pre class="r"><code>library(dplyr)
+library(rvest)
+
+path &lt;- &quot;https://www.totalwine.com/wine/champagne-sparkling-wine/champagne/rose/champagne-lallier-grand-rose/p/171403750?&quot;
+
+#details table - brand, country/state, region, wine type, varietal, style, taste, body, sku
+details &lt;- read_html(path) %&gt;% 
+  html_nodes(&quot;.detailsTableLabel__kj9FI2Mq, .detailsTableText__1SvcRdYn&quot;) %&gt;% #the two element names of the details table separated by a &quot;,&quot;
+  html_text() #extract the text</code></pre>
+<p>The above code chunk returns a character vector of length 40. Well, that’s not really helpful. It would be nice to clean this up into a nice tidy format. We are going to make a it a wide table in preparation of row-binding more wines in a subsequent step ;)</p>
+<pre class="r"><code>#convert the table to a dataframe and make it wide with clean names  
+details_df &lt;- tibble(label = details[seq(1,18,2)], #the label of the data piece is every other odd string in the vector
+         text = details[seq(2,18,2)]) %&gt;% #the data piece itself is every other even string in the vector
+  tidyr::pivot_wider(names_from = label, values_from = text) %&gt;% #make the labels the colnames
+  rename_with(.cols = everything(), .fn = janitor::make_clean_names) #remove any slashes, dash or other bad characters, make lower, and snake_case</code></pre>
+<p>See, that wasn’t so bad! Now, we don’t want this information for just one wine. What if we wanted to collect this information on all Champagnes offered through Total Wine? Simple, my friend - we’ll wrap it in a function!</p>
+<p>First we need to get the paths for all Champagnes by going to <a href="www.totalwine.com">totalwine.com</a> and extract the particular element that corresponds to sparkling wines - specifically Champagnes.</p>
+<p>This is where a little manual searching is required (read <em>easier</em>). After going to the site, selecting Wine &gt; Champagne &amp; Sparkling Wine we are left with 706 results. But, we are interested in Champagnes so that will require clicking on the “Champagne” filter under “Varietal &amp; Type”. <em>I want you to notice how the path in the URL bar changes - that’s exactly what you want.</em> Pages whose paths do not change when any filtering/action is done are called single page applications (SAP) and are not very easy to scrape. Thankfully, this doesn’t apply to us. Thankfully, it seems like Total Wine has a pretty solid database where each chunk of the path is another table being indexed.</p>
+<p>Filtering, brought us down to 235 results. This is more than one page so our first step will be to extract all the paths for each of the 235 Champagnes.</p>
+<pre class="r"><code>#for simplicity, I&#39;ve expanded the &quot;items per page&quot; option from 24(default) to 120
+#page 1 out of 2 -- path not the same for page 2 
+wine_paths_pg1 &lt;- read_html(&quot;https://www.totalwine.com/wine/champagne-sparkling-wine/c/000005?viewall=true&amp;pageSize=120&amp;varietaltype=Champagne&quot;) %&gt;% 
+  html_nodes(&quot;.productImg__3fOOgAmO a&quot;) %&gt;% #the a is to indicate we want specifically an &lt;a&gt; tag - for hyperlinks
+  html_attr(&quot;href&quot;) %&gt;% 
+  tibble(&quot;path&quot; = .)
+wine_paths_pg2 &lt;- read_html(&quot;https://www.totalwine.com/wine/champagne-sparkling-wine/c/000005?viewall=true&amp;page=2&amp;pageSize=120&amp;varietaltype=Champagne&quot;) %&gt;% 
+  html_nodes(&quot;.productImg__3fOOgAmO a&quot;) %&gt;% #the a is to indicate we want specifically an &lt;a&gt; tag - for hyperlinks
+  html_attr(&quot;href&quot;) %&gt;% 
+  tibble(&quot;path&quot; = .)
+
+#bind the 1st page to 2nd page
+wine_paths &lt;- bind_rows(wine_paths_pg1, wine_paths_pg2) #this returns 197/235 paths...this is really good as some requests may return null</code></pre>
+<p>Now let’s get those details!</p>
+<p>We will take the code chunk up above and wrap it in a function but use the path as the argument</p>
+<pre class="r"><code>#details table - brand, country/state, region, wine type, varietal, style, taste, body, sku
+get_details &lt;- function(path){
+details &lt;- read_html(paste0(&quot;https://www.totalwine.com&quot;,path)) %&gt;% #paste the the first part of the URL to the Champagne specific path
+  html_nodes(&quot;.detailsTableLabel__kj9FI2Mq, .detailsTableText__1SvcRdYn&quot;) %&gt;% 
+  html_text() 
+
+#convert the table to a dataframe and make it wide with clean names  
+details_df &lt;- tibble(label = details[seq(1,18,2)], 
+         text = details[seq(2,18,2)]) %&gt;% 
+  tidyr::pivot_wider(names_from = label, values_from = text) %&gt;% 
+  rename_with(.cols = everything(), .fn = janitor::make_clean_names) 
+}
+
+champagne_df &lt;- purrr::map_dfr(wine_paths$path, get_details)</code></pre>
+<p>Et voila! Une belle base de donnees de Champagne! Sante!</p>
+</div>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Dynamite with a laser beam</p>
+      
+      
+        ©
+        
+        2020
+         Layla Bouzoubaa 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+        
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-168802684-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>

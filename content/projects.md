@@ -7,9 +7,15 @@ title: Passion Projects & Talks
 
 # Projects
 
-- ObsContenCOVID – 2020 - Ongoing
+- University of Miami COVID-19 Dashboard - 8/2020 - Ongoing
+  - https://coronavirus.miami.edu/dashboard
+  - Key Collaborators:
+    - [Erin Kobetz, Ph.D](https://people.miami.edu/profile/ekobetz@miami.edu) - University of Miami
+    - [Elieser Nodarse](https://twitter.com/ElieserNodarse) - University of Miami
+
+- ObsContenCOVID – 4/2020 - 10/2020
   - http://observcovid.miami.edu/
-  - Key Key Collaborators:
+  - Key Collaborators:
     - [Felicia Knaul, Ph.D](https://people.miami.edu/profile/fknaul@miami.edu) – University of Miami
     - [Hector Arreola](http://tomateloapecho.org.mx/Cvs/Hector_Arreola.php) - Anahuac University, MX
     - [Michael Touchton, Ph.D](https://people.miami.edu/profile/mxt725@miami.edu) - University of Miami
@@ -18,7 +24,7 @@ title: Passion Projects & Talks
   - Press: https://www.publichealth.med.miami.edu/news/news-releases/2020/observatory/index.html
   - Web platform to visualize the adoption of public policy towards COVID-19 in Mexico and further, across Latin America
 
-- Sexual Network Mapping – 2019 - Ongoing
+- Sexual Network Mapping – 2019 - 2020
   - Key Collaborators:
     - Ariana Johnson – University of Miami
     - [Mariano Kanamori, Ph.D](https://people.miami.edu/profile/mkanamori@med.miami.edu) – University of Miami

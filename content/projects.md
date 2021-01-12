@@ -7,13 +7,13 @@ title: Passion Projects & Talks
 
 # Projects
 
-- University of Miami COVID-19 Dashboard - 8/2020 - Ongoing
+- University of Miami COVID-19 Dashboard - Aug 2020 - Ongoing
   - https://coronavirus.miami.edu/dashboard
   - Key Collaborators:
     - [Erin Kobetz, Ph.D](https://people.miami.edu/profile/ekobetz@miami.edu) - University of Miami
     - [Elieser Nodarse](https://twitter.com/ElieserNodarse) - University of Miami
 
-- ObsContenCOVID – 4/2020 - 10/2020
+- ObsContenCOVID – Apr 2020 - Oct 2020
   - http://observcovid.miami.edu/
   - Key Collaborators:
     - [Felicia Knaul, Ph.D](https://people.miami.edu/profile/fknaul@miami.edu) – University of Miami

@@ -21,9 +21,9 @@ In other news, I got a package published to [CRAN](https://ctn-0094.github.io/DO
 
 In other other news, we celebrated an anniversary and went to Sint Maarten/Saint Martin. IT WAS BEAUTIFUL. Highly recommend. I had very minimal worry about COVID while on the island. Because of cruise liners not sailing at the moment, there were significantly less tourists which, I feel, allowed me a much more authentic experience. 
 
-{{< figure src=../public/images/st-maarten.jpg class="center" width="300px" >}} 
+{{< figure src="/images/st-maarten.jpg" class="center" width="300px" >}} 
 
-{{< figure src=../public/images/st-maarten-PANO.jpg class="center" width="500px" >}} 
+{{< figure src="/images/st-maarten-PANO.jpg" class="center" width="500px" >}} 
 
 That's it for now. Stay tuned...
 

@@ -19,7 +19,7 @@ So now I am temporarily working part-time to focus on grad school applications. 
 
 In other news, I got a package published to [CRAN](https://ctn-0094.github.io/DOPE/) for the first time!! The name is pretty dope.
 
-In other other news, we celebrated an anniversary and went to Sint Maarten/Saint Martin. IT WAS BEAUTIFUL. Highly recommend. I had very minimal worry about COVID while on the island. Because of cruise liners not sailing at the moment, there were significantly less tourists which, I feel, allowed me a much more authentic experience. 
+In other other news, we celebrated an anniversary and went to Sint Maarten/Saint Martin. ✨IT WAS BEAUTIFUL✨ Highly recommend. I had very minimal worry about COVID while on the island. Because of cruise liners not sailing at the moment, there were significantly less tourists which, I feel, allowed me a much more authentic experience. 
 
 {{< figure src="/images/st-maarten.jpg" class="center-inline" width="400px" >}} {{< figure src="/images/st-maarten-building.jpg" class="center-inline" width="400px" >}}
 

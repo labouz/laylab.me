@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Layla Bouzoubaa">
+    <meta name="description" content="This post will give you a quick way to create a PostgreSQL database, setup the ODBC drivers (*inx), connect to it from RStudio and write a dataframe to it.">
+    <meta name="keywords" content="blog,data science,personal,R, public health">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PostgreSQL and RStudio: I know we match"/>
+<meta name="twitter:description" content="This post will give you a quick way to create a PostgreSQL database, setup the ODBC drivers (*inx), connect to it from RStudio and write a dataframe to it."/>
+
+    <meta property="og:title" content="PostgreSQL and RStudio: I know we match" />
+<meta property="og:description" content="This post will give you a quick way to create a PostgreSQL database, setup the ODBC drivers (*inx), connect to it from RStudio and write a dataframe to it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/creating-a-database-and-write-from-rstudio/" />
+<meta property="article:published_time" content="2021-01-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-26T00:00:00+00:00" />
+
+
+    
+      <base href="/posts/creating-a-database-and-write-from-rstudio/">
+    
+    <title>
+  PostgreSQL and RStudio: I know we match · LB
+</title>
+
+    
+      <link rel="canonical" href="/posts/creating-a-database-and-write-from-rstudio/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.e5aeb0c7ebdb0c248e6c3849c2b185c5ac91a8e09001c27f5cab574b0de80433.css" integrity="sha256-5a6wx&#43;vbDCSObDhJwrGFxayRqOCQAcJ/XKtXSw3oBDM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      LB
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Posts</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/now/">NOW</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Passion Projects/Talks</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/files/ds_resume.html">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">PostgreSQL and RStudio: I know we match</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2021-01-26T00:00:00Z'>
+                January 26, 2021
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              6-minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/postgres/">postgres</a>
+      <span class="separator">•</span>
+    <a href="/tags/databases/">databases</a>
+      <span class="separator">•</span>
+    <a href="/tags/odbc/">odbc</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        
+
+
+<div id="a-little-tale" class="section level2">
+<h2>A Little Tale</h2>
+<p>Recently at work, I was asked to take data that already existed for a specific project and figure out how to standardize it to the Observational Medical Outcomes Partnership (OMOP) <a href="https://www.ohdsi.org/data-standardization/the-common-data-model/">Common Data Model</a> (CDM). Not only did the data have to conform to this CDM but the values in the database must also follow a specific, validated vocabulary. To give you some background, I work at a medical school where I only work with patient level data and I have never had to normalize the data to any kind of standard. Most of the data I deal with have been primarily collected by the investigator’s team and then used for analysis. Rinse and repeat.</p>
+<p>Anyway, after a little (read: a lot) of digging, I think I have it somewhat figured - at least enough so that I can get to work. The OMOP CDM was designed to make disparate clinical data - like the kind I work with - conform in a way that it is easier to perform analysis using standardized tools and share the data and its meaning across applications and business processes. Using a CDM, reduces the pain of having to mush together data from multiple sources and applications. For this particular project, doing that was like forcing pieces of a puzzle together with tape so I am totally on board with a CDM. I think you get the picture, now to the good stuff.</p>
+<p>What I started with was dozens of datasets in SAS and R. Data that have already been harmonized and aggregated. Several hours into “backwards-reading” thousands of lines of code to find original values with the schema and validated lexicon side by side I was able to get an idea of what was required and what we had:</p>
+<p>{{&lt; figure src=“./table_sketches.jpg” class=“center-inline” width=“400px” &gt;}}</p>
+<p>Thankfully, OMOP has all the sources I needed to get to work:</p>
+<ul>
+<li><a href="https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:sidebar">Standardized vocabularies</a><br />
+</li>
+<li><a href="https://ohdsi.github.io/TheBookOfOhdsi/">OHDSI manual</a>
+<ul>
+<li><a href="https://ohdsi.github.io/TheBookOfOhdsi/CommonDataModel.html#cdm-standardized-tables">Notes on CDM</a></li>
+</ul></li>
+<li><a href="https://athena.ohdsi.org/search-terms/terms?invalidReason=Valid&amp;standardConcept=Standard&amp;vocabulary=Race&amp;page=1&amp;pageSize=15&amp;query=">Athena OMOP database (ex. Race)</a></li>
+<li><a href="https://github.com/OHDSI/CommonDataModel">DDL’s</a> <em>thank foodness for this</em>
+<ul>
+<li>BTW Data Defnition Languages (DDLs), if provided, are great as they establish uniformity within your database. In this case, the OMOP has created standards for the tables and fields, the value types and even the constraints for the foreign keys.</li>
+</ul></li>
+</ul>
+</div>
+<div id="creating-the-omop-cdm-database" class="section level2">
+<h2>Creating the OMOP CDM Database</h2>
+<p>Steps (<em>Note: I assume you already have <a href="https://www.postgresql.org/docs/13/installation.html">PostgreSQL setup</a>)</em> :</p>
+<ol style="list-style-type: decimal">
+<li>Create PostgreSQL database
+<ol style="list-style-type: decimal">
+<li>Open PostgreSQL app
+<img src="open_postgres.png" /></li>
+<li>Double click the database with your name to open the SQL shell
+<img src="postgres_app.png" /></li>
+<li>run <code>create database healthdb;</code>
+<img src="sql_shell.png" /></li>
+</ol></li>
+<li>In a database manager or advanced editor (I &lt;3 <a href="https://code.visualstudio.com/">Visual Studio Code</a>), clone the repo that contains the DDL for PostgreSQL: <a href="https://github.com/OHDSI/CommonDataModel.git" class="uri">https://github.com/OHDSI/CommonDataModel.git</a>. I have a special directory on my machine for repos like this. <img src="vsc_clone.png" /> <em>The “Source Control” extension comes out of the box when you install VSC for the first time</em></li>
+<li>Add the <code>healthdb</code> database to VSC by navigating to the PostgreSQL Explorer, pressing the <code>+</code> button and following the prompts (Make sure you have the PostgreSQL <a href="https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres">extension</a> for VSC ) You will need to input the credentials you setup when configuring your PostgreSQL application.
+<img src="connect_db.gif" /></li>
+<li>Once a connection to the <code>healthdb</code> database has been established, right click the database and select “New Query” and fresh page will appear.</li>
+<li>Navigate to the File Explorer where the contents of the the OHDSI/CommonDataMmodel repository are (or where you have another DDL you’d like to use). Copy and paste the contents of <code>OMOP CDM postgresql ddl.txt</code>, select all, right-click and select “Run Query” <img src="run_ddl.gif" /></li>
+</ol>
+</div>
+<div id="get-odbc-drivers" class="section level2">
+<h2>Get ODBC Drivers</h2>
+<p>Before we can get to working with data in RStudio, we need to make sure that RStudio can interface with our database. RStudio can do this through Open Database Connection (ODBC) drivers. For the purposes of this project, I will need two specific drivers:</p>
+<ol style="list-style-type: decimal">
+<li><a href="http://www.unixodbc.org/">Unix ODBC</a>
+<ul>
+<li>This is neceessary for *nix users as the POStgres ODBC driver on a Mac requires some confg files that does not come with the “out-of-the-box” installation of the PostgreSQL application for Mac</li>
+<li>Steps:
+<ol style="list-style-type: decimal">
+<li>Download the driver</li>
+<li>Open terminal</li>
+<li><code>cd</code> to downloaded file</li>
+<li>Run these commands:
+<ol style="list-style-type: decimal">
+<li><code>gunzip unixODBC*.tar.gz</code></li>
+<li><code>tar xvf unixODBC*.tar</code></li>
+<li><code>cd unixODBC-2.3.9</code></li>
+<li><code>./configure</code></li>
+<li><code>make</code></li>
+<li><code>make install</code></li>
+</ol></li>
+</ol></li>
+</ul></li>
+<li><a href="https://odbc.postgresql.org/">PostgreSQL ODBC</a>
+<ol style="list-style-type: decimal">
+<li>Select /src and download the latest tarball</li>
+<li>Unzip</li>
+<li>Run <a href="https://odbc.postgresql.org/docs/unix-compilation.html">these steps</a> to install the drivers</li>
+</ol></li>
+</ol>
+</div>
+<div id="finally-the-fun-part" class="section level2">
+<h2>Finally, the fun part…</h2>
+<p>Working with a database in RStudio is not so bad - there is a lot of <a href="https://db.rstudio.com/">documentation</a> to help you along. For this part we will only need two packages:</p>
+<pre class="r"><code>library(tidyverse)
+library(DBI)</code></pre>
+<div id="person-table-specs" class="section level3">
+<h3>‘person’ table specs</h3>
+<p><code>person_id</code> = 8 digit int<br />
+<code>gender_concept_id</code> = only two standard concepts: FEMALE (concept_id=8532) and MALE (concept_id=8507)<br />
+<code>year_of_birth</code> = 4 digit int
+<code>month_of_birth</code> = 1-2 digit int
+<code>day_of_birth</code> = 1-2 digit int
+<code>ethnicity_concept_id</code> = only two categories for data on ethnicity: “Hispanic or Latino” (concept_id=38003563) and “Not Hispanic or Latino” (concept_id=38003564)<br />
+<code>race_concept_id</code> = “White”(concept_id = 8527), “Black or African American”(concept_id = 8516), “AI/AN”(concept_id = 8657), “Asian”(concept_id = 8515), “NH/PI”(concept_id = 8557)</p>
+<p><em>Creating data for the person table</em></p>
+<pre class="r"><code>person_id &lt;- runif(100, min = 10000000, max = 99999999) %&gt;% as.integer()
+gender_concept_id &lt;- c(8532,8507, NA) %&gt;% as.integer()
+year_of_birth &lt;- runif(100, 1945, 1996) %&gt;% as.integer()
+month_of_birth &lt;- runif(100, 1, 12) %&gt;% as.integer()
+day_of_birth &lt;- runif(100, 1, 30) %&gt;% as.integer()
+ethnicity_concept_id &lt;- c(38003563, 38003564, NA) %&gt;% as.integer()
+race_concept_id &lt;- c(8527, 8516, 8657, 8515, 8557, NA) %&gt;% as.integer()
+
+#combine it all togather
+person &lt;- tibble(person_id = person_id,
+                 gender_concept_id = sample(gender_concept_id, 100, replace = TRUE),
+                 year_of_birth = year_of_birth,
+                 month_of_birth = month_of_birth,
+                 day_of_birth = day_of_birth,
+                 ethnicity_concept_id = sample(ethnicity_concept_id, 100, replace = TRUE),
+                 race_concept_id = sample(race_concept_id, 100, replace = TRUE))
+
+head(person, 25)</code></pre>
+<pre><code>## # A tibble: 25 x 7
+##    person_id gender_concept_… year_of_birth month_of_birth day_of_birth
+##        &lt;int&gt;            &lt;int&gt;         &lt;int&gt;          &lt;int&gt;        &lt;int&gt;
+##  1  38424529             8507          1979              2           27
+##  2  86727112             8507          1966              1           16
+##  3  77331505               NA          1972              5            2
+##  4  58644149             8507          1972              1           13
+##  5  27910077             8507          1963             10           14
+##  6  88422815               NA          1969              3           22
+##  7  71443032             8532          1949             10            2
+##  8  47328763               NA          1962             11           22
+##  9  53332507             8507          1964             11           14
+## 10  25326359             8507          1978              7           11
+## # … with 15 more rows, and 2 more variables: ethnicity_concept_id &lt;int&gt;,
+## #   race_concept_id &lt;int&gt;</code></pre>
+</div>
+<div id="write-to-healthdb-database" class="section level3">
+<h3>Write to <code>healthdb</code> database</h3>
+<pre class="r"><code># Connect to the default postgres database
+con &lt;- dbConnect(RPostgres::Postgres(),
+                 dbname = &#39;healthdb&#39;,
+                 host = &#39;localhost&#39;,
+                 port = 5432,
+                 password = rstudioapi::askForPassword(&quot;Database password&quot;),
+                 user = &#39;laylabouzoubaa&#39;)
+#test connection
+# sql &lt;- &quot;SELECT * FROM person&quot;
+# x &lt;- dbGetQuery(con, sql) #successfull
+
+#write `person` to db
+dbWriteTable(con, name = &quot;person&quot;, value = person, row.names = FALSE, 
+             overwrite = TRUE) #success!!!</code></pre>
+<p>That’s it! We now have some people in our <code>person</code> table.</p>
+<p><img src="person_table.png" />
+Now to fill in the rest…</p>
+</div>
+</div>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Dynamite with a laser beam</p>
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         Layla Bouzoubaa 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+        
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-168802684-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>

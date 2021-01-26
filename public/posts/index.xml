@@ -6,10 +6,164 @@
     <description>Recent content on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PostgreSQL and RStudio: I know we match</title>
+      <link>/posts/creating-a-database-and-write-from-rstudio/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/creating-a-database-and-write-from-rstudio/</guid>
+      <description>
+
+
+&lt;div id=&#34;a-little-tale&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;A Little Tale&lt;/h2&gt;
+&lt;p&gt;Recently at work, I was asked to take data that already existed for a specific project and figure out how to standardize it to the Observational Medical Outcomes Partnership (OMOP) &lt;a href=&#34;https://www.ohdsi.org/data-standardization/the-common-data-model/&#34;&gt;Common Data Model&lt;/a&gt; (CDM). Not only did the data have to conform to this CDM but the values in the database must also follow a specific, validated vocabulary. To give you some background, I work at a medical school where I only work with patient level data and I have never had to normalize the data to any kind of standard. Most of the data I deal with have been primarily collected by the investigator’s team and then used for analysis. Rinse and repeat.&lt;/p&gt;
+&lt;p&gt;Anyway, after a little (read: a lot) of digging, I think I have it somewhat figured - at least enough so that I can get to work. The OMOP CDM was designed to make disparate clinical data - like the kind I work with - conform in a way that it is easier to perform analysis using standardized tools and share the data and its meaning across applications and business processes. Using a CDM, reduces the pain of having to mush together data from multiple sources and applications. For this particular project, doing that was like forcing pieces of a puzzle together with tape so I am totally on board with a CDM. I think you get the picture, now to the good stuff.&lt;/p&gt;
+&lt;p&gt;What I started with was dozens of datasets in SAS and R. Data that have already been harmonized and aggregated. Several hours into “backwards-reading” thousands of lines of code to find original values with the schema and validated lexicon side by side I was able to get an idea of what was required and what we had:&lt;/p&gt;
+&lt;p&gt;{{&amp;lt; figure src=“./table_sketches.jpg” class=“center-inline” width=“400px” &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;Thankfully, OMOP has all the sources I needed to get to work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:sidebar&#34;&gt;Standardized vocabularies&lt;/a&gt;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ohdsi.github.io/TheBookOfOhdsi/&#34;&gt;OHDSI manual&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ohdsi.github.io/TheBookOfOhdsi/CommonDataModel.html#cdm-standardized-tables&#34;&gt;Notes on CDM&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://athena.ohdsi.org/search-terms/terms?invalidReason=Valid&amp;amp;standardConcept=Standard&amp;amp;vocabulary=Race&amp;amp;page=1&amp;amp;pageSize=15&amp;amp;query=&#34;&gt;Athena OMOP database (ex. Race)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/OHDSI/CommonDataModel&#34;&gt;DDL’s&lt;/a&gt; &lt;em&gt;thank foodness for this&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;BTW Data Defnition Languages (DDLs), if provided, are great as they establish uniformity within your database. In this case, the OMOP has created standards for the tables and fields, the value types and even the constraints for the foreign keys.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-the-omop-cdm-database&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Creating the OMOP CDM Database&lt;/h2&gt;
+&lt;p&gt;Steps (&lt;em&gt;Note: I assume you already have &lt;a href=&#34;https://www.postgresql.org/docs/13/installation.html&#34;&gt;PostgreSQL setup&lt;/a&gt;)&lt;/em&gt; :&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Create PostgreSQL database
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Open PostgreSQL app
+&lt;img src=&#34;open_postgres.png&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;Double click the database with your name to open the SQL shell
+&lt;img src=&#34;postgres_app.png&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;run &lt;code&gt;create database healthdb;&lt;/code&gt;
+&lt;img src=&#34;sql_shell.png&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;In a database manager or advanced editor (I &amp;lt;3 &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt;), clone the repo that contains the DDL for PostgreSQL: &lt;a href=&#34;https://github.com/OHDSI/CommonDataModel.git&#34; class=&#34;uri&#34;&gt;https://github.com/OHDSI/CommonDataModel.git&lt;/a&gt;. I have a special directory on my machine for repos like this. &lt;img src=&#34;vsc_clone.png&#34; /&gt; &lt;em&gt;The “Source Control” extension comes out of the box when you install VSC for the first time&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Add the &lt;code&gt;healthdb&lt;/code&gt; database to VSC by navigating to the PostgreSQL Explorer, pressing the &lt;code&gt;+&lt;/code&gt; button and following the prompts (Make sure you have the PostgreSQL &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres&#34;&gt;extension&lt;/a&gt; for VSC ) You will need to input the credentials you setup when configuring your PostgreSQL application.
+&lt;img src=&#34;connect_db.gif&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;Once a connection to the &lt;code&gt;healthdb&lt;/code&gt; database has been established, right click the database and select “New Query” and fresh page will appear.&lt;/li&gt;
+&lt;li&gt;Navigate to the File Explorer where the contents of the the OHDSI/CommonDataMmodel repository are (or where you have another DDL you’d like to use). Copy and paste the contents of &lt;code&gt;OMOP CDM postgresql ddl.txt&lt;/code&gt;, select all, right-click and select “Run Query” &lt;img src=&#34;run_ddl.gif&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-odbc-drivers&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Get ODBC Drivers&lt;/h2&gt;
+&lt;p&gt;Before we can get to working with data in RStudio, we need to make sure that RStudio can interface with our database. RStudio can do this through Open Database Connection (ODBC) drivers. For the purposes of this project, I will need two specific drivers:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.unixodbc.org/&#34;&gt;Unix ODBC&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;This is neceessary for *nix users as the POStgres ODBC driver on a Mac requires some confg files that does not come with the “out-of-the-box” installation of the PostgreSQL application for Mac&lt;/li&gt;
+&lt;li&gt;Steps:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Download the driver&lt;/li&gt;
+&lt;li&gt;Open terminal&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd&lt;/code&gt; to downloaded file&lt;/li&gt;
+&lt;li&gt;Run these commands:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;code&gt;gunzip unixODBC*.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar xvf unixODBC*.tar&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd unixODBC-2.3.9&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./configure&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make install&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://odbc.postgresql.org/&#34;&gt;PostgreSQL ODBC&lt;/a&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Select /src and download the latest tarball&lt;/li&gt;
+&lt;li&gt;Unzip&lt;/li&gt;
+&lt;li&gt;Run &lt;a href=&#34;https://odbc.postgresql.org/docs/unix-compilation.html&#34;&gt;these steps&lt;/a&gt; to install the drivers&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;finally-the-fun-part&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Finally, the fun part…&lt;/h2&gt;
+&lt;p&gt;Working with a database in RStudio is not so bad - there is a lot of &lt;a href=&#34;https://db.rstudio.com/&#34;&gt;documentation&lt;/a&gt; to help you along. For this part we will only need two packages:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(DBI)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;person-table-specs&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;‘person’ table specs&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;person_id&lt;/code&gt; = 8 digit int&lt;br /&gt;
+&lt;code&gt;gender_concept_id&lt;/code&gt; = only two standard concepts: FEMALE (concept_id=8532) and MALE (concept_id=8507)&lt;br /&gt;
+&lt;code&gt;year_of_birth&lt;/code&gt; = 4 digit int
+&lt;code&gt;month_of_birth&lt;/code&gt; = 1-2 digit int
+&lt;code&gt;day_of_birth&lt;/code&gt; = 1-2 digit int
+&lt;code&gt;ethnicity_concept_id&lt;/code&gt; = only two categories for data on ethnicity: “Hispanic or Latino” (concept_id=38003563) and “Not Hispanic or Latino” (concept_id=38003564)&lt;br /&gt;
+&lt;code&gt;race_concept_id&lt;/code&gt; = “White”(concept_id = 8527), “Black or African American”(concept_id = 8516), “AI/AN”(concept_id = 8657), “Asian”(concept_id = 8515), “NH/PI”(concept_id = 8557)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Creating data for the person table&lt;/em&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;person_id &amp;lt;- runif(100, min = 10000000, max = 99999999) %&amp;gt;% as.integer()
+gender_concept_id &amp;lt;- c(8532,8507, NA) %&amp;gt;% as.integer()
+year_of_birth &amp;lt;- runif(100, 1945, 1996) %&amp;gt;% as.integer()
+month_of_birth &amp;lt;- runif(100, 1, 12) %&amp;gt;% as.integer()
+day_of_birth &amp;lt;- runif(100, 1, 30) %&amp;gt;% as.integer()
+ethnicity_concept_id &amp;lt;- c(38003563, 38003564, NA) %&amp;gt;% as.integer()
+race_concept_id &amp;lt;- c(8527, 8516, 8657, 8515, 8557, NA) %&amp;gt;% as.integer()
+
+#combine it all togather
+person &amp;lt;- tibble(person_id = person_id,
+                 gender_concept_id = sample(gender_concept_id, 100, replace = TRUE),
+                 year_of_birth = year_of_birth,
+                 month_of_birth = month_of_birth,
+                 day_of_birth = day_of_birth,
+                 ethnicity_concept_id = sample(ethnicity_concept_id, 100, replace = TRUE),
+                 race_concept_id = sample(race_concept_id, 100, replace = TRUE))
+
+head(person, 25)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 25 x 7
+##    person_id gender_concept_… year_of_birth month_of_birth day_of_birth
+##        &amp;lt;int&amp;gt;            &amp;lt;int&amp;gt;         &amp;lt;int&amp;gt;          &amp;lt;int&amp;gt;        &amp;lt;int&amp;gt;
+##  1  38424529             8507          1979              2           27
+##  2  86727112             8507          1966              1           16
+##  3  77331505               NA          1972              5            2
+##  4  58644149             8507          1972              1           13
+##  5  27910077             8507          1963             10           14
+##  6  88422815               NA          1969              3           22
+##  7  71443032             8532          1949             10            2
+##  8  47328763               NA          1962             11           22
+##  9  53332507             8507          1964             11           14
+## 10  25326359             8507          1978              7           11
+## # … with 15 more rows, and 2 more variables: ethnicity_concept_id &amp;lt;int&amp;gt;,
+## #   race_concept_id &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-to-healthdb-database&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Write to &lt;code&gt;healthdb&lt;/code&gt; database&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Connect to the default postgres database
+con &amp;lt;- dbConnect(RPostgres::Postgres(),
+                 dbname = &amp;#39;healthdb&amp;#39;,
+                 host = &amp;#39;localhost&amp;#39;,
+                 port = 5432,
+                 password = rstudioapi::askForPassword(&amp;quot;Database password&amp;quot;),
+                 user = &amp;#39;laylabouzoubaa&amp;#39;)
+#test connection
+# sql &amp;lt;- &amp;quot;SELECT * FROM person&amp;quot;
+# x &amp;lt;- dbGetQuery(con, sql) #successfull
+
+#write `person` to db
+dbWriteTable(con, name = &amp;quot;person&amp;quot;, value = person, row.names = FALSE, 
+             overwrite = TRUE) #success!!!&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That’s it! We now have some people in our &lt;code&gt;person&lt;/code&gt; table.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;person_table.png&#34; /&gt;
+Now to fill in the rest…&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Scrape this, not that: using rvest to build a database of Champagne</title>

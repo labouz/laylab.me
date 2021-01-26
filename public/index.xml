@@ -6,10 +6,235 @@
     <description>Recent content on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PostgreSQL and RStudio: I know we match</title>
+      <link>/posts/creating-a-database-and-write-from-rstudio/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/creating-a-database-and-write-from-rstudio/</guid>
+      <description>
+
+
+&lt;div id=&#34;a-little-tale&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;A Little Tale&lt;/h2&gt;
+&lt;p&gt;Recently at work, I was asked to take data that already existed for a specific project and figure out how to standardize it to the Observational Medical Outcomes Partnership (OMOP) &lt;a href=&#34;https://www.ohdsi.org/data-standardization/the-common-data-model/&#34;&gt;Common Data Model&lt;/a&gt; (CDM). Not only did the data have to conform to this CDM but the values in the database must also follow a specific, validated vocabulary. To give you some background, I work at a medical school where I only work with patient level data and I have never had to normalize the data to any kind of standard. Most of the data I deal with have been primarily collected by the investigator’s team and then used for analysis. Rinse and repeat.&lt;/p&gt;
+&lt;p&gt;Anyway, after a little (read: a lot) of digging, I think I have it somewhat figured - at least enough so that I can get to work. The OMOP CDM was designed to make disparate clinical data - like the kind I work with - conform in a way that it is easier to perform analysis using standardized tools and share the data and its meaning across applications and business processes. Using a CDM, reduces the pain of having to mush together data from multiple sources and applications. For this particular project, doing that was like forcing pieces of a puzzle together with tape so I am totally on board with a CDM. I think you get the picture, now to the good stuff.&lt;/p&gt;
+&lt;p&gt;What I started with was dozens of datasets in SAS and R. Data that have already been harmonized and aggregated. Several hours into “backwards-reading” thousands of lines of code to find original values with the schema and validated lexicon side by side I was able to get an idea of what was required and what we had:&lt;/p&gt;
+&lt;p&gt;{{&amp;lt; figure src=“./table_sketches.jpg” class=“center-inline” width=“400px” &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;Thankfully, OMOP has all the sources I needed to get to work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:sidebar&#34;&gt;Standardized vocabularies&lt;/a&gt;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ohdsi.github.io/TheBookOfOhdsi/&#34;&gt;OHDSI manual&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ohdsi.github.io/TheBookOfOhdsi/CommonDataModel.html#cdm-standardized-tables&#34;&gt;Notes on CDM&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://athena.ohdsi.org/search-terms/terms?invalidReason=Valid&amp;amp;standardConcept=Standard&amp;amp;vocabulary=Race&amp;amp;page=1&amp;amp;pageSize=15&amp;amp;query=&#34;&gt;Athena OMOP database (ex. Race)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/OHDSI/CommonDataModel&#34;&gt;DDL’s&lt;/a&gt; &lt;em&gt;thank foodness for this&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;BTW Data Defnition Languages (DDLs), if provided, are great as they establish uniformity within your database. In this case, the OMOP has created standards for the tables and fields, the value types and even the constraints for the foreign keys.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-the-omop-cdm-database&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Creating the OMOP CDM Database&lt;/h2&gt;
+&lt;p&gt;Steps (&lt;em&gt;Note: I assume you already have &lt;a href=&#34;https://www.postgresql.org/docs/13/installation.html&#34;&gt;PostgreSQL setup&lt;/a&gt;)&lt;/em&gt; :&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Create PostgreSQL database
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Open PostgreSQL app
+&lt;img src=&#34;open_postgres.png&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;Double click the database with your name to open the SQL shell
+&lt;img src=&#34;postgres_app.png&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;run &lt;code&gt;create database healthdb;&lt;/code&gt;
+&lt;img src=&#34;sql_shell.png&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;In a database manager or advanced editor (I &amp;lt;3 &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt;), clone the repo that contains the DDL for PostgreSQL: &lt;a href=&#34;https://github.com/OHDSI/CommonDataModel.git&#34; class=&#34;uri&#34;&gt;https://github.com/OHDSI/CommonDataModel.git&lt;/a&gt;. I have a special directory on my machine for repos like this. &lt;img src=&#34;vsc_clone.png&#34; /&gt; &lt;em&gt;The “Source Control” extension comes out of the box when you install VSC for the first time&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Add the &lt;code&gt;healthdb&lt;/code&gt; database to VSC by navigating to the PostgreSQL Explorer, pressing the &lt;code&gt;+&lt;/code&gt; button and following the prompts (Make sure you have the PostgreSQL &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres&#34;&gt;extension&lt;/a&gt; for VSC ) You will need to input the credentials you setup when configuring your PostgreSQL application.
+&lt;img src=&#34;connect_db.gif&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;Once a connection to the &lt;code&gt;healthdb&lt;/code&gt; database has been established, right click the database and select “New Query” and fresh page will appear.&lt;/li&gt;
+&lt;li&gt;Navigate to the File Explorer where the contents of the the OHDSI/CommonDataMmodel repository are (or where you have another DDL you’d like to use). Copy and paste the contents of &lt;code&gt;OMOP CDM postgresql ddl.txt&lt;/code&gt;, select all, right-click and select “Run Query” &lt;img src=&#34;run_ddl.gif&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-odbc-drivers&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Get ODBC Drivers&lt;/h2&gt;
+&lt;p&gt;Before we can get to working with data in RStudio, we need to make sure that RStudio can interface with our database. RStudio can do this through Open Database Connection (ODBC) drivers. For the purposes of this project, I will need two specific drivers:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.unixodbc.org/&#34;&gt;Unix ODBC&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;This is neceessary for *nix users as the POStgres ODBC driver on a Mac requires some confg files that does not come with the “out-of-the-box” installation of the PostgreSQL application for Mac&lt;/li&gt;
+&lt;li&gt;Steps:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Download the driver&lt;/li&gt;
+&lt;li&gt;Open terminal&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd&lt;/code&gt; to downloaded file&lt;/li&gt;
+&lt;li&gt;Run these commands:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;code&gt;gunzip unixODBC*.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar xvf unixODBC*.tar&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd unixODBC-2.3.9&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./configure&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make install&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://odbc.postgresql.org/&#34;&gt;PostgreSQL ODBC&lt;/a&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Select /src and download the latest tarball&lt;/li&gt;
+&lt;li&gt;Unzip&lt;/li&gt;
+&lt;li&gt;Run &lt;a href=&#34;https://odbc.postgresql.org/docs/unix-compilation.html&#34;&gt;these steps&lt;/a&gt; to install the drivers&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;finally-the-fun-part&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Finally, the fun part…&lt;/h2&gt;
+&lt;p&gt;Working with a database in RStudio is not so bad - there is a lot of &lt;a href=&#34;https://db.rstudio.com/&#34;&gt;documentation&lt;/a&gt; to help you along. For this part we will only need two packages:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(DBI)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;person-table-specs&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;‘person’ table specs&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;person_id&lt;/code&gt; = 8 digit int&lt;br /&gt;
+&lt;code&gt;gender_concept_id&lt;/code&gt; = only two standard concepts: FEMALE (concept_id=8532) and MALE (concept_id=8507)&lt;br /&gt;
+&lt;code&gt;year_of_birth&lt;/code&gt; = 4 digit int
+&lt;code&gt;month_of_birth&lt;/code&gt; = 1-2 digit int
+&lt;code&gt;day_of_birth&lt;/code&gt; = 1-2 digit int
+&lt;code&gt;ethnicity_concept_id&lt;/code&gt; = only two categories for data on ethnicity: “Hispanic or Latino” (concept_id=38003563) and “Not Hispanic or Latino” (concept_id=38003564)&lt;br /&gt;
+&lt;code&gt;race_concept_id&lt;/code&gt; = “White”(concept_id = 8527), “Black or African American”(concept_id = 8516), “AI/AN”(concept_id = 8657), “Asian”(concept_id = 8515), “NH/PI”(concept_id = 8557)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Creating data for the person table&lt;/em&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;person_id &amp;lt;- runif(100, min = 10000000, max = 99999999) %&amp;gt;% as.integer()
+gender_concept_id &amp;lt;- c(8532,8507, NA) %&amp;gt;% as.integer()
+year_of_birth &amp;lt;- runif(100, 1945, 1996) %&amp;gt;% as.integer()
+month_of_birth &amp;lt;- runif(100, 1, 12) %&amp;gt;% as.integer()
+day_of_birth &amp;lt;- runif(100, 1, 30) %&amp;gt;% as.integer()
+ethnicity_concept_id &amp;lt;- c(38003563, 38003564, NA) %&amp;gt;% as.integer()
+race_concept_id &amp;lt;- c(8527, 8516, 8657, 8515, 8557, NA) %&amp;gt;% as.integer()
+
+#combine it all togather
+person &amp;lt;- tibble(person_id = person_id,
+                 gender_concept_id = sample(gender_concept_id, 100, replace = TRUE),
+                 year_of_birth = year_of_birth,
+                 month_of_birth = month_of_birth,
+                 day_of_birth = day_of_birth,
+                 ethnicity_concept_id = sample(ethnicity_concept_id, 100, replace = TRUE),
+                 race_concept_id = sample(race_concept_id, 100, replace = TRUE))
+
+head(person, 25)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 25 x 7
+##    person_id gender_concept_… year_of_birth month_of_birth day_of_birth
+##        &amp;lt;int&amp;gt;            &amp;lt;int&amp;gt;         &amp;lt;int&amp;gt;          &amp;lt;int&amp;gt;        &amp;lt;int&amp;gt;
+##  1  38424529             8507          1979              2           27
+##  2  86727112             8507          1966              1           16
+##  3  77331505               NA          1972              5            2
+##  4  58644149             8507          1972              1           13
+##  5  27910077             8507          1963             10           14
+##  6  88422815               NA          1969              3           22
+##  7  71443032             8532          1949             10            2
+##  8  47328763               NA          1962             11           22
+##  9  53332507             8507          1964             11           14
+## 10  25326359             8507          1978              7           11
+## # … with 15 more rows, and 2 more variables: ethnicity_concept_id &amp;lt;int&amp;gt;,
+## #   race_concept_id &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-to-healthdb-database&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Write to &lt;code&gt;healthdb&lt;/code&gt; database&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Connect to the default postgres database
+con &amp;lt;- dbConnect(RPostgres::Postgres(),
+                 dbname = &amp;#39;healthdb&amp;#39;,
+                 host = &amp;#39;localhost&amp;#39;,
+                 port = 5432,
+                 password = rstudioapi::askForPassword(&amp;quot;Database password&amp;quot;),
+                 user = &amp;#39;laylabouzoubaa&amp;#39;)
+#test connection
+# sql &amp;lt;- &amp;quot;SELECT * FROM person&amp;quot;
+# x &amp;lt;- dbGetQuery(con, sql) #successfull
+
+#write `person` to db
+dbWriteTable(con, name = &amp;quot;person&amp;quot;, value = person, row.names = FALSE, 
+             overwrite = TRUE) #success!!!&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That’s it! We now have some people in our &lt;code&gt;person&lt;/code&gt; table.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;person_table.png&#34; /&gt;
+Now to fill in the rest…&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/now/</link>
+      <pubDate>Sun, 10 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/now/</guid>
+      <description>&lt;h3 id=&#34;the-right-now&#34;&gt;The RIGHT NOW&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;This is page is inspired by: &amp;ldquo;What&amp;rsquo;s up? How&amp;rsquo;s life?&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;If anyone&amp;rsquo;s even remotely interested in the above questions, here&amp;rsquo;s what you need to know:&lt;/p&gt;
+&lt;p&gt;Ok, it&amp;rsquo;s been a minute, I know. Work has not really calmed down since last we spoke and I am working fewer hours. Why fewer hours? Well, let me take a few steps back&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;(&lt;em&gt;in narrator voice&lt;/em&gt;) Previously, on &amp;ldquo;Right NOW&amp;rdquo;, our heroine jumps the  hurdels of beurocracy at the Univrsity of Miami while trying to publish a badass COVID-19 public dashboard. She has since published said Dashboard, turned 29 and decided she was going to go back to school 😲 But why, you ask? Because, she became tired of being the tool and wanted to be the architect. Being a public heath data scientist has brougt her tremendous joy and she grew significanty, thanks to the support of her super-mentors, but there came a point where all young heroins must rise up and fight their own battles.&lt;/p&gt;
+&lt;p&gt;Ok, enough of the superhero metaphor, I&amp;rsquo;m really not that dramatic. But yes, in Novemeber I decided that research was my fate and that the only way I was truly going to grow into my own skin was by get those damn three letters after my name - PhD. That&amp;rsquo;s pretty serious for me. I swore after my masters that I was done. What changed? The hell if I know. What I do know is that The Universe has been sending me signs to go for it left and right and I do not ignore signs from The Universe.&lt;/p&gt;
+&lt;p&gt;So now I am temporarily working part-time to focus on grad school applications. Work is piling up but 🤷‍♀️ I plan to return to full-time in February once the last of my applications has been submitted but until then, full time workload will have to just take a seat while I power thru. I won&amp;rsquo;t reveal where I&amp;rsquo;ve applied to but that&amp;rsquo;s where my focus has been these past couple months (I&amp;rsquo;ll announce it here when I get decisions!), hence the pause in posts. Not fret, more posts to come.&lt;/p&gt;
+&lt;p&gt;In other news, I got a package published to &lt;a href=&#34;https://ctn-0094.github.io/DOPE/&#34;&gt;CRAN&lt;/a&gt; for the first time!! The name is pretty dope.&lt;/p&gt;
+&lt;p&gt;In other other news, we celebrated an anniversary and went to Sint Maarten/Saint Martin. ✨IT WAS BEAUTIFUL✨ Highly recommend. I had very minimal worry about COVID while on the island. Because of cruise liners not sailing at the moment, there were significantly less tourists which, I feel, allowed me a much more authentic experience.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/st-maarten.jpg&#34; width=&#34;400px&#34;/&gt; 
+&lt;/figure&gt;
+ &lt;figure class=&#34;center-inline&#34;&gt;
+    &lt;img src=&#34;/images/st-maarten-building.jpg&#34; width=&#34;400px&#34;/&gt; 
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;/images/st-maarten-PANO.jpg&#34; width=&#34;1000px&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;That&amp;rsquo;s it for now. Stay tuned&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Oh, and because all the cool kids have one&amp;hellip;.&lt;/p&gt;
+&lt;style type=&#34;text/css&#34; media=&#34;screen&#34;&gt;
+    .gr_grid_container {
+        width: 500px;
+        display: flex;
+        /* customize grid container div here. eg: width: 500px; */
+    }
+    
+    .gr_grid_book_container {
+        /* customize book cover container div here */
+        float: left;
+        width: 98px;
+        height: 160px;
+        padding: 0px 0px;
+        overflow: hidden;
+    }
+&lt;/style&gt;
+&lt;div id=&#34;gr_grid_widget_1600127326&#34;&gt;
+    &lt;!-- Show static html as a placeholder in case js is not enabled - javascript include will override this if things work --&gt;
+    &lt;h3&gt;
+        &lt;a style=&#34;text-decoration: none;&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/review/list/121450152-layla?shelf=currently-reading&amp;utm_medium=api&amp;utm_source=grid_widget&#34;&gt;Currently on my nightstand:&lt;/a&gt;
+    &lt;/h3&gt;
+    &lt;div class=&#34;gr_grid_container&#34;&gt;
+        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
+            &lt;a title=&#34;City of Girls&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/51918871-city-of-girls&#34;&gt;&lt;img alt=&#34;City of Girls&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1583203648l/51918871._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
+            &lt;a title=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/48889983-calling-bullshit&#34;&gt;&lt;img alt=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592246867l/48889983._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
+            &lt;a title=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/34762552-algorithms-of-oppression&#34;&gt;&lt;img alt=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492944248l/34762552._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
+            &lt;a title=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/43726576-how-charts-lie&#34;&gt;&lt;img alt=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1563764604l/43726576._SX98_.jpg&#34; /&gt;&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;noscript&gt;&lt;br/&gt;Share &lt;a rel=&#34;nofollow&#34; href=&#34;/&#34;&gt;book reviews&lt;/a&gt; and ratings with Layla, and even join a &lt;a rel=&#34;nofollow&#34; href=&#34;/group&#34;&gt;book club&lt;/a&gt; on Goodreads.&lt;/noscript&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;script src=&#34;https://www.goodreads.com/review/grid_widget/121450152.Currently%20on%20my%20nightstand:?cover_size=medium&amp;hide_link=true&amp;hide_title=&amp;num_books=20&amp;order=a&amp;shelf=currently-reading&amp;sort=date_added&amp;widget_id=1600127326&#34; type=&#34;text/javascript&#34;
+    charset=&#34;utf-8&#34;&gt;
+&lt;/script&gt;
+</description>
+    </item>
     
     <item>
       <title>Scrape this, not that: using rvest to build a database of Champagne</title>
@@ -93,66 +318,6 @@ details_df &amp;lt;- tibble(label = details[seq(1,18,2)],
 champagne_df &amp;lt;- purrr::map_dfr(wine_paths$path, get_details)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Et voila! Une belle base de donnees de Champagne! Sante!&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/now/</link>
-      <pubDate>Tue, 25 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/now/</guid>
-      <description>&lt;h3 id=&#34;the-right-now&#34;&gt;The RIGHT NOW&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;This is page is inspired by: &amp;ldquo;What&amp;rsquo;s up? How&amp;rsquo;s life?&amp;quot;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;If anyone&amp;rsquo;s even remotely interested in the above questions, here&amp;rsquo;s what you need to know:&lt;/p&gt;
-&lt;p&gt;Since the commencement of “shelter in place” in March, things in my life has been quite interesting. I’ve learned to appreciate the small miracles, now and retrospectively. Right when The University of Miami notified us that we had to work from home, my roommate from hell was just moving out. After 6 months of living together, I just could not put up with his bullshit any longer and THANK GOD. Although, I would have to fork up the rent all by myself, I thought to myself &lt;em&gt;fuck it&lt;/em&gt;. I work too damn hard to deal with the doings of a man-child, so I kicked his ass out. Could you imagine me having to deal with him and working from home? Anyone who knows me personally is probably thanking their lucky stars the move happened when it did, for the sake of that poor bastard. Small miracles…&lt;/p&gt;
-&lt;p&gt;On a more serious note, work has been in flux. April was one of the most stressful times in my entire tenure at The U. Stress was on the rise as demands were coming in left and right, my boss was transitioning into a different and more perplexing role and the protocol for COVID was constantly evolving - as is the nature of the virus. Florida was quickly becoming the epicenter of COVID-19 😷 and all eyes were on UM. Efforts, put in place by a collaboration between Miami-Dade County (MDC) Mayor Carlos Gimenez, Florida Power &amp;amp; Light, and The University of Miami, to ramp up serological testing (for antibodies) to capture a more accurate picture of COVID-19 burden across MDC were in full force. We randomly tested over 10,000 residents of MDC and I got to work on building our official dashboard (&lt;a href=&#34;http://www.sparkc.info&#34;&gt;www.sparkc.info&lt;/a&gt;) This all came in addition to the 50/50 role I currently have with Sylvester and the Department of Public Health Sciences. Thankfully, stress came back down to more “normal” levels and I was back to doing what I would normally do&amp;hellip;except from home.&lt;/p&gt;
-&lt;p&gt;I really took advantage of my extra room and turned it into my multipurpose room 💪. I set up my home office, purchased a pull-out couch for guests, installed a tv on the wall and got some home workout equipment since I knew a gym would be out of the question for a while. That lasted for about two months until my boyfriend, who’s a software engineer, decided, since we were sheltering in place together, that the couch was just not going to cut it as a workstation. So back re-arranging things; but it all worked out. I honestly like this setup a lot better. We’ve been sheltering in place together for 6 months now, he’s still breathing, and our relationship is stronger than ever…another small miracle.
-Back to COVID-19. Was I fool to think that I had escaped the stress back in April? Yes. Yes, I was. With the start of the semester and July being a &lt;em&gt;terrible&lt;/em&gt; month for Florida, The U was gearing up for “return to campus” under the safest precautions one could possibly take. And here I was again, tasked with building a public-facing dashboard to visualize our testing efforts. I was honored with task and I did not take it lightly - anything COVID is quite sensitive. Oh, and this was happening right when my boyfriend and I decided to take a road trip to Delaware (where tf is that anyway?) to visit his folks (for the first time in person for me). I did intend on working but this was another level. For three straight weeks it was 12-hour workdays, nights and weekends. I am grateful to have a job.&lt;/p&gt;
-&lt;p&gt;Anyway, that did not come without some drama. I pride myself on being a scientist of data, a forever learner of data methodology. Unfortunately, my opinion on dashboard details clashed with those of people much higher than I in the org chart whose job, to their defense, is to prevent bad PR against The University. Well, that’s exactly what happened. Thankfully, we rectified our mistakes as quickly as we could, but I fear we may have done a bit of damage to the trust from the UM Community. But since our launch in mid-August, we have made incredible progress. I’ve met and worked closely with so many new people from across campuses. I wish work was like this all the time (without a raging virus on our tails). I mean the true interdisciplinary collaboration being done as I type this is remarkable. For the first time since I began working at the U, I truly feel like I’m part of something bigger, a real team. You can check out that work at &lt;a href=&#34;https://coronavirus.miami.edu/dashboard&#34;&gt;https://coronavirus.miami.edu/dashboard&lt;/a&gt;. This is truly an instance of “trying to fly while still building the plane” (is that the saying?).&lt;/p&gt;
-&lt;p&gt;Now, I’m back home in my lovely apartment in Miami trying to fight off any signs of burn-out, work-fatigue, the blues or whatever the hell it&amp;rsquo;s called when work has been non-stop and haven&amp;rsquo;t really socialized in six months. In whatever free time I have, I am auditing Dr. Alberto Cairo’s &amp;ldquo;Intro to Data Journalism&amp;rdquo; course to sharpen any data visualization skills I currently have and learn some new ones. The course is going great and I’m actually super excited for the rest of the semester. I’m learning some really valuable stuff that will likely make its way into a blog post 😼.&lt;/p&gt;
-&lt;p&gt;That’s all folks! Check back in a month or two to see if anything has changed since writing this (most likely, it won’t).&lt;/p&gt;
-&lt;p&gt;Oh, and because all the cool kids have one&amp;hellip;.&lt;/p&gt;
-&lt;style type=&#34;text/css&#34; media=&#34;screen&#34;&gt;
-    .gr_grid_container {
-        width: 500px;
-        display: flex;
-        /* customize grid container div here. eg: width: 500px; */
-    }
-    
-    .gr_grid_book_container {
-        /* customize book cover container div here */
-        float: left;
-        width: 98px;
-        height: 160px;
-        padding: 0px 0px;
-        overflow: hidden;
-    }
-&lt;/style&gt;
-&lt;div id=&#34;gr_grid_widget_1600127326&#34;&gt;
-    &lt;!-- Show static html as a placeholder in case js is not enabled - javascript include will override this if things work --&gt;
-    &lt;h3&gt;
-        &lt;a style=&#34;text-decoration: none;&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/review/list/121450152-layla?shelf=currently-reading&amp;utm_medium=api&amp;utm_source=grid_widget&#34;&gt;Currently on my nightstand:&lt;/a&gt;
-    &lt;/h3&gt;
-    &lt;div class=&#34;gr_grid_container&#34;&gt;
-        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;City of Girls&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/51918871-city-of-girls&#34;&gt;&lt;img alt=&#34;City of Girls&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1583203648l/51918871._SX98_.jpg&#34; /&gt;&lt;/a&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/48889983-calling-bullshit&#34;&gt;&lt;img alt=&#34;Calling Bullshit: The Art of Skepticism in a Data-Driven World&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592246867l/48889983._SX98_.jpg&#34; /&gt;&lt;/a&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/34762552-algorithms-of-oppression&#34;&gt;&lt;img alt=&#34;Algorithms of Oppression: How Search Engines Reinforce Racism&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492944248l/34762552._SX98_.jpg&#34; /&gt;&lt;/a&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;gr_grid_book_container&#34;&gt;
-            &lt;a title=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; rel=&#34;nofollow&#34; href=&#34;https://www.goodreads.com/book/show/43726576-how-charts-lie&#34;&gt;&lt;img alt=&#34;How Charts Lie: Getting Smarter about Visual Information&#34; border=&#34;0&#34; src=&#34;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1563764604l/43726576._SX98_.jpg&#34; /&gt;&lt;/a&gt;
-        &lt;/div&gt;
-        &lt;noscript&gt;&lt;br/&gt;Share &lt;a rel=&#34;nofollow&#34; href=&#34;/&#34;&gt;book reviews&lt;/a&gt; and ratings with Layla, and even join a &lt;a rel=&#34;nofollow&#34; href=&#34;/group&#34;&gt;book club&lt;/a&gt; on Goodreads.&lt;/noscript&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;script src=&#34;https://www.goodreads.com/review/grid_widget/121450152.Currently%20on%20my%20nightstand:?cover_size=medium&amp;hide_link=true&amp;hide_title=&amp;num_books=20&amp;order=a&amp;shelf=currently-reading&amp;sort=date_added&amp;widget_id=1600127326&#34; type=&#34;text/javascript&#34;
-    charset=&#34;utf-8&#34;&gt;
-&lt;/script&gt;
 </description>
     </item>
     
@@ -1338,10 +1503,22 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;projects&#34;&gt;Projects&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;ObsContenCOVID – 2020 - Ongoing&lt;/p&gt;
+&lt;p&gt;University of Miami COVID-19 Dashboard - Aug 2020 - Ongoing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://coronavirus.miami.edu/dashboard&#34;&gt;https://coronavirus.miami.edu/dashboard&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Key Collaborators:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://people.miami.edu/profile/ekobetz@miami.edu&#34;&gt;Erin Kobetz, Ph.D&lt;/a&gt; - University of Miami&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.com/ElieserNodarse&#34;&gt;Elieser Nodarse&lt;/a&gt; - University of Miami&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ObsContenCOVID – Apr 2020 - Oct 2020&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://observcovid.miami.edu/&#34;&gt;http://observcovid.miami.edu/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Key Key Collaborators:
+&lt;li&gt;Key Collaborators:
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://people.miami.edu/profile/fknaul@miami.edu&#34;&gt;Felicia Knaul, Ph.D&lt;/a&gt; – University of Miami&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://tomateloapecho.org.mx/Cvs/Hector_Arreola.php&#34;&gt;Hector Arreola&lt;/a&gt; - Anahuac University, MX&lt;/li&gt;
@@ -1355,7 +1532,7 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Sexual Network Mapping – 2019 - Ongoing&lt;/p&gt;
+&lt;p&gt;Sexual Network Mapping – 2019 - 2020&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Key Collaborators:
 &lt;ul&gt;

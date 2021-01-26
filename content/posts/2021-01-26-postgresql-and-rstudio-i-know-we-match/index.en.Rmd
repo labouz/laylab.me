@@ -25,7 +25,7 @@ Anyway, after a little (read: a lot) of digging, I think I have it somewhat figu
 
 What I started with was dozens of datasets in SAS and R. Data that have already been harmonized and aggregated. Several hours into "backwards-reading" thousands of lines of code to find original values with the schema and validated lexicon side by side I was able to get an idea of what was required and what we had:
 
-{{< figure src="./table_sketches.jpg" class="center-inline" width="400px" >}}
+![](./table_sketches.jpg)
 
 Thankfully, OMOP has all the sources I needed to get to work: 
 

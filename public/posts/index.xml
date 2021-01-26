@@ -25,7 +25,7 @@
 &lt;p&gt;Recently at work, I was asked to take data that already existed for a specific project and figure out how to standardize it to the Observational Medical Outcomes Partnership (OMOP) &lt;a href=&#34;https://www.ohdsi.org/data-standardization/the-common-data-model/&#34;&gt;Common Data Model&lt;/a&gt; (CDM). Not only did the data have to conform to this CDM but the values in the database must also follow a specific, validated vocabulary. To give you some background, I work at a medical school where I only work with patient level data and I have never had to normalize the data to any kind of standard. Most of the data I deal with have been primarily collected by the investigator’s team and then used for analysis. Rinse and repeat.&lt;/p&gt;
 &lt;p&gt;Anyway, after a little (read: a lot) of digging, I think I have it somewhat figured - at least enough so that I can get to work. The OMOP CDM was designed to make disparate clinical data - like the kind I work with - conform in a way that it is easier to perform analysis using standardized tools and share the data and its meaning across applications and business processes. Using a CDM, reduces the pain of having to mush together data from multiple sources and applications. For this particular project, doing that was like forcing pieces of a puzzle together with tape so I am totally on board with a CDM. I think you get the picture, now to the good stuff.&lt;/p&gt;
 &lt;p&gt;What I started with was dozens of datasets in SAS and R. Data that have already been harmonized and aggregated. Several hours into “backwards-reading” thousands of lines of code to find original values with the schema and validated lexicon side by side I was able to get an idea of what was required and what we had:&lt;/p&gt;
-&lt;p&gt;{{&amp;lt; figure src=“./table_sketches.jpg” class=“center-inline” width=“400px” &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;table_sketches.jpg&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Thankfully, OMOP has all the sources I needed to get to work:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.ohdsi.org/web/wiki/doku.php?id=documentation:vocabulary:sidebar&#34;&gt;Standardized vocabularies&lt;/a&gt;&lt;br /&gt;
@@ -128,16 +128,16 @@ head(person, 25)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 25 x 7
 ##    person_id gender_concept_… year_of_birth month_of_birth day_of_birth
 ##        &amp;lt;int&amp;gt;            &amp;lt;int&amp;gt;         &amp;lt;int&amp;gt;          &amp;lt;int&amp;gt;        &amp;lt;int&amp;gt;
-##  1  38424529             8507          1979              2           27
-##  2  86727112             8507          1966              1           16
-##  3  77331505               NA          1972              5            2
-##  4  58644149             8507          1972              1           13
-##  5  27910077             8507          1963             10           14
-##  6  88422815               NA          1969              3           22
-##  7  71443032             8532          1949             10            2
-##  8  47328763               NA          1962             11           22
-##  9  53332507             8507          1964             11           14
-## 10  25326359             8507          1978              7           11
+##  1  46992105             8507          1971             11           29
+##  2  69233800             8507          1964             10            3
+##  3  46455082               NA          1972             10            3
+##  4  31190802             8532          1955              6           14
+##  5  68929349             8507          1950              5           27
+##  6  61393961             8532          1954              8           18
+##  7  22828431               NA          1945             10           16
+##  8  56101340               NA          1992              9           10
+##  9  19499178             8507          1960             10           20
+## 10  54433128             8507          1990              2            6
 ## # … with 15 more rows, and 2 more variables: ethnicity_concept_id &amp;lt;int&amp;gt;,
 ## #   race_concept_id &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;

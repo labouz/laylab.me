@@ -49,7 +49,9 @@ series: []
 <li>run <code>create database healthdb;</code>
 <img src="sql_shell.png" /></li>
 </ol></li>
-<li>In a database manager or advanced editor (I &lt;3 <a href="https://code.visualstudio.com/">Visual Studio Code</a>), clone the repo that contains the DDL for PostgreSQL: <a href="https://github.com/OHDSI/CommonDataModel.git" class="uri">https://github.com/OHDSI/CommonDataModel.git</a>. I have a special directory on my machine for repos like this. <img src="vsc_clone.png" /> <em>The “Source Control” extension comes out of the box when you install VSC for the first time</em></li>
+<li>In a database manager or advanced editor (I &lt;3 <a href="https://code.visualstudio.com/">Visual Studio Code</a>), clone the repo that contains the DDL for PostgreSQL: <a href="https://github.com/OHDSI/CommonDataModel.git" class="uri">https://github.com/OHDSI/CommonDataModel.git</a>. I have a special directory on my machine for repos like this.
+<img src="vsc_clone.png" />
+<em>The “Source Control” extension comes out of the box when you install VSC for the first time</em></li>
 <li>Add the <code>healthdb</code> database to VSC by navigating to the PostgreSQL Explorer, pressing the <code>+</code> button and following the prompts (Make sure you have the PostgreSQL <a href="https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres">extension</a> for VSC ) You will need to input the credentials you setup when configuring your PostgreSQL application.
 <img src="connect_db.gif" /></li>
 <li>Once a connection to the <code>healthdb</code> database has been established, right click the database and select “New Query” and fresh page will appear.</li>
@@ -123,16 +125,16 @@ head(person, 25)</code></pre>
 <pre><code>## # A tibble: 25 x 7
 ##    person_id gender_concept_… year_of_birth month_of_birth day_of_birth
 ##        &lt;int&gt;            &lt;int&gt;         &lt;int&gt;          &lt;int&gt;        &lt;int&gt;
-##  1  46992105             8507          1971             11           29
-##  2  69233800             8507          1964             10            3
-##  3  46455082               NA          1972             10            3
-##  4  31190802             8532          1955              6           14
-##  5  68929349             8507          1950              5           27
-##  6  61393961             8532          1954              8           18
-##  7  22828431               NA          1945             10           16
-##  8  56101340               NA          1992              9           10
-##  9  19499178             8507          1960             10           20
-## 10  54433128             8507          1990              2            6
+##  1  41470777             8532          1947              5           28
+##  2  71954847             8507          1977              9           13
+##  3  70480354               NA          1986              3            8
+##  4  23693378             8507          1965              5           24
+##  5  51833113               NA          1981              6           26
+##  6  10775969             8532          1965              1           27
+##  7  49074903             8532          1948              3           17
+##  8  52489188             8532          1980              2           11
+##  9  26350094             8532          1951              4           29
+## 10  66737271             8507          1976              8           24
 ## # … with 15 more rows, and 2 more variables: ethnicity_concept_id &lt;int&gt;,
 ## #   race_concept_id &lt;int&gt;</code></pre>
 </div>

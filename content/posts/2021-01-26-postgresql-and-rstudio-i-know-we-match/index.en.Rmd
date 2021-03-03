@@ -46,7 +46,9 @@ Steps (*Note: I assume you already have [PostgreSQL setup](https://www.postgresq
     ![](postgres_app.png)
     3. run `create database healthdb;`
     ![](sql_shell.png)
-2. In a database manager or advanced editor (I <3 [Visual Studio Code](https://code.visualstudio.com/)), clone the repo that contains the DDL for PostgreSQL: https://github.com/OHDSI/CommonDataModel.git. I have a special directory on my machine for repos like this. ![](vsc_clone.png) *The "Source Control" extension comes out of the box when you install VSC for the first time*
+2. In a database manager or advanced editor (I <3 [Visual Studio Code](https://code.visualstudio.com/)), clone the repo that contains the DDL for PostgreSQL: https://github.com/OHDSI/CommonDataModel.git. I have a special directory on my machine for repos like this. 
+![](vsc_clone.png) 
+*The "Source Control" extension comes out of the box when you install VSC for the first time*
 3. Add the `healthdb` database to VSC by navigating to the PostgreSQL Explorer, pressing the `+` button and following the prompts (Make sure you have the PostgreSQL [extension](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) for VSC ) You will need to input the credentials you setup when configuring your PostgreSQL application.
  ![](connect_db.gif)
 5. Once a connection to the `healthdb` database has been established, right click the database and select "New Query" and fresh page will appear.

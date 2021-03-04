@@ -67,7 +67,7 @@ title: Passion Projects & Talks
 
 # Passion Talks
 
-- [Introduction to Public Health Data Science with R](https://whova.com/embedded/subsession/reset_202103/1437579/1437581/?view=) - NSF RESET Conference - Online - 2021
+- [Introduction to Public Health Data Science with R](https://labouz.github.io/RESET_INTRO_DS/) - [NSF RESET Conference](ttps://whova.com/embedded/subsession/reset_202103/1437579/1437581/?view=) - Online - 2021
 - [Mayshad #BWYWTB Series: Women in Data Science](https://joinmayshad.com/event/women-data-science-9-18-20/) - Live Stream - 2020
 - [Whose Knowledge Gets To Be Saved](https://www.dikayodata.com/datafemme/algorithmsofoppression) – Data Femme Podcast – Online – 2020
 - Women in Data Science – Panelist - General Assembly Boston – Boston, MA - Online – 2020

@@ -57,7 +57,7 @@ Note: After purchasing your domain, it may take up to 24 hours register. If this
 
 Login to your [shinyapps.io](https://www.shinyapps.io/) dashboard and navigate to Account > Domains in the sidebar panel. Type in your new domain and press "Add Domain". *NOTE: be sure to add the `www.` in front of your domain.* This is important because when you create your CNAME, you will be telling Google to map your new domain - which includes the `www.` subdomain - to your [shinyapps.io](https://www.shinyapps.io/) account. Your [shinyapps.io](https://www.shinyapps.io/) account also includes the `www.` subdomain so in order to have a successful map, these two components must match.
 
-![](sidebar2.gif)
+![](sidebar3.gif)
 
 Then, in the sidebar, navigate to Applications > All and then click on your Shiny app. At the top, click on URLs.
 

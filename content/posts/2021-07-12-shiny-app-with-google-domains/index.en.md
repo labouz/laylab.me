@@ -55,9 +55,9 @@ Note: After purchasing your domain, it may take up to 24 hours register. If this
 
 ## Step 3. - Linking the Domain to your Shiny app
 
-Login to your [shinyapps.io](https://www.shinyapps.io/) dashboard and navigate to Account > Domains in the sidebar panel. Type in your new domain and press "Add Domain"
+Login to your [shinyapps.io](https://www.shinyapps.io/) dashboard and navigate to Account > Domains in the sidebar panel. Type in your new domain and press "Add Domain". *NOTE: be sure to add the `www.` in front of your domain.* This is important because when you create your CNAME, you will be telling Google to map your new domain - which includes the `www.` subdomain - to your [shinyapps.io](https://www.shinyapps.io/) account. Your [shinyapps.io](https://www.shinyapps.io/) account also includes the `www.` subdomain so in order to have a successful map, these two components must match.
 
-![](sidebar.gif)
+![](sidebar2.gif)
 
 Then, in the sidebar, navigate to Applications > All and then click on your Shiny app. At the top, click on URLs.
 
@@ -70,7 +70,7 @@ Select the "Add URL" button in the bottom right corner and select your new domai
 ![](add_url2.png)
 
 
-## Step 4. - Adjusting CNAME Settings
+## Step 4. - Adjusting DNS Settings
 
 When I first had to do this, I thought that would be it. It seems like it should be that simple 🤷‍♀️. There is just one last step. We need to make sure Google knows to point your custom domain to your Shiny app account. This is done by creating a Canonical Name a.k.a and [CNAME](https://en.wikipedia.org/wiki/CNAME_record) from `myawesomesauce.info` to `labouz.shinyapps.io`. CNAMEs act as an alias. They essentially point the domain to another resource where information, like host IP address can be found (shinyapps.io).
 
@@ -82,4 +82,4 @@ Here is where you need to add the custom resource record under DNS settings.
 
 ![](cname.gif)
 
-That's it! Keep in mind it may take up to 48 hours for setting updates to take effect. Enjoy your not lame Shiny app! 🐹
+That's it! Keep in mind it may take up to 48 hours for setting updates to take effect. While I wait, I typically redeploy my app for good measure :) Enjoy your not lame Shiny app! 🐹

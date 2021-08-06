@@ -9,21 +9,17 @@ date: "2021-01-10"
 
 If anyone's even remotely interested in the above questions, here's what you need to know:
 
-Ok, it's been a minute, I know. Work has not really calmed down since last we spoke and I am working fewer hours. Why fewer hours? Well, let me take a few steps back....
+So, I got in! Into PhD programs that is... I've decided to accept my offer to Drexel University's Doctorol Program in Information Science with a Drexel Blue Fellowship - go me! This is a huge step. I won't lie, I've been in academia my whole life and this is a bit scary - still. I've already begun my first PhD Seminar in Case-Based Reasoning with my advisor, Dr.Rosina Weber, who is an expert in what appears to be a pretty niche field. My colleagues seem amazing so far so that eases the intimidation a bit but still can't help the feeling I'm completely out of my league here. Welp, here goes nothing...
 
-(*in narrator voice*) Previously, on "Right NOW", our heroine jumps the  hurdels of beurocracy at the Univrsity of Miami while trying to publish a badass COVID-19 public dashboard. She has since published said Dashboard, turned 29 and decided she was going to go back to school 😲 But why, you ask? Because, she became tired of being the tool and wanted to be the architect. Being a public heath data scientist has brougt her tremendous joy and she grew significanty, thanks to the support of her super-mentors, but there came a point where all young heroins must rise up and fight their own battles.
+In other news, I'm officially moved to Philadelphia. We bought a cute home in the Point Breeze neighborhood. Hopefully by the end of the year, all the boxes will be unpacked and I will learn how to get home without the help of Miss Google Maps 😅. So far, I'm loving it! It's still warm (hot even) and the communal vibes are real. That's something I've missed in Miami. I had friends and found community when I went actively searched for it but here, community has come to me. I've already met a few neighbors on my block and have become a regular at my local coffee shop (*read: temp office*)! 
 
-Ok, enough of the superhero metaphor, I'm really not that dramatic. But yes, in Novemeber I decided that research was my fate and that the only way I was truly going to grow into my own skin was by get those damn three letters after my name - PhD. That's pretty serious for me. I swore after my masters that I was done. What changed? The hell if I know. What I do know is that The Universe has been sending me signs to go for it left and right and I do not ignore signs from The Universe. 
+What about UM, you ask? Well, as off August 2nd I am officially resigned. The University has been a critical step in my growth and wouldn't be where I am now without all my amazing mentors there. I will forever be grateful to them. This is not the last they'll see of me. As anything in academia goes, research lives on. I will passively continue contributing to the projects (specifically my package, [DOPE](https://github.com/CTN-0094/DOPE)) on which my role was critical. 
 
-So now I am temporarily working part-time to focus on grad school applications. Work is piling up but 🤷‍♀️ I plan to return to full-time in February once the last of my applications has been submitted but until then, full time workload will have to just take a seat while I power thru. I won't reveal where I've applied to but that's where my focus has been these past couple months (I'll announce it here when I get decisions!), hence the pause in posts. Not fret, more posts to come.
+As for [R-Ladies Miami](https://twitter.com/RLadiesMiami), I have one more meetup to organize and then my role will shift as a passive organizer/cheerleader! So, if there are any passionate R-Ladies reading this, based in Miami, who would like to co-organize this group with other awesome ladies and with the commitment and fervor it deserves - DM me via [Twitter](https://twitter.com/bouzoulay)!
 
-In other news, I got a package published to [CRAN](https://ctn-0094.github.io/DOPE/) for the first time!! The name is pretty dope.
+Oh, I almost forgot our new fur babies! 😻😻 Internet, meet Stevie (grey) and Selena (orange). We adopted them, and their mama and brother, during a trip to Costa Rica (yes, I brought cats into the US and it did take two trips - reach out if you want to know *that* story, we can do virtual coffee 🤣).
 
-In other other news, we celebrated an anniversary and went to Sint Maarten/Saint Martin. ✨IT WAS BEAUTIFUL✨ Highly recommend. I had very minimal worry about COVID while on the island. Because of cruise liners not sailing at the moment, there were significantly less tourists which, I feel, allowed me a much more authentic experience. 
-
-{{< figure src="/images/st-maarten.jpg" class="center-inline" width="400px" >}} {{< figure src="/images/st-maarten-building.jpg" class="center-inline" width="400px" >}}
-
-{{< figure src="/images/st-maarten-PANO.jpg" class="center" width="1000px" >}} 
+{{< figure src="/images/babies.jpeg" class="center-inline" width="500px" >}} 
 
 That's it for now. Stay tuned...
 

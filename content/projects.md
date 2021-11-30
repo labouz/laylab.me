@@ -7,7 +7,7 @@ title: Passion Projects & Talks
 
 # Projects
 
-- University of Miami COVID-19 Dashboard - Aug 2020 - Ongoing
+- University of Miami COVID-19 Dashboard - July 2020 - Dec 2020
   - https://coronavirus.miami.edu/dashboard
   - Key Collaborators:
     - [Erin Kobetz, Ph.D](https://people.miami.edu/profile/ekobetz@miami.edu) - University of Miami
@@ -67,7 +67,9 @@ title: Passion Projects & Talks
 
 # Passion Talks
 
-- [Introduction to Public Health Data Science with R](https://labouz.github.io/RESET_INTRO_DS/) - [NSF RESET Conference](ttps://whova.com/embedded/subsession/reset_202103/1437579/1437581/?view=) - Online - 2021
+- [Drexel University Society of Women Engineers (SWE) Lives & Lessons 2021 Panel](http://drexel.swe.org/lives-and-lessons.html) - Online - 11/2021
+- #IamRemarkable Workshop – Miami Dade College Computer Science Students - Online - 04/2021
+- [Introduction to Public Health Data Science with R](https://labouz.github.io/RESET_INTRO_DS/) - [NSF RESET Conference](ttps://whova.com/embedded/subsession/reset_202103/1437579/1437581/?view=) - Online - 03/2021
 - [Mayshad #BWYWTB Series: Women in Data Science](https://joinmayshad.com/event/women-data-science-9-18-20/) - Live Stream - 2020
 - [Whose Knowledge Gets To Be Saved](https://www.dikayodata.com/datafemme/algorithmsofoppression) – Data Femme Podcast – Online – 2020
 - Women in Data Science – Panelist - General Assembly Boston – Boston, MA - Online – 2020

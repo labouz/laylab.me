@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://laylab.me"
 title = "LB"
 
 theme = "hugo-coder"
@@ -14,7 +14,7 @@ pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
 # disqusShortname = "yourdiscussshortname"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 
 [params]
     author = "Layla Bouzoubaa"

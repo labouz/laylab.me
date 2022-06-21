@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ggplot on LB</title>
-    <link>/tags/ggplot/</link>
+    <link>https://laylab.me/tags/ggplot/</link>
     <description>Recent content in ggplot on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/ggplot/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://laylab.me/tags/ggplot/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Facet ggplots While Preserving Unique Order</title>
-      <link>/posts/facet-ggplots-while-preserving-order/</link>
+      <link>https://laylab.me/posts/facet-ggplots-while-preserving-order/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/posts/facet-ggplots-while-preserving-order/</guid>
+      <guid>https://laylab.me/posts/facet-ggplots-while-preserving-order/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://laylab.me/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- &lt;style type=&#34;text/css&#34;&gt; --&gt;
@@ -592,7 +592,7 @@ f + geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp
        y = &amp;quot;Count&amp;quot;) +
   ggtitle(&amp;quot;Count of 19 Cancers by Site&amp;quot;) +
   theme_light() &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;That’s cool but, I want to order this by most frequent to less frequent so that means I need to make site a factor and because there are 4 different race/ethnicity categories, I also need to make sure each race has it’s own order. Therefore, I need to &lt;code&gt;group_by()&lt;/code&gt; race and &lt;code&gt;arrange()&lt;/code&gt; by race and count.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_sexes &amp;lt;- prevalence %&amp;gt;% 
   filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;%   # sex == &amp;quot;people&amp;quot;
@@ -612,7 +612,7 @@ f + geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp
        y = &amp;quot;Count&amp;quot;) +
   ggtitle(&amp;quot;Count of 19 Cancers by Site&amp;quot;) +
   theme_light() &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot_fact-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot_fact-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Yippee!!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Now, I need to replicate this plot for not only all 19 cancers, but the top 5 cancers, the top 5 cancers by each race group, the cancers that are caused by viruses, and the cancers caused by viruses for each race group. Not only do I want to look at the counts, but I also want these plots for the percent late stage at diagnosis and for the age-adjusted incidence rates…oh, $#!@.&lt;/p&gt;
 &lt;p&gt;That’s 15 different plots and if you know me, there’s no way in hell I am copying and pasting this crap 15 times…&lt;/p&gt;
@@ -681,7 +681,7 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }
 
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;WOOP!&lt;/strong&gt;…progress. Now to turn this into a full function that will produce and save all 15 graphics!&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
@@ -793,7 +793,7 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }
 
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now, this made me excited at first &lt;em&gt;until&lt;/em&gt; I noticed that when I facted by race, the order of the levels for site remained fixed, regardless of race. The order for the “All_Races” group was getting recycled. &lt;em&gt;This&lt;/em&gt; is where the headache, more cursing, and thoughts of running away and never coming back started to creep in.&lt;/p&gt;
 &lt;p&gt;How can I facet on race yet still preserve the order of site per each race group???&lt;/p&gt;
 &lt;p&gt;* &lt;em&gt;In the Spongebob narrator voice&lt;/em&gt; * A few hours later…. I gave up and went home.&lt;/p&gt;
@@ -952,9 +952,9 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }
 
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;makeGraphs(&amp;quot;adjRate&amp;quot;, virus = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-4.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-4.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;YAASSSS!!!&lt;/strong&gt;…purrring in contentment ;)&lt;/p&gt;
 &lt;p&gt;*Note: I’ve commented out the ggsaves for the sake of making sure I don’t screw up what I already have&lt;/p&gt;
 &lt;p&gt;I hope what went through my head effectively made it through my fingers, onto the keyboard, and on the screen into this document in an intelligible way.&lt;/p&gt;

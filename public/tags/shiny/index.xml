@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shiny on LB</title>
+    <link>https://laylab.me/tags/shiny/</link>
+    <description>Recent content in shiny on LB</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 12 Jul 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://laylab.me/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Customize Shiny App with a Google Domains</title>
+      <link>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</link>
+      <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re reading this you have probably deployed a Shiny app or two using RStudio&amp;rsquo;s service, &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;shinyapps.io&lt;/a&gt;. It&amp;rsquo;s a really easy way to get your apps up on the web and ready to share with your peers in a matter of minutes - even if you have the free tier. Unfortunately, if you have the free tier custom domains, like &lt;code&gt;myawesomesauce.com&lt;/code&gt; is not supported. You must have the &lt;em&gt;FULL BLOWN Professional Package&lt;/em&gt; at a whopping $299 a month or $3,300 a year (see pricing below)! 😮&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./pricing.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If you ask me, this an outrageous amount to pay for some borrowed server space and time. Personally, I would spin up my own virtual machine on any of the cloud providers (my flavor is the Google Cloud Platform) and go from there. If your app does not require a ton of compute resources than this should cost you relatively little money. This topic is making me thirsty for a new post 🤔&lt;/p&gt;
+&lt;p&gt;If you do not have deep pockets or an employer who is willing to shell out the 💰💰 for this account then, I&amp;rsquo;m sorry to say, this post is not for you. You are stuck with the &lt;code&gt;.shinyapps.io\coolApp&lt;/code&gt; domain. &lt;em&gt;I know, it&amp;rsquo;s pretty lame.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;If you &lt;strong&gt;DO&lt;/strong&gt; have the ability to integrate a custom domain, then read further. I have found integrating a domain purchased from Google Domains with a Shiny app tricky at times, so I figured I needed to write a post about it.&lt;/p&gt;
+&lt;h2 id=&#34;step-1---google-domains&#34;&gt;Step 1. - Google Domains&lt;/h2&gt;
+&lt;p&gt;At this step, I am assuming you can already build a Shiny app, have created a shinyapps.io account, and can deploy your app onto it. If you cannot do the last bit, see this &lt;a href=&#34;https://docs.rstudio.com/shinyapps.io/getting-started.html#deploying-applications&#34;&gt;quick bite&lt;/a&gt; on how to get your app out on the web!&lt;/p&gt;
+&lt;p&gt;Once your Shiny app is online, sign into &lt;a href=&#34;https://domains.google/&#34;&gt;Google Domains&lt;/a&gt; by simply logging in with your Gmail account or any other account you use to access Google services.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;domains.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;step-2---purchase-a-domain&#34;&gt;Step 2. - Purchase a domain!&lt;/h2&gt;
+&lt;p&gt;The domain is the web address that you will connect to your shiny app!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;get_domain.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;A few tips on domains:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make it stick. Websites with really long names are really hard to remember so keep it short and relevant!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Be mindful of of your domain extension (&lt;code&gt;.com&lt;/code&gt;, &lt;code&gt;.org&lt;/code&gt;). The more popular extension, &lt;code&gt;.com&lt;/code&gt; will likely be taken but no fret, Google Domains will offer some suggestions that &lt;em&gt;are&lt;/em&gt; available. Also note that several extensions like &lt;code&gt;.us&lt;/code&gt; (United States) or &lt;code&gt;.me&lt;/code&gt; (Montenegro) are country extensions and are intended to be used by entities within that country. However, extensions like &lt;code&gt;.us&lt;/code&gt; and &lt;code&gt;.me&lt;/code&gt; are open to registrations worldwide as they also have personal meaning (me and us!) that can be used to connect with your users/personal brand.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A side note on &lt;code&gt;.org&lt;/code&gt; - if you&amp;rsquo;re not a bonefied organization, don&amp;rsquo;t use &lt;code&gt;.org&lt;/code&gt;. That&amp;rsquo;s just confusing, c&amp;rsquo;mon!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lastly, be careful. Buying a domain seems virtually harmless but you &lt;em&gt;can&lt;/em&gt; get scammed. Only buy from trusted registrars, like Google or GoDaddy, and buy quickly. Do not go online asking the opinion of the internet on your domain name as you run the risk of a &amp;ldquo;domain name front runner&amp;rdquo; snatching it up in hopes of selling it for a profit. BTW, domains on Google typically cost $10-25 annually. &amp;ldquo;Front runners&amp;rdquo; buy up hundreds of potentially relevant domain names for dirt cheap and are willing to sell them - sometimes at a RIDICULOUS markup. This has happened to my team. Don&amp;rsquo;t say I didn&amp;rsquo;t warn you.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Once you&amp;rsquo;ve decided on a domain add it to cart and checkout! Google will ask you for how long you want to purchase your domain, if you want privacy protection and if you want to turn on auto-renew. I &lt;em&gt;strongly&lt;/em&gt; recommend you turn on privacy protection. Domain owner information is required for the &lt;a href=&#34;https://en.wikipedia.org/wiki/WHOIS&#34;&gt;WHOIS protocol&lt;/a&gt; but with privacy protection, Google will supply alternate contact information on your behalf. My name, address and phone number publicly available? No thank you!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;cart_add.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Note: After purchasing your domain, it may take up to 24 hours register. If this is your first time using Google Domains, please make sure your email address is verified!&lt;/p&gt;
+&lt;h2 id=&#34;step-3---linking-the-domain-to-your-shiny-app&#34;&gt;Step 3. - Linking the Domain to your Shiny app&lt;/h2&gt;
+&lt;p&gt;Login to your &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;shinyapps.io&lt;/a&gt; dashboard and navigate to Account &amp;gt; Domains in the sidebar panel. Type in your new domain and press &amp;ldquo;Add Domain&amp;rdquo;. &lt;em&gt;NOTE: be sure to add the &lt;code&gt;www.&lt;/code&gt; in front of your domain.&lt;/em&gt; This is important because when you create your CNAME, you will be telling Google to map your new domain - which includes the &lt;code&gt;www.&lt;/code&gt; subdomain - to your &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;shinyapps.io&lt;/a&gt; account. Your &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;shinyapps.io&lt;/a&gt; account also includes the &lt;code&gt;www.&lt;/code&gt; subdomain so in order to have a successful map, these two components must match.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;sidebar3.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then, in the sidebar, navigate to Applications &amp;gt; All and then click on your Shiny app. At the top, click on URLs.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;URL.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Select the &amp;ldquo;Add URL&amp;rdquo; button in the bottom right corner and select your new domain in the popup.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;add_url.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;add_url2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;step-4---adjusting-dns-settings&#34;&gt;Step 4. - Adjusting DNS Settings&lt;/h2&gt;
+&lt;p&gt;When I first had to do this, I thought that would be it. It seems like it should be that simple 🤷‍♀️. There is just one last step. We need to make sure Google knows to point your custom domain to your Shiny app account. This is done by creating a Canonical Name a.k.a and &lt;a href=&#34;https://en.wikipedia.org/wiki/CNAME_record&#34;&gt;CNAME&lt;/a&gt; from &lt;code&gt;myawesomesauce.info&lt;/code&gt; to &lt;code&gt;labouz.shinyapps.io&lt;/code&gt;. CNAMEs act as an alias. They essentially point the domain to another resource where information, like host IP address can be found (shinyapps.io).&lt;/p&gt;
+&lt;p&gt;Go back to your domains.google account and navigate to your newly purchased domain in the left sidebar under &amp;ldquo;My Domains&amp;rdquo;. Find your domain and select &amp;ldquo;Manage&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;manage.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Here is where you need to add the custom resource record under DNS settings.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;cname.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s it! Keep in mind it may take up to 48 hours for setting updates to take effect. While I wait, I typically redeploy my app for good measure :) Enjoy your not lame Shiny app! 🐹&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

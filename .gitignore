@@ -12,3 +12,5 @@ public/posts/*.rds
 
 content/posts/*.rda
 content/posts/*.rds
+
+Thumbs.db

@@ -2,120 +2,147 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on LB</title>
-    <link>/tags/</link>
+    <link>https://laylab.me/tags/</link>
     <description>Recent content in Tags on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jul 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://laylab.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>deployment</title>
+      <link>https://laylab.me/tags/deployment/</link>
+      <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://laylab.me/tags/deployment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>domains</title>
+      <link>https://laylab.me/tags/domains/</link>
+      <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://laylab.me/tags/domains/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shiny</title>
+      <link>https://laylab.me/tags/shiny/</link>
+      <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://laylab.me/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>databases</title>
-      <link>/tags/databases/</link>
+      <link>https://laylab.me/tags/databases/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/tags/databases/</guid>
+      <guid>https://laylab.me/tags/databases/</guid>
       <description></description>
     </item>
     
     <item>
       <title>odbc</title>
-      <link>/tags/odbc/</link>
+      <link>https://laylab.me/tags/odbc/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/tags/odbc/</guid>
+      <guid>https://laylab.me/tags/odbc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>postgres</title>
-      <link>/tags/postgres/</link>
+      <link>https://laylab.me/tags/postgres/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/tags/postgres/</guid>
+      <guid>https://laylab.me/tags/postgres/</guid>
       <description></description>
     </item>
     
     <item>
       <title>html</title>
-      <link>/tags/html/</link>
+      <link>https://laylab.me/tags/html/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/html/</guid>
+      <guid>https://laylab.me/tags/html/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rvest</title>
-      <link>/tags/rvest/</link>
+      <link>https://laylab.me/tags/rvest/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rvest/</guid>
+      <guid>https://laylab.me/tags/rvest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>scraping</title>
-      <link>/tags/scraping/</link>
+      <link>https://laylab.me/tags/scraping/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/scraping/</guid>
+      <guid>https://laylab.me/tags/scraping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>api</title>
-      <link>/tags/api/</link>
+      <link>https://laylab.me/tags/api/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/api/</guid>
+      <guid>https://laylab.me/tags/api/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ngrok</title>
-      <link>/tags/ngrok/</link>
+      <link>https://laylab.me/tags/ngrok/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ngrok/</guid>
+      <guid>https://laylab.me/tags/ngrok/</guid>
       <description></description>
     </item>
     
     <item>
       <title>plumber</title>
-      <link>/tags/plumber/</link>
+      <link>https://laylab.me/tags/plumber/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/plumber/</guid>
+      <guid>https://laylab.me/tags/plumber/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dataviz</title>
-      <link>/tags/dataviz/</link>
+      <link>https://laylab.me/tags/dataviz/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/dataviz/</guid>
+      <guid>https://laylab.me/tags/dataviz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ggplot</title>
-      <link>/tags/ggplot/</link>
+      <link>https://laylab.me/tags/ggplot/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggplot/</guid>
+      <guid>https://laylab.me/tags/ggplot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ggpubr</title>
-      <link>/tags/ggpubr/</link>
+      <link>https://laylab.me/tags/ggpubr/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggpubr/</guid>
+      <guid>https://laylab.me/tags/ggpubr/</guid>
       <description></description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>api on LB</title>
-    <link>https://laylab.me/tags/api/</link>
+    <link>/tags/api/</link>
     <description>Recent content in api on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 08 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://laylab.me/tags/api/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/api/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The API and I - Exposing a Plumber API</title>
-      <link>https://laylab.me/posts/the-api-and-i-exposing-a-pluber-api/</link>
+      <link>/posts/the-api-and-i-exposing-a-pluber-api/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/the-api-and-i-exposing-a-pluber-api/</guid>
+      <guid>/posts/the-api-and-i-exposing-a-pluber-api/</guid>
       <description>
 
 
@@ -86,7 +86,7 @@ function(){
 r &amp;lt;- plumb(&amp;quot;plumber.R&amp;quot;)
 r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;When you run this you will get a screen like this from swagger:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/api_swagger.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/api_swagger.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;FYI, your local address will be localhost:8000/plotly&lt;/p&gt;
 &lt;div id=&#34;now-to-the-fun-part&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Now to the fun part!&lt;/h4&gt;
@@ -95,7 +95,7 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;li&gt;You will have to create an account, this is how you will get your authentication token. The easiest would to authenticate is with your GitHub account, if you have one.&lt;/li&gt;
 &lt;li&gt;Download the installation for your operating system&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_download.png&#34; width=&#34;600&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_download.png&#34; width=&#34;600&#34; /&gt;&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Open your terminal&lt;/li&gt;
 &lt;li&gt;Unzip the ngrok installation files&lt;/li&gt;
@@ -104,15 +104,15 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;li&gt;&lt;code&gt;./ngrok authtoken YOUR-AUTH-TOKEN&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_auth.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_auth.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now it’s time to expose your API! 😎&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Hopefully, you still have the localhost served. If not, just run &lt;code&gt;r$run(port=8000)&lt;/code&gt; again and you should be good.&lt;/li&gt;
 &lt;li&gt;Open your terminal again. Make sure you’re in the directory where you unzipped ngrok (Applications, for me) and run &lt;code&gt;./ngrok http 8000&lt;/code&gt; and that’s it! You have now exposed port 8000 on your computer. If all went well, you should get a screen like this:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_expose.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_expose.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now, all you have to do is share! Copy and paste the “Forwarding” URL and add the path to your API and send it out for testing!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_plotly.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_plotly.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

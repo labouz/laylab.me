@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>LB</title>
-    <link>https://laylab.me/</link>
+    <link>/</link>
     <description>Recent content on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 12 Jul 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://laylab.me/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Customize Shiny App with a Google Domains</title>
-      <link>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</link>
+      <link>/posts/2021-07-12-shiny-app-with-google-domains/</link>
       <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</guid>
+      <guid>/posts/2021-07-12-shiny-app-with-google-domains/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;re reading this you have probably deployed a Shiny app or two using RStudio&amp;rsquo;s service, &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;shinyapps.io&lt;/a&gt;. It&amp;rsquo;s a really easy way to get your apps up on the web and ready to share with your peers in a matter of minutes - even if you have the free tier. Unfortunately, if you have the free tier custom domains, like &lt;code&gt;myawesomesauce.com&lt;/code&gt; is not supported. You must have the &lt;em&gt;FULL BLOWN Professional Package&lt;/em&gt; at a whopping $299 a month or $3,300 a year (see pricing below)! 😮&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./pricing.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;If you ask me, this an outrageous amount to pay for some borrowed server space and time. Personally, I would spin up my own virtual machine on any of the cloud providers (my flavor is the Google Cloud Platform) and go from there. If your app does not require a ton of compute resources than this should cost you relatively little money. This topic is making me thirsty for a new post 🤔&lt;/p&gt;
@@ -67,10 +67,10 @@
     
     <item>
       <title>PostgreSQL and RStudio: I know we match</title>
-      <link>https://laylab.me/posts/creating-a-database-and-write-from-rstudio/</link>
+      <link>/posts/creating-a-database-and-write-from-rstudio/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/creating-a-database-and-write-from-rstudio/</guid>
+      <guid>/posts/creating-a-database-and-write-from-rstudio/</guid>
       <description>
 
 
@@ -223,10 +223,10 @@ Now to fill in the rest…&lt;/p&gt;
     
     <item>
       <title></title>
-      <link>https://laylab.me/now/</link>
+      <link>/now/</link>
       <pubDate>Sun, 10 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/now/</guid>
+      <guid>/now/</guid>
       <description>&lt;h3 id=&#34;the-right-now&#34;&gt;The RIGHT NOW&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;This is page is inspired by: &amp;ldquo;What&amp;rsquo;s up? How&amp;rsquo;s life?&amp;quot;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;If anyone&amp;rsquo;s even remotely interested in the above questions, here&amp;rsquo;s what you need to know:&lt;/p&gt;
@@ -235,7 +235,7 @@ Now to fill in the rest…&lt;/p&gt;
 &lt;p&gt;This summer I am doing an apprenticeship with the Data Team at &lt;a href=&#34;https://caa.com&#34;&gt;CAA&lt;/a&gt;. I am only in my first week and everyone has been super helpful and so nice! I am looking forward to designing a research study and diving right in with the support of such an awesome team! I&amp;rsquo;m bummed that moving to LA for the summer didn&amp;rsquo;t work out as I had hoped but I am grateful they were able to accommodate me being a remote employee!&lt;/p&gt;
 &lt;p&gt;On the personal front, nothing new ha. I guess no news is good news, right? Farzad and I are still living in the house on Taylor St. We do our thing and every once in a while catch some events around this awesome city. We are enjoying our life here with our two kitties, Stevie &amp;amp; Selena (I will never stop posting photos of them - my entire camera roll)&lt;/p&gt;
 &lt;figure class=&#34;center-inline&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/selena2.jpeg&#34; width=&#34;500px&#34;/&gt; 
+    &lt;img src=&#34;/images/selena2.jpeg&#34; width=&#34;500px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;p&gt;That&amp;rsquo;s it for now. Stay tuned&amp;hellip;&lt;/p&gt;
@@ -314,8 +314,8 @@ Now to fill in the rest…&lt;/p&gt;
       &gt;Layla&#39;s favorite books »&lt;/a
     &gt;
     &lt;noscript
-      &gt;&lt;br /&gt;Share &lt;a rel=&#34;nofollow&#34; href=&#34;https://laylab.me/&#34;&gt;book reviews&lt;/a&gt; and ratings with
-      Layla, and even join a &lt;a rel=&#34;nofollow&#34; href=&#34;https://laylab.me/group&#34;&gt;book club&lt;/a&gt; on
+      &gt;&lt;br /&gt;Share &lt;a rel=&#34;nofollow&#34; href=&#34;/&#34;&gt;book reviews&lt;/a&gt; and ratings with
+      Layla, and even join a &lt;a rel=&#34;nofollow&#34; href=&#34;/group&#34;&gt;book club&lt;/a&gt; on
       Goodreads.&lt;/noscript
     &gt;
   &lt;/div&gt;
@@ -330,10 +330,10 @@ Now to fill in the rest…&lt;/p&gt;
     
     <item>
       <title>Scrape this, not that: using rvest to build a database of Champagne</title>
-      <link>https://laylab.me/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</link>
+      <link>/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</guid>
+      <guid>/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</guid>
       <description>
 
 
@@ -354,7 +354,7 @@ Now to fill in the rest…&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Finally, it’s a good idea to familiarize yourself with the “Inspect” feature from your browser. This allows your to see the breakdown of any web-page your viewing. This is where you will also find the names for the elements and attributes you want to scrape!&lt;/p&gt;
 &lt;p&gt;(pro tip: use the &#34;select element feature to jump directly to the element you’re looking for)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-09-28-scrape-this-not-that-using-rvest-to-build-a-database-of-champagne.en_files/elements_console.png&#34; height=&#34;500&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-09-28-scrape-this-not-that-using-rvest-to-build-a-database-of-champagne.en_files/elements_console.png&#34; height=&#34;500&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: &lt;code&gt;rvest&lt;/code&gt; cannot handle JS, it only reads the HTML before JS loaded so some objects may not be possible to scrape with this package. However, if you have the inspect console open in your browser, go to the “Network” tab, refresh the page and try looking for a GET request made to an API (api may be in the URL). This is data stored in a JSON file which can be read using &lt;code&gt;jsonlite::fromJSON()&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Don’t get intimidated. It’s quite simple. Here, let me show you:&lt;/p&gt;
 &lt;div id=&#34;scrape-the-details-of-a-specific-wine&#34; class=&#34;section level3&#34;&gt;
@@ -415,10 +415,10 @@ champagne_df &amp;lt;- purrr::map_dfr(wine_paths$path, get_details)&lt;/code&gt;
     
     <item>
       <title>The API and I - Exposing a Plumber API</title>
-      <link>https://laylab.me/posts/the-api-and-i-exposing-a-pluber-api/</link>
+      <link>/posts/the-api-and-i-exposing-a-pluber-api/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/the-api-and-i-exposing-a-pluber-api/</guid>
+      <guid>/posts/the-api-and-i-exposing-a-pluber-api/</guid>
       <description>
 
 
@@ -488,7 +488,7 @@ function(){
 r &amp;lt;- plumb(&amp;quot;plumber.R&amp;quot;)
 r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;When you run this you will get a screen like this from swagger:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/api_swagger.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/api_swagger.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;FYI, your local address will be localhost:8000/plotly&lt;/p&gt;
 &lt;div id=&#34;now-to-the-fun-part&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Now to the fun part!&lt;/h4&gt;
@@ -497,7 +497,7 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;li&gt;You will have to create an account, this is how you will get your authentication token. The easiest would to authenticate is with your GitHub account, if you have one.&lt;/li&gt;
 &lt;li&gt;Download the installation for your operating system&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_download.png&#34; width=&#34;600&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_download.png&#34; width=&#34;600&#34; /&gt;&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Open your terminal&lt;/li&gt;
 &lt;li&gt;Unzip the ngrok installation files&lt;/li&gt;
@@ -506,15 +506,15 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;li&gt;&lt;code&gt;./ngrok authtoken YOUR-AUTH-TOKEN&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_auth.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_auth.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now it’s time to expose your API! 😎&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Hopefully, you still have the localhost served. If not, just run &lt;code&gt;r$run(port=8000)&lt;/code&gt; again and you should be good.&lt;/li&gt;
 &lt;li&gt;Open your terminal again. Make sure you’re in the directory where you unzipped ngrok (Applications, for me) and run &lt;code&gt;./ngrok http 8000&lt;/code&gt; and that’s it! You have now exposed port 8000 on your computer. If all went well, you should get a screen like this:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_expose.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_expose.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now, all you have to do is share! Copy and paste the “Forwarding” URL and add the path to your API and send it out for testing!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_plotly.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-07-08-the-api-and-i-exposing-a-pluber-api.en_files/ngrok_plotly.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -522,13 +522,13 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
     
     <item>
       <title></title>
-      <link>https://laylab.me/about/</link>
+      <link>/about/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/about/</guid>
+      <guid>/about/</guid>
       <description>&lt;h3 id=&#34;this-is-me-layla-b-&#34;&gt;This is me, Layla B 👋&lt;/h3&gt;
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/pic01.jpeg&#34; height=&#34;325px&#34;/&gt; 
+    &lt;img src=&#34;/images/pic01.jpeg&#34; height=&#34;325px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;strong&gt;The not so boring stuff:&lt;/strong&gt;&lt;/p&gt;
@@ -536,7 +536,7 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;li&gt;
 &lt;p&gt;Freshly transplanted Miamian, originally from Atlanta, GA&lt;/p&gt;
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/pic02.jpg&#34; width=&#34;200px&#34;/&gt; 
+    &lt;img src=&#34;/images/pic02.jpg&#34; width=&#34;200px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;/li&gt;
@@ -546,7 +546,7 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;li&gt;
 &lt;p&gt;Raised in the &lt;a href=&#34;http://www.sevengablesrestaurant.com/&#34;&gt;restaurant&lt;/a&gt; biz&lt;/p&gt;
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/pic04.jpg&#34; width=&#34;300px&#34;/&gt; 
+    &lt;img src=&#34;/images/pic04.jpg&#34; width=&#34;300px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;/li&gt;
@@ -558,7 +558,7 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/pic05.jpg&#34; width=&#34;300px&#34;/&gt; 
+    &lt;img src=&#34;/images/pic05.jpg&#34; width=&#34;300px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;ul&gt;
@@ -587,23 +587,23 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
 &lt;/ul&gt;
 &lt;br&gt;
 &lt;p&gt;&lt;figure class=&#34;center-inline&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/rl.png&#34; width=&#34;80px&#34;/&gt; 
+    &lt;img src=&#34;/images/rl.png&#34; width=&#34;80px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;figure class=&#34;center-inline&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/wtm.png&#34; width=&#34;112px&#34;/&gt; 
+    &lt;img src=&#34;/images/wtm.png&#34; width=&#34;112px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;figure class=&#34;center-inline&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/iar.png&#34; width=&#34;150px&#34;/&gt; 
+    &lt;img src=&#34;/images/iar.png&#34; width=&#34;150px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;figure class=&#34;center-inline&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/gdg-miami.png&#34; width=&#34;180px&#34;/&gt; 
+    &lt;img src=&#34;/images/gdg-miami.png&#34; width=&#34;180px&#34;/&gt; 
 &lt;/figure&gt;
 
 &lt;figure class=&#34;center-inline&#34;&gt;
-    &lt;img src=&#34;https://laylab.me/images/stackedDiagonal.png&#34; width=&#34;200px&#34;/&gt; 
+    &lt;img src=&#34;/images/stackedDiagonal.png&#34; width=&#34;200px&#34;/&gt; 
 &lt;/figure&gt;
 &lt;/p&gt;
 &lt;br&gt;
@@ -612,12 +612,12 @@ r$run(port = 8000) #this will run your api on localhost, port: 8000.&lt;/code&gt
     
     <item>
       <title>Facet ggplots While Preserving Unique Order</title>
-      <link>https://laylab.me/posts/facet-ggplots-while-preserving-order/</link>
+      <link>/posts/facet-ggplots-while-preserving-order/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/facet-ggplots-while-preserving-order/</guid>
+      <guid>/posts/facet-ggplots-while-preserving-order/</guid>
       <description>
-&lt;script src=&#34;https://laylab.me/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- &lt;style type=&#34;text/css&#34;&gt; --&gt;
@@ -1191,7 +1191,7 @@ f + geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp
        y = &amp;quot;Count&amp;quot;) +
   ggtitle(&amp;quot;Count of 19 Cancers by Site&amp;quot;) +
   theme_light() &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;That’s cool but, I want to order this by most frequent to less frequent so that means I need to make site a factor and because there are 4 different race/ethnicity categories, I also need to make sure each race has it’s own order. Therefore, I need to &lt;code&gt;group_by()&lt;/code&gt; race and &lt;code&gt;arrange()&lt;/code&gt; by race and count.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_sexes &amp;lt;- prevalence %&amp;gt;% 
   filter(sex == &amp;quot;P&amp;quot;) %&amp;gt;%   # sex == &amp;quot;people&amp;quot;
@@ -1211,7 +1211,7 @@ f + geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp
        y = &amp;quot;Count&amp;quot;) +
   ggtitle(&amp;quot;Count of 19 Cancers by Site&amp;quot;) +
   theme_light() &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot_fact-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/ggplot_fact-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Yippee!!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Now, I need to replicate this plot for not only all 19 cancers, but the top 5 cancers, the top 5 cancers by each race group, the cancers that are caused by viruses, and the cancers caused by viruses for each race group. Not only do I want to look at the counts, but I also want these plots for the percent late stage at diagnosis and for the age-adjusted incidence rates…oh, $#!@.&lt;/p&gt;
 &lt;p&gt;That’s 15 different plots and if you know me, there’s no way in hell I am copying and pasting this crap 15 times…&lt;/p&gt;
@@ -1280,7 +1280,7 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }
 
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;WOOP!&lt;/strong&gt;…progress. Now to turn this into a full function that will produce and save all 15 graphics!&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
 
@@ -1392,7 +1392,7 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }
 
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/func3-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now, this made me excited at first &lt;em&gt;until&lt;/em&gt; I noticed that when I facted by race, the order of the levels for site remained fixed, regardless of race. The order for the “All_Races” group was getting recycled. &lt;em&gt;This&lt;/em&gt; is where the headache, more cursing, and thoughts of running away and never coming back started to creep in.&lt;/p&gt;
 &lt;p&gt;How can I facet on race yet still preserve the order of site per each race group???&lt;/p&gt;
 &lt;p&gt;* &lt;em&gt;In the Spongebob narrator voice&lt;/em&gt; * A few hours later…. I gave up and went home.&lt;/p&gt;
@@ -1551,9 +1551,9 @@ makeGraphs &amp;lt;- function(measure, virus = FALSE) {
 }
 
 makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-2.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;makeGraphs(&amp;quot;adjRate&amp;quot;, virus = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-4.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;https://laylab.me/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-4.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/posts/2019-07-12-facet-ggplots-while-preserving-order_files/figure-html/workingFunc-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;YAASSSS!!!&lt;/strong&gt;…purrring in contentment ;)&lt;/p&gt;
 &lt;p&gt;*Note: I’ve commented out the ggsaves for the sake of making sure I don’t screw up what I already have&lt;/p&gt;
 &lt;p&gt;I hope what went through my head effectively made it through my fingers, onto the keyboard, and on the screen into this document in an intelligible way.&lt;/p&gt;
@@ -1563,20 +1563,20 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Contact</title>
-      <link>https://laylab.me/contact/</link>
+      <link>/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/contact/</guid>
+      <guid>/contact/</guid>
       <description>&lt;p&gt;Follow me, @johndoe.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>First snippet</title>
-      <link>https://laylab.me/snippets/first/</link>
+      <link>/snippets/first/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/snippets/first/</guid>
+      <guid>/snippets/first/</guid>
       <description>&lt;p&gt;This content is in &lt;code&gt;snippets/first/index.md&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;pwd&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
@@ -1584,10 +1584,10 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Passion Projects &amp; Talks</title>
-      <link>https://laylab.me/projects/</link>
+      <link>/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/projects/</guid>
+      <guid>/projects/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#projects&#34;&gt;Projects&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#passion-talks&#34;&gt;Passion Talks&lt;/a&gt;&lt;/li&gt;
@@ -1735,10 +1735,10 @@ makeGraphs(&amp;quot;count&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Second snippet</title>
-      <link>https://laylab.me/snippets/second/</link>
+      <link>/snippets/second/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/snippets/second/</guid>
+      <guid>/snippets/second/</guid>
       <description>&lt;p&gt;This content is in &lt;code&gt;snippets/second/index.md&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;ls -la
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>

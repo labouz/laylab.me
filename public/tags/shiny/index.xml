@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>shiny on LB</title>
-    <link>https://laylab.me/tags/shiny/</link>
+    <link>/tags/shiny/</link>
     <description>Recent content in shiny on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 12 Jul 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://laylab.me/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Customize Shiny App with a Google Domains</title>
-      <link>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</link>
+      <link>/posts/2021-07-12-shiny-app-with-google-domains/</link>
       <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</guid>
+      <guid>/posts/2021-07-12-shiny-app-with-google-domains/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;re reading this you have probably deployed a Shiny app or two using RStudio&amp;rsquo;s service, &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;shinyapps.io&lt;/a&gt;. It&amp;rsquo;s a really easy way to get your apps up on the web and ready to share with your peers in a matter of minutes - even if you have the free tier. Unfortunately, if you have the free tier custom domains, like &lt;code&gt;myawesomesauce.com&lt;/code&gt; is not supported. You must have the &lt;em&gt;FULL BLOWN Professional Package&lt;/em&gt; at a whopping $299 a month or $3,300 a year (see pricing below)! 😮&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./pricing.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;If you ask me, this an outrageous amount to pay for some borrowed server space and time. Personally, I would spin up my own virtual machine on any of the cloud providers (my flavor is the Google Cloud Platform) and go from there. If your app does not require a ton of compute resources than this should cost you relatively little money. This topic is making me thirsty for a new post 🤔&lt;/p&gt;

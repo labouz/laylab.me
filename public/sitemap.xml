@@ -3,157 +3,157 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://laylab.me/posts/</loc>
+    <loc>/posts/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://laylab.me/posts/2021-07-12-shiny-app-with-google-domains/</loc>
+    <loc>/posts/2021-07-12-shiny-app-with-google-domains/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/deployment/</loc>
+    <loc>/tags/deployment/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/domains/</loc>
+    <loc>/tags/domains/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/</loc>
+    <loc>/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/shiny/</loc>
+    <loc>/tags/shiny/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2021-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/databases/</loc>
+    <loc>/tags/databases/</loc>
     <lastmod>2021-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/odbc/</loc>
+    <loc>/tags/odbc/</loc>
     <lastmod>2021-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/postgres/</loc>
+    <loc>/tags/postgres/</loc>
     <lastmod>2021-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/posts/creating-a-database-and-write-from-rstudio/</loc>
+    <loc>/posts/creating-a-database-and-write-from-rstudio/</loc>
     <lastmod>2021-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/now/</loc>
+    <loc>/now/</loc>
     <lastmod>2021-01-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/html/</loc>
+    <loc>/tags/html/</loc>
     <lastmod>2020-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/rvest/</loc>
+    <loc>/tags/rvest/</loc>
     <lastmod>2020-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</loc>
+    <loc>/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</loc>
     <lastmod>2020-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/scraping/</loc>
+    <loc>/tags/scraping/</loc>
     <lastmod>2020-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/api/</loc>
+    <loc>/tags/api/</loc>
     <lastmod>2020-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/ngrok/</loc>
+    <loc>/tags/ngrok/</loc>
     <lastmod>2020-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/plumber/</loc>
+    <loc>/tags/plumber/</loc>
     <lastmod>2020-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/posts/the-api-and-i-exposing-a-pluber-api/</loc>
+    <loc>/posts/the-api-and-i-exposing-a-pluber-api/</loc>
     <lastmod>2020-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2019-08-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/dataviz/</loc>
+    <loc>/tags/dataviz/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/posts/facet-ggplots-while-preserving-order/</loc>
+    <loc>/posts/facet-ggplots-while-preserving-order/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/ggplot/</loc>
+    <loc>/tags/ggplot/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/tags/ggpubr/</loc>
+    <loc>/tags/ggpubr/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://laylab.me/categories/</loc>
+    <loc>/categories/</loc>
   </url>
   
   <url>
-    <loc>https://laylab.me/contact/</loc>
+    <loc>/contact/</loc>
   </url>
   
   <url>
-    <loc>https://laylab.me/snippets/first/</loc>
+    <loc>/snippets/first/</loc>
   </url>
   
   <url>
-    <loc>https://laylab.me/projects/</loc>
+    <loc>/projects/</loc>
   </url>
   
   <url>
-    <loc>https://laylab.me/snippets/second/</loc>
+    <loc>/snippets/second/</loc>
   </url>
   
   <url>
-    <loc>https://laylab.me/series/</loc>
+    <loc>/series/</loc>
   </url>
   
   <url>
-    <loc>https://laylab.me/snippets/</loc>
+    <loc>/snippets/</loc>
   </url>
   
 </urlset>

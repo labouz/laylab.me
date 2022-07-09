@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>postgres on LB</title>
-    <link>https://laylab.me/tags/postgres/</link>
+    <link>/tags/postgres/</link>
     <description>Recent content in postgres on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://laylab.me/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>PostgreSQL and RStudio: I know we match</title>
-      <link>https://laylab.me/posts/creating-a-database-and-write-from-rstudio/</link>
+      <link>/posts/creating-a-database-and-write-from-rstudio/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/creating-a-database-and-write-from-rstudio/</guid>
+      <guid>/posts/creating-a-database-and-write-from-rstudio/</guid>
       <description>
 
 

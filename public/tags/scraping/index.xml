@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>scraping on LB</title>
-    <link>https://laylab.me/tags/scraping/</link>
+    <link>/tags/scraping/</link>
     <description>Recent content in scraping on LB</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://laylab.me/tags/scraping/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/scraping/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Scrape this, not that: using rvest to build a database of Champagne</title>
-      <link>https://laylab.me/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</link>
+      <link>/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://laylab.me/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</guid>
+      <guid>/posts/scrape-this-not-that-using-rvest-to-build-a-database-of-champagne/</guid>
       <description>
 
 
@@ -37,7 +37,7 @@
 &lt;/ul&gt;
 &lt;p&gt;Finally, it’s a good idea to familiarize yourself with the “Inspect” feature from your browser. This allows your to see the breakdown of any web-page your viewing. This is where you will also find the names for the elements and attributes you want to scrape!&lt;/p&gt;
 &lt;p&gt;(pro tip: use the &#34;select element feature to jump directly to the element you’re looking for)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://laylab.me/posts/2020-09-28-scrape-this-not-that-using-rvest-to-build-a-database-of-champagne.en_files/elements_console.png&#34; height=&#34;500&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2020-09-28-scrape-this-not-that-using-rvest-to-build-a-database-of-champagne.en_files/elements_console.png&#34; height=&#34;500&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: &lt;code&gt;rvest&lt;/code&gt; cannot handle JS, it only reads the HTML before JS loaded so some objects may not be possible to scrape with this package. However, if you have the inspect console open in your browser, go to the “Network” tab, refresh the page and try looking for a GET request made to an API (api may be in the URL). This is data stored in a JSON file which can be read using &lt;code&gt;jsonlite::fromJSON()&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Don’t get intimidated. It’s quite simple. Here, let me show you:&lt;/p&gt;
 &lt;div id=&#34;scrape-the-details-of-a-specific-wine&#34; class=&#34;section level3&#34;&gt;
